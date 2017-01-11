@@ -34,7 +34,6 @@ public class TestMyBatis {
 		// logger.info("值："+user.getUserName());
                 System.out.println("user=" + user);
 		logger.info(JSON.toJSONString(user));
-                System.out.println(userService.deleteUserById(2));
                 
 	}
 }

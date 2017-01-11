@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>XXXX管理</title>
+        <title>LBM酒店管理</title>
         <link href="/LbmHotel/content/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
         <link href="/LbmHotel/content/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
         <link href="/LbmHotel/content/sidebar-menu/sidebar-menu.css" rel="stylesheet" />
@@ -64,15 +64,15 @@
                 <div class="navbar-header pull-left">
                     <a href="#" class="navbar-brand" style="font-size: 26px;padding-top: 14px;">
                         <small>
-                            <i class="icon-leaf"></i>
-                            XXXX管理系统
+                            <i class="icon-fire"></i>
+                            LBM酒店管理系统
                         </small>
                     </a>
                 </div>
 
                 <div class="navbar-header pull-right" role="navigation">
                     <div style="background-color: #579ec8 !important; color: #fff; height:50px; line-height:50px; margin-right: 50px;">
-                        欢迎光临,<span id="span_user_name">XX</span>
+                        欢迎光临,<span id="span_user_name">***</span>
                         <a href="/LbmHotel/user/loadOut" onclick="return confirm('确定退出系统？');" style="color: #fff;">
                             <i class="icon-off"></i>
                             退出
@@ -160,68 +160,68 @@
             </a>
         </div>
         <script type="text/javascript">
-            var vdept = "#";
-            var vuser = "#";
-            var vplan = "#";
-            var vrecord = "#";
-            var basemsg = "/LbmHotel/hnust/user/user.html";
-            var mpwd = "#";
-            var vresult = "#";
-            var yijian = "#";
+            var kehu = "/LbmHotel/kehu/keHu";
+            var fangjian = "/LbmHotel/fangjian/fangJian";
+            var yuding = "/LbmHotel/yuding/yuDing";
+            var ruzhu = "/LbmHotel/ruzhu/ruZhu";
+            var jiezhang = "/LbmHotel/jiezhang/jieZhang";
+            var user = "/LbmHotel/user/user";
+            var mpwd = "/LbmHotel/user/password";
             //toastr.options.positionClass = 'toast-bottom-right';
             $(function () {
                 $('#menu').sidebarMenu({
                     data: [{
                             id: '1',
-                            text: '系统管理',
-                            icon: 'icon-cog',
+                            text: '基础数据',
+                            icon: 'icon-leaf',
                             url: '',
                             menus: [{
                                     id: '11',
-                                    text: '基本信息',
+                                    text: '会员管理',
                                     icon: 'icon-glass',
-                                    url: basemsg
+                                    url: kehu
                                 }, {
                                     id: '12',
-                                    text: '修改密码',
+                                    text: '房间管理',
                                     icon: 'icon-glass',
-                                    url: mpwd
+                                    url: fangjian
                                 }]
                         }, {
                             id: '2',
-                            text: '评分管理',
+                            text: '业务管理',
                             icon: 'icon-leaf',
                             url: '',
                             menus: [{
                                     id: '26',
-                                    text: '部门管理',
+                                    text: '预定房间',
                                     icon: 'icon-glass',
-                                    url: vdept
+                                    url: yuding
                                 }, {
                                     id: '21',
-                                    text: '被评人管理',
+                                    text: '客户入住',
                                     icon: 'icon-glass',
-                                    url: vuser
+                                    url: ruzhu
                                 }, {
                                     id: '25',
-                                    text: '评测计划',
+                                    text: '客户结账',
                                     icon: 'icon-glass',
-                                    url: vplan
+                                    url: jiezhang
+                                }]
+                        }, {
+                            id: '3',
+                            text: '系统管理',
+                            icon: 'icon-cog',
+                            url: '',
+                            menus: [{
+                                    id: '31',
+                                    text: '用户管理',
+                                    icon: 'icon-glass',
+                                    url: user
                                 }, {
-                                    id: '22',
-                                    text: '评分明细',
+                                    id: '32',
+                                    text: '修改密码',
                                     icon: 'icon-glass',
-                                    url: vrecord
-                                }, {
-                                    id: '23',
-                                    text: '评分结果',
-                                    icon: 'icon-glass',
-                                    url: vresult
-                                }, {
-                                    id: '24',
-                                    text: '主观意见',
-                                    icon: 'icon-glass',
-                                    url: yijian
+                                    url: mpwd
                                 }]
                         }]
                 });

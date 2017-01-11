@@ -69,6 +69,11 @@ public class UserController {
     public String goHome(HttpServletRequest request, Model model) {
         return "home/home";
     }
+    
+    @RequestMapping("/user")
+    public String goUser(HttpServletRequest request, Model model) {
+        return "user/user";
+    }
 
     @RequestMapping("/loadOut")
     public void loadOut(HttpServletRequest request, HttpServletResponse response) {
