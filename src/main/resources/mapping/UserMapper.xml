@@ -4,11 +4,12 @@
   <resultMap id="BaseResultMap" type="com.lanbo.hotel.pojo.User" >
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="user_name" property="userName" jdbcType="VARCHAR" />
+    <result column="load_name" property="loadName" jdbcType="VARCHAR" />
     <result column="password" property="password" jdbcType="VARCHAR" />
     <result column="age" property="age" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, user_name, password, age
+    id, user_name,load_name password, age
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -79,4 +80,10 @@
       age = #{age,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <select id="selectByNameAndPassword" resultMap="BaseResultMap" >
+    select 
+    <include refid="Base_Column_List" />
+    from user_t
+    where load_name = #{0} and password = #{1}
+  </select>
 </mapper>

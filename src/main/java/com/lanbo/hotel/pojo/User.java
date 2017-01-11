@@ -1,13 +1,15 @@
 package com.lanbo.hotel.pojo;
 
 public class User {
-    private Integer id;
+    private Integer id =-1;
 
     private String userName;
+    
+    private String loadName;
 
     private String password;
 
-    private Integer age;
+    private Integer age = 0;
 
     public Integer getId() {
         return id;
@@ -31,6 +33,14 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password == null ? null : password.trim();
+    }
+
+    public String getLoadName() {
+        return loadName;
+    }
+
+    public void setLoadName(String loadName) {
+        this.loadName = loadName;
     }
 
     public Integer getAge() {
