@@ -40,6 +40,14 @@ public class UserController {
         }
         return map;
     }
+    
+    @RequestMapping(value = "/getLordUser", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+    @ResponseBody
+    public User getLordUser(HttpServletRequest request,
+            HttpServletResponse response) {
+        User user = (User) request.getSession().getAttribute("user");
+        return user;
+    }
 
     @RequestMapping(value = "/loadUser", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
     @ResponseBody

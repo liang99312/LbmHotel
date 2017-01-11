@@ -36,6 +36,26 @@
             }
         </style>
         <script>
+            $(document).ready(function(){
+                $("#loadName").keypress(function(e){
+                    if(e.which === 13) {
+                        if($("#loadName").val() === ""){
+                            alert("请输入用户名");
+                            $("#loadName").focus();
+                            return;
+                        }else{
+                            $("#passWord").focus();
+                        }
+                    }
+                });
+                $("#passWord").keypress(function(e){
+                    if(e.which === 13) {
+                        load();
+                    }
+                });
+                $("#loadName").focus();
+            });
+            
             function load(){
                 var loadName = $("#loadName").val();
                 var password = $("#passWord").val();
@@ -57,6 +77,7 @@
                                     window.top.location.href = "/LbmHotel/user/home";
                                 }else{
                                     alert("登录失败:用户名或密码错误");
+                                    $("#loadName").focus();
                                 }
 			}
 		});
