@@ -2,18 +2,11 @@ package com.lanbo.hotel.dao;
 
 import com.lanbo.hotel.pojo.User;
 
-public interface IUserDao {
-    int deleteByPrimaryKey(Integer id);
-
-    int insert(User record);
-
+public interface IUserDao extends IBaseDao{
     int insertSelective(User record);
 
-    User selectByPrimaryKey(Integer id);
-
-    int updateByPrimaryKeySelective(User record);
-
-    int updateByPrimaryKey(User record);
+    int updatePassword(User record);
     
     User selectByNameAndPassword(String loadName,String password);
+    
 }

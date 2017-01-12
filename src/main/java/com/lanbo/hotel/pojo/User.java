@@ -1,6 +1,6 @@
 package com.lanbo.hotel.pojo;
 
-public class User {
+public class User{
     private Integer id =-1;
 
     private String userName;
@@ -8,8 +8,14 @@ public class User {
     private String loadName;
 
     private String password;
+    
+    private String sex;
 
     private Integer age = 0;
+    
+    private String zhiwei;
+    
+    private String quanxian;
 
     public Integer getId() {
         return id;
@@ -51,8 +57,32 @@ public class User {
         this.age = age;
     }
 
+    public String getSex() {
+        return sex;
+    }
+
+    public void setSex(String sex) {
+        this.sex = sex;
+    }
+
+    public String getZhiwei() {
+        return zhiwei;
+    }
+
+    public void setZhiwei(String zhiwei) {
+        this.zhiwei = zhiwei;
+    }
+
+    public String getQuanxian() {
+        return quanxian;
+    }
+
+    public void setQuanxian(String quanxian) {
+        this.quanxian = quanxian;
+    }
+
     @Override
     public String toString() {
-        return "User{" + "id=" + id + ", userName=" + userName + ", password=" + password + ", age=" + age + '}';
+        return userName;
     }
 }

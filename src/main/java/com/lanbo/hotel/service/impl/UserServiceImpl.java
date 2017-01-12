@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 import com.lanbo.hotel.dao.IUserDao;
 import com.lanbo.hotel.pojo.User;
 import com.lanbo.hotel.service.IUserService;
+import java.util.HashMap;
+import java.util.List;
 
 @Service("userService")
 public class UserServiceImpl implements IUserService {
@@ -17,12 +19,12 @@ public class UserServiceImpl implements IUserService {
     @Override
     public User getUserById(int userId) {
         // TODO Auto-generated method stub
-        return this.userDao.selectByPrimaryKey(userId);
+        return (User) this.userDao.selectById(userId);
     }
 
     @Override
     public boolean deleteUserById(int userId) {
-        return this.userDao.deleteByPrimaryKey(userId) == 1;
+        return this.userDao.deleteById(userId) == 1;
     }
 
     @Override
@@ -33,6 +35,21 @@ public class UserServiceImpl implements IUserService {
     @Override
     public User getLoadUser(String loadName, String password) {
         return this.userDao.selectByNameAndPassword(loadName,password);
+    }
+
+    @Override
+    public boolean updateUser(User user) {
+        return this.userDao.updateById(user) == 1;
+    }
+
+    @Override
+    public int getSelectRows(HashMap map) {
+        return this.userDao.selectRows(map);
+    }
+
+    @Override
+    public List<User> getSelectPage(HashMap map) {
+        return (List<User>)this.userDao.selectByPage(map);
     }
 
 }

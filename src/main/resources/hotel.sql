@@ -5,4 +5,7 @@ CREATE TABLE `hotel`.`user_t` (
   `load_name` VARCHAR(45) NULL,
   `password` VARCHAR(45) NULL,
   `age` INT NULL,
+  `sex` VARCHAR(45) NULL,
+  `zhiwei` VARCHAR(45) NULL,
+  `quanxian` VARCHAR(1000) NULL,
   PRIMARY KEY (`id`))ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;

@@ -6,26 +6,28 @@
     <result column="user_name" property="userName" jdbcType="VARCHAR" />
     <result column="load_name" property="loadName" jdbcType="VARCHAR" />
     <result column="password" property="password" jdbcType="VARCHAR" />
+    <result column="sex" property="sex" jdbcType="VARCHAR" />
     <result column="age" property="age" jdbcType="INTEGER" />
+    <result column="zhiwei" property="zhiwei" jdbcType="VARCHAR" />
+    <result column="quanxian" property="quanxian" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, user_name,load_name password, age
+    id, user_name,load_name, password, sex, age, zhiwei, quanxian
   </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+  <select id="selectById" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
     from user_t
     where id = #{id,jdbcType=INTEGER}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+  <delete id="deleteById" parameterType="java.lang.Integer" >
     delete from user_t
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.lanbo.hotel.pojo.User" >
-    insert into user_t (id, user_name, password, 
-      age)
-    values (#{id,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
-      #{age,jdbcType=INTEGER})
+    insert into user_t (user_name,load_name, password, sex, age, zhiwei, quanxian)
+    values (#{userName,jdbcType=VARCHAR}, #{loadName,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR,}, #{sex,jdbcType=VARCHAR},
+      #{age,jdbcType=INTEGER}, #{zhiwei,jdbcType=VARCHAR,}, #{quanxian,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.lanbo.hotel.pojo.User" >
     insert into user_t
@@ -58,26 +60,20 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.lanbo.hotel.pojo.User" >
+  <update id="updatePassword" parameterType="com.lanbo.hotel.pojo.User" >
     update user_t
     <set >
-      <if test="userName != null" >
-        user_name = #{userName,jdbcType=VARCHAR},
-      </if>
-      <if test="password != null" >
-        password = #{password,jdbcType=VARCHAR},
-      </if>
-      <if test="age != null" >
-        age = #{age,jdbcType=INTEGER},
-      </if>
+      password = #{password,jdbcType=VARCHAR}
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.lanbo.hotel.pojo.User" >
+  <update id="updateById" parameterType="com.lanbo.hotel.pojo.User" >
     update user_t
     set user_name = #{userName,jdbcType=VARCHAR},
-      password = #{password,jdbcType=VARCHAR},
-      age = #{age,jdbcType=INTEGER}
+      age = #{age,jdbcType=INTEGER},
+      sex = #{sex,jdbcType=VARCHAR},
+      zhiwei = #{zhiwei,jdbcType=VARCHAR},
+      quanxian = #{quanxian,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
   <select id="selectByNameAndPassword" resultMap="BaseResultMap" >
@@ -85,5 +81,28 @@
     <include refid="Base_Column_List" />
     from user_t
     where load_name = #{0} and password = #{1}
+  </select>
+  <select id="selectByPage" resultMap="BaseResultMap" parameterType="hashmap">
+    select
+    <include refid="Base_Column_List" />
+    from user_t where 1=1
+    <if test="userName != null and userName !=''">
+        and user_name = #{userName}
+    </if>
+    <if test="loadName != null and loadName !=''">
+        and load_name=#{loadName}
+    </if>
+    order by id limit #{beginRow},#{pageSize}
+  </select>
+  <select id="selectRows" resultType="int" parameterType="hashmap">
+    select
+    count(1)
+    from user_t where 1=1
+    <if test="userName != null and userName !=''">
+        and user_name = #{userName}
+    </if>
+    <if test="loadName != null and loadName !=''">
+        and load_name=#{loadName}
+    </if>
   </select>
 </mapper>
