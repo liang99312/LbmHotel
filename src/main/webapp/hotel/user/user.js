@@ -1,6 +1,22 @@
 $(document).ready(function () {
-    testPage();
+    var options = {};
+    options.url = "/LbmHotel/user/getUserPage";
+    options.tj = {"currentPage": 1};
+    options.func = jxUser;
+    options.ul = "#example";
+    queryPaginator(options);
 });
+
+function jxUser(json) {
+    $("#data_table_body tr").remove();
+    $.each(json.list, function (index, item) { //遍历返回的json
+        var trStr = '<tr><td>' + item.id + '</td><td>' + item.userName + '</td><td>' + item.loadName + '</td><td>'
+                + '<button class="btn btn-warning" onclick="Edit(' + item.Id + ' );">修改</button>'
+                + '<button class="btn btn-warning" onclick="Edit(' + item.Id + ' );">删除</button></td></tr>';
+        $("#data_table_body").append(trStr);
+    });
+}
+
 
 function test() {
     var d = {};
@@ -29,7 +45,7 @@ function test() {
 function testPage() {
     var d = {};
     d.currentPage = 1;
-    d.paramters={"userName":"a","loadName":"a"};
+    d.paramters = {"userName": "a", "loadName": "a"};
     $.ajax({
         url: "/LbmHotel/user/getUserPage",
         data: JSON.stringify(d),

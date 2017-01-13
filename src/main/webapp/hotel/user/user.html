@@ -9,10 +9,34 @@ and open the template in the editor.
         <title>TODO supply a title</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="/LbmHotel/content/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+        <link href="/LbmHotel/content/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
         <script src="/LbmHotel/js/jquery2.js"></script>
+        <script src="/LbmHotel/content/bootstrap/js/bootstrap.min.js"></script>
+        <script src="/LbmHotel/content/bootstrap/js/bootstrap-paginator.js"></script>
+        <script src="/LbmHotel/hotel/common/fenyeUtil.js"></script>
         <script src="/LbmHotel/hotel/user/user.js"></script>
     </head>
-    <body>
-        <div>user……</div>
+    <body style='height:800px;'>
+        <div style="float:left; width: 100%">
+            <label>用户列表</label>
+            <div id="list1" class="table-responsive" style="height: 695px">
+                <table id="data_table" class="table">
+                    <thead>
+                        <tr>
+                            <th>id</th>
+                            <th>姓名</th>
+                            <th>编号</th>
+                            <th>操作</th>
+                        </tr>
+                    </thead>
+                    <tbody id='data_table_body'>
+                        
+                    </tbody>
+                </table>
+            </div>
+
+            <ul id="example"></ul>
+        </div>
     </body>
 </html>
