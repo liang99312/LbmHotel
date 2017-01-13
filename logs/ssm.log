@@ -4363,3 +4363,15 @@ Caused by: org.springframework.beans.factory.NoSuchBeanDefinitionException: No q
 [INFO] [2017-01-12 17:17:55][org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor]JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
 [INFO] [2017-01-12 17:17:56][com.lanbo.testmybatis.TestMyBatis]{"age":10,"id":1,"loadName":"zs","password":"123","userName":"张三"}
 [INFO] [2017-01-12 17:17:56][org.springframework.context.support.GenericApplicationContext]Closing org.springframework.context.support.GenericApplicationContext@59f99ea: startup date [Thu Jan 12 17:17:54 CST 2017]; root of context hierarchy
+[INFO] [2017-01-13 22:36:44][org.springframework.beans.factory.xml.XmlBeanDefinitionReader]Loading XML bean definitions from class path resource [spring-mybatis.xml]
+[INFO] [2017-01-13 22:36:44][org.springframework.context.support.GenericApplicationContext]Refreshing org.springframework.context.support.GenericApplicationContext@6ae006d8: startup date [Fri Jan 13 22:36:44 CST 2017]; root of context hierarchy
+[INFO] [2017-01-13 22:36:45][org.springframework.beans.factory.config.PropertyPlaceholderConfigurer]Loading properties file from class path resource [jdbc.properties]
+[INFO] [2017-01-13 22:36:45][org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor]JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+[INFO] [2017-01-13 22:36:46][com.lanbo.testmybatis.TestMyBatis]{"age":10,"id":1,"loadName":"1","password":"123","quanxian":"","sex":"女","userName":"张1","zhiwei":""}
+[INFO] [2017-01-13 22:36:46][org.springframework.context.support.GenericApplicationContext]Closing org.springframework.context.support.GenericApplicationContext@6ae006d8: startup date [Fri Jan 13 22:36:44 CST 2017]; root of context hierarchy
+[INFO] [2017-01-13 22:36:55][org.springframework.beans.factory.xml.XmlBeanDefinitionReader]Loading XML bean definitions from class path resource [spring-mybatis.xml]
+[INFO] [2017-01-13 22:36:55][org.springframework.context.support.GenericApplicationContext]Refreshing org.springframework.context.support.GenericApplicationContext@19e185b9: startup date [Fri Jan 13 22:36:55 CST 2017]; root of context hierarchy
+[INFO] [2017-01-13 22:36:56][org.springframework.beans.factory.config.PropertyPlaceholderConfigurer]Loading properties file from class path resource [jdbc.properties]
+[INFO] [2017-01-13 22:36:56][org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor]JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+[INFO] [2017-01-13 22:36:57][com.lanbo.testmybatis.TestMyBatis]{"age":10,"id":1,"loadName":"1","password":"123","quanxian":"","sex":"女","userName":"张1","zhiwei":""}
+[INFO] [2017-01-13 22:36:57][org.springframework.context.support.GenericApplicationContext]Closing org.springframework.context.support.GenericApplicationContext@19e185b9: startup date [Fri Jan 13 22:36:55 CST 2017]; root of context hierarchy

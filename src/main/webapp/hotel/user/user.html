@@ -19,57 +19,60 @@ and open the template in the editor.
     </head>
     <body style='height:800px;'>
         <div style="float:left; width: 100%">
-            <label>用户列表</label>
-            <div id="list1" class="table-responsive" style="height: 695px">
-                <table id="data_table" class="table">
+            <button type="button" class="btn btn-primary btn-sm" onclick="addUser();">新增用户</button>
+            <span>&nbsp;姓名：</span><input id="selUserName" type="text" /><span>&nbsp;编号：</span><input id="selLoadName" type="text" /><button type="button" class="btn btn-primary btn-sm" onclick="selectUser();" style="margin-left: 2px;">查找</button>
+            <div id="list1" class="table-responsive" style="height: 670px">
+                <table id="data_table" class="table table-hover">
                     <thead>
                         <tr>
-                            <th>id</th>
                             <th>姓名</th>
                             <th>编号</th>
+                            <th>性别</th>
+                            <th>年龄</th>
+                            <th>职位</th>
                             <th>操作</th>
                         </tr>
                     </thead>
                     <tbody id='data_table_body'>
-
+                        <tr><td>请查询用户记录</td></tr>
                     </tbody>
                 </table>
             </div>
 
             <ul id="example"></ul>
         </div>
-        <div class="modal fade" id="addUserModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal fade" id="userModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header" style="background: #ace1ff;height: 40px;border-top-left-radius: 6px;border-top-right-radius: 6px;padding:10px">
                         <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                        <h4 class="modal-title">添加人员</h4>
+                        <h4 class="modal-title" id="userModel_title">添加人员</h4>
                     </div>
                     <div class="modal-body">
                         <div class="content">
                             <div class="form-group">
                                 <label for="inpUserName">姓名：</label>
-                                <input type="text" name="inpUserName" />
+                                <input type="text" id="inpUserName" />
                             </div>
                             <div class="form-group">
                                 <label for="inpLoadName">编号：</label>
-                                <input type="text" name="inpLoadName" />
+                                <input type="text" id="inpLoadName" />
                             </div>
                             <div class="form-group">
                                 <label for="inpSex">性别：</label>
-                                <input type="text" name="inpSex" />
+                                <input type="text" id="inpSex" />
                             </div>
                             <div class="form-group">
                                 <label for="inpAge">年龄：</label>
-                                <input type="text" name="inpAge" />
+                                <input type="text" id="inpAge" />
                             </div>
                             <div class="form-group">
                                 <label for="inpZhiwei">职位：</label>
-                                <input type="text" name="inpZhiwei" />
+                                <input type="text" id="inpZhiwei" />
                             </div>
                             <div class="form-group">
-                                <label for="inpQuanxian">年龄：</label>
-                                <input type="text" name="inpQuanxian" />
+                                <label for="inpQuanxian">权限：</label>
+                                <input type="text" id="inpQuanxian" />
                             </div>
                         </div>
                     </div>

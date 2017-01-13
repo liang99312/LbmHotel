@@ -33,6 +33,7 @@ public class UserController {
     @RequestMapping(value = "/addUser", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
     @ResponseBody
     public Map<String, Object> addUser(@RequestBody User model) {
+        model.setPassword("123456");
         boolean result = this.userService.addUser(model);
         Map<String, Object> map = new HashMap();
         if (result) {

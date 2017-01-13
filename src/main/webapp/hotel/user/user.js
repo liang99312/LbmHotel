@@ -1,64 +1,129 @@
+var users;
+var optFlag = 1;
+var editIndex = -1;
 $(document).ready(function () {
-    var options = {};
-    options.url = "/LbmHotel/user/getUserPage";
-    options.tj = {"currentPage": 1};
-    options.func = jxUser;
-    options.ul = "#example";
-    queryPaginator(options);
-    $('#addUserModal').modal('show');
+    
 });
 
 function jxUser(json) {
     $("#data_table_body tr").remove();
+    users = [];
+    users = json.list;
     $.each(json.list, function (index, item) { //遍历返回的json
-        var trStr = '<tr><td>' + item.id + '</td><td>' + item.userName + '</td><td>' + item.loadName + '</td><td>'
-                + '<button class="btn btn-warning" onclick="Edit(' + item.Id + ' );">修改</button>&nbsp;'
-                + '<button class="btn btn-warning" onclick="Edit(' + item.Id + ' );">删除</button></td></tr>';
+        var trStr = '<tr><td>' + item.userName + '</td><td>' + item.loadName + '</td><td>' + item.sex + '</td><td>' + item.age + '</td><td>' + item.zhiwei + '</td><td>'
+                + '<button class="btn btn-warning btn-xs" onclick="editUser(' + index + ' );">修改</button>&nbsp;'
+                + '<button class="btn btn-warning btn-xs" onclick="delUser(' + index + ' );">删除</button></td></tr>';
         $("#data_table_body").append(trStr);
     });
 }
 
+function selectUser(){
+    var user = {};
+    var tj = {"pageSize":20,"currentPage":1};
+    if($("#selUserName").val() !== ""){
+        user.userName = $("#selUserName").val();
+    }
+    if($("#selLoadName").val() !== ""){
+        user.loadName = $("#selLoadName").val();
+    }
+    tj.paramters = user;
+    var options = {};
+    options.url = "/LbmHotel/user/getUserPage";
+    options.tj = tj;
+    options.func = jxUser;
+    options.ul = "#example";
+    queryPaginator(options);
+}
 
-function test() {
-    var d = {};
-    d.id = 3;
-    d.userName = 'a';
-    d.loadName = 'a';
-    d.sex = '女';
-    d.age = 100;
-    d.zhiwei = '经理';
-    d.quanxian = '101;102';
+function addUser() {
+    optFlag = 1;
+    $("#userModel_title").html("新增用户");
+    $("#inpUserName").val("");
+    $("#inpLoadName").val("");
+    $("#inpSex").val("");
+    $("#inpAge").val("");
+    $("#inpZhiwei").val("");
+    $("#inpQuanxian").val("");
+    $("#userModal").modal("show");
+}
+
+
+function editUser(index) {
+    optFlag = 2;
+    if (users[index] === undefined) {
+        optFlag = 1;
+        return alert("请选择用户");
+    }
+    var user = users[index];
+    editIndex = index;
+    $("#userModel_title").html("修改用户");
+    $("#inpUserName").val(user.userName);
+    $("#inpLoadName").val(user.loadName);
+    $("#inpSex").val(user.sex);
+    $("#inpAge").val(user.age);
+    $("#inpZhiwei").val(user.zhiwei);
+    $("#inpQuanxian").val(user.quanxian);
+    $("#userModal").modal("show");
+}
+
+function saveUser() {
+    var user = {};
+    var url = "";
+    if (optFlag === 2) {
+        if (users[editIndex] === undefined) {
+            return;
+        }
+        user = users[editIndex];
+        url = "/LbmHotel/user/updateUser";
+    } else if (optFlag === 1) {
+        url = "/LbmHotel/user/addUser";
+    }
+    user.userName = $("#inpUserName").val();
+    user.loadName = $("#inpLoadName").val();
+    user.sex = $("#inpSex").val();
+    user.age = parseInt($("#inpAge").val(), 10);
+    user.zhiwei = $("#inpZhiwei").val();
+    user.quanxian = $("#inpQuanxian").val();
     $.ajax({
-        url: "/LbmHotel/user/updateUser",
-        data: JSON.stringify(d),
+        url: url,
+        data: JSON.stringify(user),
         contentType: "application/json",
         type: "post",
         cache: false,
         error: function (msg, textStatus) {
-            alert("shibai");
+            alert("保存失败");
         },
         success: function (json) {
-            alert("s");
+            if (json.result){
+                $("#userModal").modal("hide");
+                selectUser();
+            }else
+                alert("保存失败");
         }
     });
 }
 
-function testPage() {
-    var d = {};
-    d.currentPage = 1;
-    d.paramters = {"userName": "a", "loadName": "a"};
-    $.ajax({
-        url: "/LbmHotel/user/getUserPage",
-        data: JSON.stringify(d),
-        contentType: "application/json",
-        type: "post",
-        cache: false,
-        error: function (msg, textStatus) {
-            alert("shibai");
-        },
-        success: function (json) {
-            alert(JSON.stringify(json));
-        }
-    });
+function delUser(index) {
+    if (users[index] === undefined) {
+        return alert("请选择用户");
+    }
+    var user = users[index];
+    if(confirm("确定删除用户："+user.userName+"?")){
+        $.ajax({
+            url: "/LbmHotel/user/delUser",
+            data: JSON.stringify(user),
+            contentType: "application/json",
+            type: "post",
+            cache: false,
+            error: function (msg, textStatus) {
+                alert("删除失败");
+            },
+            success: function (json) {
+                if (!json.result)
+                    alert("删除失败");
+                else
+                    selectUser();
+            }
+        });
+    }
 }
-
