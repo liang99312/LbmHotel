@@ -412,7 +412,7 @@
         buildPageItem: function (type, page) {
 
             var itemContainer = $("<li></li>"), //creates the item container
-                    itemContent = $("<a></a>"), //creates the item content
+                    itemContent = $("<a style='cursor:pointer'></a>"), //creates the item content
                     text = "",
                     title = "",
                     itemContainerClass = this.options.itemContainerClass(type, page, this.currentPage),
