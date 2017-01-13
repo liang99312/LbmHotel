@@ -5,6 +5,7 @@ $(document).ready(function () {
     options.func = jxUser;
     options.ul = "#example";
     queryPaginator(options);
+    $('#addUserModal').modal('show');
 });
 
 function jxUser(json) {

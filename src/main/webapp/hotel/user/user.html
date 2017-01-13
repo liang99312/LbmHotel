@@ -31,12 +31,53 @@ and open the template in the editor.
                         </tr>
                     </thead>
                     <tbody id='data_table_body'>
-                        
+
                     </tbody>
                 </table>
             </div>
 
             <ul id="example"></ul>
+        </div>
+        <div class="modal fade" id="addUserModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header" style="background: #ace1ff;height: 40px;border-top-left-radius: 6px;border-top-right-radius: 6px;padding:10px">
+                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                        <h4 class="modal-title">添加人员</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="content">
+                            <div class="form-group">
+                                <label for="inpUserName">姓名：</label>
+                                <input type="text" name="inpUserName" />
+                            </div>
+                            <div class="form-group">
+                                <label for="inpLoadName">编号：</label>
+                                <input type="text" name="inpLoadName" />
+                            </div>
+                            <div class="form-group">
+                                <label for="inpSex">性别：</label>
+                                <input type="text" name="inpSex" />
+                            </div>
+                            <div class="form-group">
+                                <label for="inpAge">年龄：</label>
+                                <input type="text" name="inpAge" />
+                            </div>
+                            <div class="form-group">
+                                <label for="inpZhiwei">职位：</label>
+                                <input type="text" name="inpZhiwei" />
+                            </div>
+                            <div class="form-group">
+                                <label for="inpQuanxian">年龄：</label>
+                                <input type="text" name="inpQuanxian" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer" style="text-align: center;padding: 8px;">
+                        <button type="submit" class="btn btn-primary">保存</button>
+                    </div>
+                </div>
+            </div>
         </div>
     </body>
 </html>
