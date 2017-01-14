@@ -106,4 +106,9 @@
         and load_name LIKE concat('%',#{loadName},'%') 
     </if>
   </select>
+  <select id="selectLoadNames" resultType="int" parameterType="com.lanbo.hotel.pojo.User" >
+    select
+    count(1)
+    from user_t where load_name = #{loadName,jdbcType=VARCHAR} and id != #{id,jdbcType=INTEGER}
+  </select>
 </mapper>

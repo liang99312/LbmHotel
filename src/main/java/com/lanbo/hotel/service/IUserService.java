@@ -9,6 +9,8 @@ public interface IUserService {
         public boolean deleteUserById(int userId);
         public boolean addUser(User user);
         public boolean updateUser(User user);
+        public boolean updatePassword(User user);
+        public boolean selectLoadNames(User user);
         public User getLoadUser(String loadName,String password);
         public int getSelectRows(HashMap map);
         public List<User> getSelectPage(HashMap map);

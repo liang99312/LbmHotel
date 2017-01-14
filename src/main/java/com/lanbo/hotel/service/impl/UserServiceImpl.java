@@ -52,4 +52,14 @@ public class UserServiceImpl implements IUserService {
         return (List<User>)this.userDao.selectByPage(map);
     }
 
+    @Override
+    public boolean updatePassword(User user) {
+        return this.userDao.updatePassword(user) == 1;
+    }
+
+    @Override
+    public boolean selectLoadNames(User user) {
+        return this.userDao.selectLoadNames(user)>0;
+    }
+
 }

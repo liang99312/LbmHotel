@@ -7,6 +7,8 @@ public interface IUserDao extends IBaseDao{
 
     int updatePassword(User record);
     
+    int selectLoadNames(User record);
+    
     User selectByNameAndPassword(String loadName,String password);
     
 }

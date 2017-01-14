@@ -98,7 +98,7 @@ function saveUser() {
                 $("#userModal").modal("hide");
                 selectUser();
             }else
-                alert("保存失败");
+                alert("保存失败:"+json.msg !== undefined? json.msg:"");
         }
     });
 }
@@ -120,7 +120,7 @@ function delUser(index) {
             },
             success: function (json) {
                 if (!json.result)
-                    alert("删除失败");
+                    alert("删除失败:"+json.msg !== undefined? json.msg:"");
                 else
                     selectUser();
             }

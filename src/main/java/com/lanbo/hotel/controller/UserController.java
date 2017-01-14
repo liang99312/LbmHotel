@@ -33,13 +33,20 @@ public class UserController {
     @RequestMapping(value = "/addUser", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
     @ResponseBody
     public Map<String, Object> addUser(@RequestBody User model) {
+        model.setId(-1);
+        Map<String, Object> map = new HashMap();
+        if(this.userService.selectLoadNames(model)){
+            map.put("result", false);
+            map.put("msg", "该编号已存在，请重新输入");
+            return map;
+        }
         model.setPassword("123456");
         boolean result = this.userService.addUser(model);
-        Map<String, Object> map = new HashMap();
         if (result) {
             map.put("result", true);
         } else {
             map.put("result", false);
+            map.put("msg", "写入数据库失败");
         }
         return map;
     }
@@ -47,12 +54,18 @@ public class UserController {
     @RequestMapping(value = "/updateUser", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
     @ResponseBody
     public Map<String, Object> updateUser(@RequestBody User model) {
-        boolean result = this.userService.updateUser(model);
         Map<String, Object> map = new HashMap();
+        if(this.userService.selectLoadNames(model)){
+            map.put("result", false);
+            map.put("msg", "该编号已存在，请重新输入");
+            return map;
+        }
+        boolean result = this.userService.updateUser(model);
         if (result) {
             map.put("result", true);
         } else {
             map.put("result", false);
+            map.put("msg", "修改数据库失败");
         }
         return map;
     }
@@ -60,8 +73,13 @@ public class UserController {
     @RequestMapping(value = "/delUser", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
     @ResponseBody
     public Map<String, Object> delUser(@RequestBody User model) {
-        boolean result = this.userService.deleteUserById(model.getId());
         Map<String, Object> map = new HashMap();
+        if(model.getId() == 1){
+            map.put("result", false);
+            map.put("msg","系统管理员不能被删除！");
+            return map;
+        }
+        boolean result = this.userService.deleteUserById(model.getId());
         if (result) {
             map.put("result", true);
         } else {
@@ -133,6 +151,27 @@ public class UserController {
         }
         return map;
     }
+    
+    @RequestMapping(value = "/changePassword", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+    @ResponseBody
+    public Map<String, Object> changePassword(@RequestBody User model, HttpServletRequest request,
+            HttpServletResponse response) {
+        User user = this.userService.getLoadUser(model.getLoadName(), model.getPassword());
+        Map<String, Object> map = new HashMap();
+        if (user == null) {
+            map.put("result", false);
+            map.put("msg","原密码输入有误");
+        } else {
+            user.setPassword(model.getQuanxian());
+            boolean result = this.userService.updatePassword(user);
+            if(!result){
+                map.put("result", false);
+                map.put("msg", "修改数据库失败");
+            }else
+                map.put("result", true);
+        }
+        return map;
+    }
 
     @RequestMapping("/home")
     public String goHome(HttpServletRequest request, Model model) {
@@ -142,6 +181,11 @@ public class UserController {
     @RequestMapping("/user")
     public String goUser(HttpServletRequest request, Model model) {
         return "user/user";
+    }
+    
+    @RequestMapping("/password")
+    public String goPassword(HttpServletRequest request, Model model) {
+        return "user/password";
     }
 
     @RequestMapping("/loadOut")

@@ -29,6 +29,7 @@
             }
         </style>
         <script type="text/javascript">
+            var loadUser = null;
             $(document).ready(function () {
                 $.ajax({
                     url: "/LbmHotel/user/getLordUser",
@@ -38,6 +39,7 @@
                     error: function (msg, textStatus) {
                     },
                     success: function (json) {
+                        loadUser = json;
                         $("#span_user_name").html(json.userName);
                     }
                 });
