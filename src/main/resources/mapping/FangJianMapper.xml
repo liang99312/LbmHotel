@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lanbo.hotel.dao.IFangJianDao" >
+  <resultMap id="BaseResultMap" type="com.lanbo.hotel.pojo.FangJian" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="fj_hao" property="fjHao" jdbcType="VARCHAR" />
+    <result column="luo_ceng" property="luoCeng" jdbcType="VARCHAR" />
+    <result column="fuze_ren" property="fuzeRen" jdbcType="VARCHAR" />
+    <result column="state" property="state" jdbcType="VARCHAR" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, fj_hao, luo_ceng, fuze_ren, state, remark
+  </sql>
+  <select id="selectById" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from fangjian_t
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteById" parameterType="java.lang.Integer" >
+    delete from fangjian_t
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.lanbo.hotel.pojo.FangJian" >
+    insert into fangjian_t (fj_hao, luo_ceng, fuze_ren, state, remark)
+    values (#{fjHao,jdbcType=VARCHAR}, #{luoCeng,jdbcType=VARCHAR}, #{fuzeRen,jdbcType=VARCHAR,}, #{state,jdbcType=VARCHAR},#{remark,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateById" parameterType="com.lanbo.hotel.pojo.FangJian" >
+    update fangjian_t
+    set fj_hao = #{fjHao,jdbcType=VARCHAR},
+      luo_ceng = #{luoCeng,jdbcType=VARCHAR},
+      state = #{state,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      fuze_ren = #{fuzeRen,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPage" resultMap="BaseResultMap" parameterType="hashmap">
+    select
+    <include refid="Base_Column_List" />
+    from fangjian_t where 1=1 
+    <if test="fjHao != null and fjHao !=''">
+        and fj_hao LIKE concat('%',#{fjHao},'%')
+    </if>
+    <if test="state != null and state !=''">
+        and state = #{state}
+    </if>
+    order by id limit #{beginRow},#{pageSize}
+  </select>
+  <select id="selectRows" resultType="int" parameterType="hashmap">
+    select
+    count(1)
+    from fangjian_t where 1=1
+    <if test="fjHao != null and fjHao !=''">
+        and fj_hao LIKE concat('%',#{fjHao},'%') 
+    </if>
+    <if test="state != null and state !=''">
+        and state = #{state}
+    </if>
+  </select>
+  <select id="selectHaos" resultType="int" parameterType="com.lanbo.hotel.pojo.FangJian" >
+    select
+    count(1)
+    from fangjian_t where fj_hao = #{fjHao,jdbcType=VARCHAR} and id != #{id,jdbcType=INTEGER}
+  </select>
+</mapper>
