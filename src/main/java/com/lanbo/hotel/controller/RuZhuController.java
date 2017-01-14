@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * @author DengFeng
  */
 @Controller
-@RequestMapping("ruzhu")
+@RequestMapping("ruZhu")
 public class RuZhuController {
     
     @RequestMapping("/ruZhu")

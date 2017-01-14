@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * @author DengFeng
  */
 @Controller
-@RequestMapping("yuding")
+@RequestMapping("yuDing")
 public class YuDingController {
     
     @RequestMapping("/yuDing")

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.lanbo.hotel.pojo.User;
 import com.lanbo.hotel.service.IUserService;
+import com.lanbo.hotel.util.DataUtil;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -40,7 +41,13 @@ public class UserController {
             map.put("msg", "该编号已存在，请重新输入");
             return map;
         }
-        model.setPassword("123456");
+        model.setPassword(DataUtil.defaultPassword);
+        String qxString = model.getQuanxian(); 
+        qxString = qxString.replace("；", ";");
+        if(!qxString.contains(DataUtil.baseQxString)){
+            qxString = DataUtil.baseQxString + ";" + qxString;
+        }
+        model.setQuanxian(qxString);
         boolean result = this.userService.addUser(model);
         if (result) {
             map.put("result", true);
@@ -60,6 +67,12 @@ public class UserController {
             map.put("msg", "该编号已存在，请重新输入");
             return map;
         }
+        String qxString = model.getQuanxian(); 
+        qxString = qxString.replace("；", ";");
+        if(!qxString.contains(DataUtil.baseQxString)){
+            qxString = DataUtil.baseQxString + ";" + qxString;
+        }
+        model.setQuanxian(qxString);
         boolean result = this.userService.updateUser(model);
         if (result) {
             map.put("result", true);
@@ -146,6 +159,9 @@ public class UserController {
             map.put("result", -1);
             request.getSession().setAttribute("user", null);
         } else {
+            if(user.getId() == 1){
+                user.setQuanxian(DataUtil.qxString);
+            }
             request.getSession().setAttribute("user", user);
             map.put("result", 1);
         }
