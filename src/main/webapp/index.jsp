@@ -68,6 +68,10 @@
                 if (load_password !== undefined && load_password !== null) {
                     $("#passWord").val(load_password);
                 }
+                var load_rem = GetCookie("load_rem");
+                if (load_rem !== undefined && load_rem !== null && load_rem === "true") {
+                    $("#remeber").prop("checked",true);
+                }
                 $("#loadName").keypress(function (e) {
                     if (e.which === 13) {
                         if ($("#loadName").val() === "") {
@@ -108,9 +112,11 @@
                             if ($("#remeber").is(":checked")) {
                                 SetCookie("load_name", loadName);
                                 SetCookie("load_password", password);
+                                SetCookie("load_rem", "true");
                             } else {
                                 DeleteCookie("load_name");
                                 DeleteCookie("load_password");
+                                DeleteCookie("load_rem");
                             }
                             window.top.location.href = "/LbmHotel/user/home";
                         } else {
