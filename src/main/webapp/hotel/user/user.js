@@ -11,8 +11,8 @@ function jxUser(json) {
     users = json.list;
     $.each(json.list, function (index, item) { //遍历返回的json
         var trStr = '<tr><td>' + item.userName + '</td><td>' + item.loadName + '</td><td>' + item.sex + '</td><td>' + item.age + '</td><td>' + item.zhiwei + '</td><td>'
-                + '<button class="btn btn-info btn-xs icon-edit" onclick="editUser(' + index + ' );"></button>&nbsp;'
-                + '<button class="btn btn-danger btn-xs icon-remove" onclick="delUser(' + index + ' );"></button></td></tr>';
+                + '<button class="btn btn-info btn-xs icon-edit" onclick="editUser(' + index + ' );" style="padding-top: 4px;padding-bottom: 3px;"></button>&nbsp;'
+                + '<button class="btn btn-danger btn-xs icon-remove" onclick="delUser(' + index + ' );" style="padding-top: 4px;padding-bottom: 3px;"></button></td></tr>';
         $("#data_table_body").append(trStr);
     });
 }
