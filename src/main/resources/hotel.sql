@@ -22,3 +22,14 @@ CREATE TABLE `hotel`.`fangjian_t` (
   `state` VARCHAR(45) NULL,
   `remark` VARCHAR(200) NULL,
   PRIMARY KEY (`id`))ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+CREATE TABLE `hotel`.`yuding_t` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `fj_hao` VARCHAR(45) NULL,
+  `kehu` VARCHAR(45) NULL,
+  `zj_hao` VARCHAR(45) NULL,
+  `yd_sj` DATETIME NULL,
+  `rz_sj` DATETIME NULL,
+  `state` VARCHAR(45) NULL,
+  `remark` VARCHAR(200) NULL,
+  PRIMARY KEY (`id`))ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;

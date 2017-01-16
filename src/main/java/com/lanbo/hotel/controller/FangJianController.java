@@ -63,7 +63,7 @@ public class FangJianController {
         Map<String, Object> map = new HashMap();
         if(this.fangJianService.selectHaos(model)){
             map.put("result", false);
-            map.put("msg", "该房间号已存在，请重新输入");
+            map.put("msg", "该客户的预定已存在，请重新输入");
             return map;
         }
         boolean result = this.fangJianService.updateFangJian(model);
@@ -81,19 +81,6 @@ public class FangJianController {
     public Map<String, Object> delFangJian(@RequestBody FangJian model) {
         Map<String, Object> map = new HashMap();
         boolean result = this.fangJianService.deleteFangJianById(model.getId());
-        if (result) {
-            map.put("result", true);
-        } else {
-            map.put("result", false);
-        }
-        return map;
-    }
-
-    @RequestMapping(value = "/getFangJians", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
-    @ResponseBody
-    public Map<String, Object> getFangJians(@RequestBody FangJian model) {
-        boolean result = this.fangJianService.deleteFangJianById(model.getId());
-        Map<String, Object> map = new HashMap();
         if (result) {
             map.put("result", true);
         } else {
