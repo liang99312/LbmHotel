@@ -16,6 +16,7 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -139,6 +140,16 @@ public class UserController {
         map.put("pageSize", model.getPageSize());
         model.setList(this.userService.getSelectPage(map));
         return model;
+    }
+    
+    @RequestMapping(value = "/getAllUserName", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+    @ResponseBody
+    public Map<String, Object> getAllUserName(@RequestBody HashMap model) {
+        List result = this.userService.getAllUserName(model);
+        Map<String, Object> map = new HashMap();
+        map.put("result", true);
+        map.put("list",result);
+        return map;
     }
 
     @RequestMapping(value = "/getLordUser", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")

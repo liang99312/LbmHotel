@@ -2,8 +2,12 @@ var fangJians;
 var optFlag = 1;
 var editIndex = -1;
 $(document).ready(function () {
-    
+    getUserNames(setTrager);
 });
+
+function setTrager(){
+    $('#inpFuzeRen').AutoComplete({'data': h_userNames.list}); 
+}
 
 function jxFangJian(json) {
     $("#data_table_body tr").remove();
@@ -17,13 +21,13 @@ function jxFangJian(json) {
     });
 }
 
-function selectFangJian(){
+function selectFangJian() {
     var fangJian = {};
-    var tj = {"pageSize":20,"currentPage":1};
-    if($("#selFjHao").val() !== ""){
+    var tj = {"pageSize": 20, "currentPage": 1};
+    if ($("#selFjHao").val() !== "") {
         fangJian.fjHao = $("#selFjHao").val();
     }
-    if($("#selState").val() !== ""){
+    if ($("#selState").val() !== "") {
         fangJian.state = $("#selState").val();
     }
     tj.paramters = fangJian;
@@ -40,7 +44,7 @@ function addFangJian() {
     $("#fangJianModel_title").html("新增房间");
     $("#inpFjHao").val("");
     $("#inpLuoCeng").val("");
-    $("#inpState").val("就绪").attr("readonly","true");
+    $("#inpState").val("就绪").attr("readonly", "true");
     $("#inpFuzeRen").val("");
     $("#inpRemark").val("");
     $("#fangJianModal").modal("show");
@@ -91,11 +95,11 @@ function saveFangJian() {
             alert("保存失败");
         },
         success: function (json) {
-            if (json.result){
+            if (json.result) {
                 $("#fangJianModal").modal("hide");
                 selectFangJian();
-            }else
-                alert("保存失败:"+json.msg !== undefined? json.msg:"");
+            } else
+                alert("保存失败:" + json.msg !== undefined ? json.msg : "");
         }
     });
 }
@@ -105,7 +109,7 @@ function delFangJian(index) {
         return alert("请选择房间");
     }
     var fangJian = fangJians[index];
-    if(confirm("确定删除房间："+fangJian.fjHao+"?")){
+    if (confirm("确定删除房间：" + fangJian.fjHao + "?")) {
         $.ajax({
             url: "/LbmHotel/fangJian/delFangJian",
             data: JSON.stringify(fangJian),
@@ -117,7 +121,7 @@ function delFangJian(index) {
             },
             success: function (json) {
                 if (!json.result)
-                    alert("删除失败:"+json.msg !== undefined? json.msg:"");
+                    alert("删除失败:" + json.msg !== undefined ? json.msg : "");
                 else
                     selectFangJian();
             }

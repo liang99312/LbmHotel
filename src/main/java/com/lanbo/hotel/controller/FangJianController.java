@@ -10,6 +10,7 @@ import com.lanbo.hotel.pojo.FangJian;
 import com.lanbo.hotel.service.IFangJianService;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -126,5 +127,24 @@ public class FangJianController {
         map.put("pageSize", model.getPageSize());
         model.setList(this.fangJianService.getSelectPage(map));
         return model;
+    }
+    
+    @RequestMapping(value = "/getAllFangJianHao", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+    @ResponseBody
+    public Map<String, Object> getAllFangJianHao(@RequestBody HashMap model) {
+        System.out.println(model);
+        List<String> stateList = new ArrayList<String>();
+        stateList.add("就绪");
+        stateList.add("已使用");
+        stateList.add("未准备");
+        if(model.get("state") == null || !stateList.contains(model.get("state").toString())){
+            model.remove("state");
+            model.put("state", null);
+        }
+        List result = this.fangJianService.getAllFangJianHao(model);
+        Map<String, Object> map = new HashMap();
+        map.put("result", true);
+        map.put("list",result);
+        return map;
     }
 }

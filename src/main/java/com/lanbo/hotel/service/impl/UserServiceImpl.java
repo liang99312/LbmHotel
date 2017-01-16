@@ -62,4 +62,9 @@ public class UserServiceImpl implements IUserService {
         return this.userDao.selectLoadNames(user)>0;
     }
 
+    @Override
+    public List getAllUserName(HashMap map) {
+        return this.userDao.selectAllUserName(map);
+    }
+
 }

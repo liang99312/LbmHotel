@@ -12,4 +12,5 @@ public interface IFangJianService {
         public int getSelectRows(HashMap map);
         public List<FangJian> getSelectPage(HashMap map);
         public boolean selectHaos(FangJian fangJian);
+        public List getAllFangJianHao(HashMap map);
 }

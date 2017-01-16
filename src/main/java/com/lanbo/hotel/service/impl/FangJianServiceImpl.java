@@ -52,4 +52,9 @@ public class FangJianServiceImpl implements IFangJianService {
         return this.fangJianDao.selectHaos(fangJian)>0;
     }
 
+    @Override
+    public List getAllFangJianHao(HashMap map) {
+        return this.fangJianDao.selectAllFangJianHao(map);
+    }
+
 }

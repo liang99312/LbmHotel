@@ -111,4 +111,9 @@
     count(1)
     from user_t where load_name = #{loadName,jdbcType=VARCHAR} and id != #{id,jdbcType=INTEGER}
   </select>
+  <select id="selectAllUserName" resultType="java.lang.String" parameterType="hashmap">
+    select 
+    user_name 
+    from user_t where 1=1
+  </select>
 </mapper>

@@ -1,3 +1,33 @@
+var h_fangJianHaos;
+var h_userNames;
+
+function getFangJianHaos(d,func){
+    hajax("/LbmHotel/fangJian/getAllFangJianHao",d,"h_fangJianHaos",func);
+}
+
+function getUserNames(func){
+    hajax("/LbmHotel/user/getAllUserName",null,"h_userNames",func);
+}
+
+function hajax(url,d,result,func){
+    $.ajax({
+        url: url,
+        data: JSON.stringify(d),
+        contentType: "application/json",
+        type: "post",
+        cache: false,
+        error: function (msg, textStatus) {
+            alert("查询数据失败");
+        },
+        success: function (json) {
+           eval(result + " = json");
+           if(func){
+               func();
+           }
+        }
+    });
+}
+
 function queryPaginator(options) {
     var tj = options.tj;
     var url = options.url;

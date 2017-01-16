@@ -14,4 +14,5 @@ public interface IUserService {
         public User getLoadUser(String loadName,String password);
         public int getSelectRows(HashMap map);
         public List<User> getSelectPage(HashMap map);
+        public List getAllUserName(HashMap map);
 }
