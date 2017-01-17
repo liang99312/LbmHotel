@@ -3,6 +3,7 @@ var optFlag = 1;
 var editIndex = -1;
 $(document).ready(function () {
     getUserNames(setTrager);
+    $('#inpRzSj').datetimepicker({language:  'zh-CN',format: 'yyyy-mm-dd hh:ii',weekStart: 7,todayBtn:  1,autoclose: 1,todayHighlight: 1,startView: 2,forceParse: 0,showMeridian: 1});
 });
 
 function setTrager(){

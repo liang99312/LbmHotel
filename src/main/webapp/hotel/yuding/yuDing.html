@@ -11,10 +11,13 @@ and open the template in the editor.
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="/LbmHotel/content/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
         <link href="/LbmHotel/content/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+        <link href="/LbmHotel/content/bootstrap/css/bootstrap-datetimepicker.min.css" rel="stylesheet" />
         <link href="/LbmHotel/content/autocomplete/autocomplete.css" rel="stylesheet" />
         <script src="/LbmHotel/js/jquery2.js"></script>
         <script src="/LbmHotel/content/bootstrap/js/bootstrap.min.js"></script>
         <script src="/LbmHotel/content/bootstrap/js/bootstrap-paginator.js"></script>
+        <script src="/LbmHotel/content/bootstrap/js/bootstrap-datetimepicker.min.js"></script>
+        <script src="/LbmHotel/content/bootstrap/js/bootstrap-datetimepicker.zh-CN.js"></script>
         <script src="/LbmHotel/content/autocomplete/autocomplete.js"></script>
         <script src="/LbmHotel/hotel/common/hotel.js"></script>
         <script src="/LbmHotel/hotel/yuding/yuDing.js"></script>
@@ -33,7 +36,8 @@ and open the template in the editor.
                             <th>客户</th>
                             <th>证件号</th>
                             <th>预定时间</th>
-                            <th>预入住时间</th>
+                            <th>预住时间</th>
+                            <th>预住天数</th>
                             <th>状态</th>
                             <th>备注</th>
                             <th>操作</th>
@@ -57,29 +61,33 @@ and open the template in the editor.
                     <div class="modal-body">
                         <div class="content">
                             <div class="form-group">
-                                <label for="inpFjHao">房间号：</label>
+                                <label for="inpFjHao">房&ensp;间&ensp;号：</label>
                                 <input type="text" id="inpFjHao" />
                             </div>
                             <div class="form-group">
-                                <label for="inpKeHu">客&ensp;&ensp;户：</label>
+                                <label for="inpKeHu">客&ensp;&ensp;&ensp;&ensp;户：</label>
                                 <input type="text" id="inpKeHu" />
                             </div>
                             <div class="form-group">
-                                <label for="inpZjHao">证件号：</label>
+                                <label for="inpZjHao">证&ensp;件&ensp;号：</label>
                                 <input type="text" id="inpZjHao" />
                             </div>
                             <div class="form-group">
-                                <label for="inpRzSj">入住时间：</label>
+                                <label for="inpRzSj">预住时间：</label>
                                 <input type="text" id="inpRzSj" />
                             </div>
                             <div class="form-group">
-                                <label for="inpState">状&ensp;&ensp;态：</label>
+                                <label for="inpRzTs">预住天数：</label>
+                                <input type="text" id="inpRzTs" />
+                            </div>
+                            <div class="form-group">
+                                <label for="inpState">状&ensp;&ensp;&ensp;&ensp;态：</label>
                                 <select id="inpState" style="width: 174px;height: 26px;">
                                     <option value="已生效">已生效</option><option value="已入住">已入住</option><option value="已失效">已失效</option>
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label for="inpRemark">备&ensp;&ensp;注：</label>
+                                <label for="inpRemark">备&ensp;&ensp;&ensp;&ensp;注：</label>
                                 <input type="text" id="inpRemark" />
                             </div>
                         </div>

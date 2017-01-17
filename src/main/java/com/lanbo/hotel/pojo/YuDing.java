@@ -21,6 +21,8 @@ public class YuDing{
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date rzSj;
     
+    private Integer rzTs = 1;
+    
     private String state;
     
     private String fuzeRen;
@@ -73,6 +75,14 @@ public class YuDing{
 
     public void setRzSj(Date rzSj) {
         this.rzSj = rzSj;
+    }
+
+    public Integer getRzTs() {
+        return rzTs;
+    }
+
+    public void setRzTs(Integer rzTs) {
+        this.rzTs = rzTs;
     }
 
     public String getState() {

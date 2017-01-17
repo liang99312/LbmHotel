@@ -32,6 +32,7 @@ CREATE TABLE `hotel`.`yuding_t` (
   `zjhao` VARCHAR(45) NULL,
   `ydsj` DATETIME NULL,
   `rzsj` DATETIME NULL,
+  `rzts` INT NULL DEFAULT 0,
   `fuzeren` VARCHAR(45) NULL,
   `state` VARCHAR(45) NULL,
   `remark` VARCHAR(200) NULL,
