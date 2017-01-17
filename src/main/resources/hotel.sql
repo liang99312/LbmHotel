@@ -2,8 +2,8 @@ CREATE DATABASE hotel DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
 
 CREATE TABLE `hotel`.`user_t` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `user_name` VARCHAR(45) NULL,
-  `load_name` VARCHAR(45) NULL,
+  `username` VARCHAR(45) NULL,
+  `loadname` VARCHAR(45) NULL,
   `password` VARCHAR(45) NULL,
   `age` INT NULL,
   `sex` VARCHAR(45) NULL,
@@ -11,25 +11,26 @@ CREATE TABLE `hotel`.`user_t` (
   `quanxian` VARCHAR(1000) NULL,
   PRIMARY KEY (`id`))ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
-insert into user_t (id,user_name,load_name, password, sex, age, zhiwei, quanxian) 
+insert into user_t (id,username,loadname, password, sex, age, zhiwei, quanxian) 
   values(1,'admin','a','a','',0,'','');
 
 CREATE TABLE `hotel`.`fangjian_t` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `fj_hao` VARCHAR(45) NULL,
-  `luo_ceng` VARCHAR(45) NULL,
-  `fuze_ren` VARCHAR(45) NULL,
+  `fjhao` VARCHAR(45) NULL,
+  `luoceng` VARCHAR(45) NULL,
+  `fuzeren` VARCHAR(45) NULL,
   `state` VARCHAR(45) NULL,
   `remark` VARCHAR(200) NULL,
   PRIMARY KEY (`id`))ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 CREATE TABLE `hotel`.`yuding_t` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `fj_hao` VARCHAR(45) NULL,
+  `fjhao` VARCHAR(45) NULL,
   `kehu` VARCHAR(45) NULL,
-  `zj_hao` VARCHAR(45) NULL,
-  `yd_sj` DATETIME NULL,
-  `rz_sj` DATETIME NULL,
+  `zjhao` VARCHAR(45) NULL,
+  `ydsj` DATETIME NULL,
+  `rzsj` DATETIME NULL,
+  `fuzeren` VARCHAR(45) NULL,
   `state` VARCHAR(45) NULL,
   `remark` VARCHAR(200) NULL,
   PRIMARY KEY (`id`))ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
