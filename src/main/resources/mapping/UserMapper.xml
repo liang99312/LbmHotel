@@ -3,8 +3,8 @@
 <mapper namespace="com.lanbo.hotel.dao.IUserDao" >
   <resultMap id="BaseResultMap" type="com.lanbo.hotel.pojo.User" >
     <id column="id" property="id" jdbcType="INTEGER" />
-    <result column="user_name" property="userName" jdbcType="VARCHAR" />
-    <result column="load_name" property="loadName" jdbcType="VARCHAR" />
+    <result column="username" property="userName" jdbcType="VARCHAR" />
+    <result column="loadname" property="loadName" jdbcType="VARCHAR" />
     <result column="password" property="password" jdbcType="VARCHAR" />
     <result column="sex" property="sex" jdbcType="VARCHAR" />
     <result column="age" property="age" jdbcType="INTEGER" />
@@ -12,7 +12,7 @@
     <result column="quanxian" property="quanxian" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, user_name,load_name, password, sex, age, zhiwei, quanxian
+    id, username,loadname, password, sex, age, zhiwei, quanxian
   </sql>
   <select id="selectById" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -25,7 +25,7 @@
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.lanbo.hotel.pojo.User" >
-    insert into user_t (user_name,load_name, password, sex, age, zhiwei, quanxian)
+    insert into user_t (username,loadname, password, sex, age, zhiwei, quanxian)
     values (#{userName,jdbcType=VARCHAR}, #{loadName,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR,}, #{sex,jdbcType=VARCHAR},
       #{age,jdbcType=INTEGER}, #{zhiwei,jdbcType=VARCHAR,}, #{quanxian,jdbcType=VARCHAR})
   </insert>
@@ -36,7 +36,7 @@
         id,
       </if>
       <if test="userName != null" >
-        user_name,
+        username,
       </if>
       <if test="password != null" >
         password,
@@ -69,8 +69,8 @@
   </update>
   <update id="updateById" parameterType="com.lanbo.hotel.pojo.User" >
     update user_t
-    set user_name = #{userName,jdbcType=VARCHAR},
-      load_name = #{loadName,jdbcType=VARCHAR},
+    set username = #{userName,jdbcType=VARCHAR},
+      loadname = #{loadName,jdbcType=VARCHAR},
       age = #{age,jdbcType=INTEGER},
       sex = #{sex,jdbcType=VARCHAR},
       zhiwei = #{zhiwei,jdbcType=VARCHAR},
@@ -81,17 +81,17 @@
     select 
     <include refid="Base_Column_List" />
     from user_t
-    where load_name = #{0} and password = #{1}
+    where loadname = #{0} and password = #{1}
   </select>
   <select id="selectByPage" resultMap="BaseResultMap" parameterType="hashmap">
     select
     <include refid="Base_Column_List" />
     from user_t where 1=1 
     <if test="userName != null and userName !=''">
-        and user_name LIKE concat('%',#{userName},'%')
+        and username LIKE concat('%',#{userName},'%')
     </if>
     <if test="loadName != null and loadName !=''">
-        and load_name LIKE concat('%',#{loadName},'%') 
+        and loadname LIKE concat('%',#{loadName},'%') 
     </if>
     order by id limit #{beginRow},#{pageSize}
   </select>
@@ -100,20 +100,20 @@
     count(1)
     from user_t where 1=1
     <if test="userName != null and userName !=''">
-        and user_name LIKE concat('%',#{userName},'%') 
+        and username LIKE concat('%',#{userName},'%') 
     </if>
     <if test="loadName != null and loadName !=''">
-        and load_name LIKE concat('%',#{loadName},'%') 
+        and loadname LIKE concat('%',#{loadName},'%') 
     </if>
   </select>
   <select id="selectLoadNames" resultType="int" parameterType="com.lanbo.hotel.pojo.User" >
     select
     count(1)
-    from user_t where load_name = #{loadName,jdbcType=VARCHAR} and id != #{id,jdbcType=INTEGER}
+    from user_t where loadname = #{loadName,jdbcType=VARCHAR} and id != #{id,jdbcType=INTEGER}
   </select>
   <select id="selectAllUserName" resultType="java.lang.String" parameterType="hashmap">
     select 
-    user_name 
+    username 
     from user_t where 1=1
   </select>
 </mapper>
