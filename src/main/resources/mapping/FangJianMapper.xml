@@ -5,12 +5,14 @@
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="fjhao" property="fjHao" jdbcType="VARCHAR" />
     <result column="luoceng" property="luoCeng" jdbcType="VARCHAR" />
+    <result column="jibie" property="jiBie" jdbcType="VARCHAR" />
+    <result column="jiage" property="jiaGe" jdbcType="FLOAT" />
     <result column="fuzeren" property="fuzeRen" jdbcType="VARCHAR" />
     <result column="state" property="state" jdbcType="VARCHAR" />
     <result column="remark" property="remark" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, fjhao, luoceng, fuzeren, state, remark
+    id, fjhao, luoceng, jibie, jiage, fuzeren, state, remark
   </sql>
   <select id="selectById" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -23,13 +25,15 @@
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.lanbo.hotel.pojo.FangJian" >
-    insert into fangjian_t (fjhao, luoceng, fuzeren, state, remark)
-    values (#{fjHao,jdbcType=VARCHAR}, #{luoCeng,jdbcType=VARCHAR}, #{fuzeRen,jdbcType=VARCHAR,}, #{state,jdbcType=VARCHAR},#{remark,jdbcType=VARCHAR})
+    insert into fangjian_t (fjhao, luoceng, jibie, jiage, fuzeren, state, remark)
+    values (#{fjHao,jdbcType=VARCHAR}, #{luoCeng,jdbcType=VARCHAR}, #{jiBie,jdbcType=VARCHAR}, #{jiaGe,jdbcType=FLOAT}, #{fuzeRen,jdbcType=VARCHAR,}, #{state,jdbcType=VARCHAR},#{remark,jdbcType=VARCHAR})
   </insert>
   <update id="updateById" parameterType="com.lanbo.hotel.pojo.FangJian" >
     update fangjian_t
     set fjhao = #{fjHao,jdbcType=VARCHAR},
       luoceng = #{luoCeng,jdbcType=VARCHAR},
+      jibie = #{jiBie,jdbcType=VARCHAR},
+      jiage = #{jiaGe,jdbcType=FLOAT},
       state = #{state,jdbcType=VARCHAR},
       remark = #{remark,jdbcType=VARCHAR},
       fuzeren = #{fuzeRen,jdbcType=VARCHAR}

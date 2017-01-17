@@ -14,7 +14,7 @@ function jxYuDing(json) {
     yuDings = [];
     yuDings = json.list;
     $.each(json.list, function (index, item) { //遍历返回的json
-        var trStr = '<tr><td>' + item.fjHao + '</td><td>' + item.luoCeng + '</td><td>' + item.fuzeRen + '</td><td>' + item.state + '</td><td>' + item.remark + '</td><td>'
+        var trStr = '<tr><td>' + item.fjHao + '</td><td>' + item.keHu + '</td><td>' + item.zjHao + '</td><td>' + item.ydSj + '</td><td>' + item.rzSj + '</td><td>' + item.fuzeRen + '</td><td>' + item.state + '</td><td>' + item.remark + '</td><td>'
                 + '<button class="btn btn-info btn-xs icon-edit" onclick="editYuDing(' + index + ' );" style="padding-top: 4px;padding-bottom: 3px;"></button>&nbsp;'
                 + '<button class="btn btn-danger btn-xs icon-remove" onclick="delYuDing(' + index + ' );" style="padding-top: 4px;padding-bottom: 3px;"></button></td></tr>';
         $("#data_table_body").append(trStr);
@@ -41,7 +41,7 @@ function selectYuDing() {
 
 function addYuDing() {
     optFlag = 1;
-    $("#yuDingModel_title").html("新增房间");
+    $("#yuDingModel_title").html("新增预定");
     $("#inpFjHao").val("");
     $("#inpLuoCeng").val("");
     $("#inpState").val("就绪").attr("readonly", "true");
@@ -55,11 +55,11 @@ function editYuDing(index) {
     optFlag = 2;
     if (yuDings[index] === undefined) {
         optFlag = 1;
-        return alert("请选择房间");
+        return alert("请选择预定");
     }
     var yuDing = yuDings[index];
     editIndex = index;
-    $("#yuDingModel_title").html("修改房间");
+    $("#yuDingModel_title").html("修改预定");
     $("#inpFjHao").val(yuDing.fjHao);
     $("#inpLuoCeng").val(yuDing.luoCeng);
     $("#inpState").val(yuDing.state).removeAttr("readonly");
@@ -106,10 +106,10 @@ function saveYuDing() {
 
 function delYuDing(index) {
     if (yuDings[index] === undefined) {
-        return alert("请选择房间");
+        return alert("请选择预定");
     }
     var yuDing = yuDings[index];
-    if (confirm("确定删除房间：" + yuDing.fjHao + "?")) {
+    if (confirm("确定删除预定：" + yuDing.fjHao + "?")) {
         $.ajax({
             url: "/LbmHotel/yuDing/delYuDing",
             data: JSON.stringify(yuDing),

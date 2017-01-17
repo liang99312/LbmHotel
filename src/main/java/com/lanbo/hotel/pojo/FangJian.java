@@ -6,6 +6,10 @@ public class FangJian{
     private String fjHao;
     
     private String luoCeng;
+    
+    private String jiBie;
+    
+    private Float jiaGe;
 
     private String fuzeRen;
     
@@ -43,6 +47,22 @@ public class FangJian{
 
     public void setFuzeRen(String fuzeRen) {
         this.fuzeRen = fuzeRen;
+    }
+
+    public String getJiBie() {
+        return jiBie;
+    }
+
+    public void setJiBie(String jiBie) {
+        this.jiBie = jiBie;
+    }
+
+    public Float getJiaGe() {
+        return jiaGe;
+    }
+    
+    public void setJiaGe(Float jiaGe) {
+        this.jiaGe = jiaGe;
     }
 
     public String getState() {

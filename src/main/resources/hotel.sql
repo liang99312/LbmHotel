@@ -18,6 +18,8 @@ CREATE TABLE `hotel`.`fangjian_t` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `fjhao` VARCHAR(45) NULL,
   `luoceng` VARCHAR(45) NULL,
+  `jibie` VARCHAR(45) NULL,
+  `jiage` FLOAT NULL,
   `fuzeren` VARCHAR(45) NULL,
   `state` VARCHAR(45) NULL,
   `remark` VARCHAR(200) NULL,

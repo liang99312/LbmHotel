@@ -14,7 +14,7 @@ function jxFangJian(json) {
     fangJians = [];
     fangJians = json.list;
     $.each(json.list, function (index, item) { //遍历返回的json
-        var trStr = '<tr><td>' + item.fjHao + '</td><td>' + item.luoCeng + '</td><td>' + item.fuzeRen + '</td><td>' + item.state + '</td><td>' + item.remark + '</td><td>'
+        var trStr = '<tr><td>' + item.fjHao + '</td><td>' + item.luoCeng + '</td><td>' + item.jiBie + '</td><td>' + item.jiaGe + '</td><td>' + item.fuzeRen + '</td><td>' + item.state + '</td><td>' + item.remark + '</td><td>'
                 + '<button class="btn btn-info btn-xs icon-edit" onclick="editFangJian(' + index + ' );" style="padding-top: 4px;padding-bottom: 3px;"></button>&nbsp;'
                 + '<button class="btn btn-danger btn-xs icon-remove" onclick="delFangJian(' + index + ' );" style="padding-top: 4px;padding-bottom: 3px;"></button></td></tr>';
         $("#data_table_body").append(trStr);
@@ -44,6 +44,8 @@ function addFangJian() {
     $("#fangJianModel_title").html("新增房间");
     $("#inpFjHao").val("");
     $("#inpLuoCeng").val("");
+    $("#inpJiBie").val("");
+    $("#inpJiaGe").val("0");
     $("#inpState").val("就绪").attr("readonly", "true");
     $("#inpFuzeRen").val("");
     $("#inpRemark").val("");
@@ -62,6 +64,8 @@ function editFangJian(index) {
     $("#fangJianModel_title").html("修改房间");
     $("#inpFjHao").val(fangJian.fjHao);
     $("#inpLuoCeng").val(fangJian.luoCeng);
+    $("#inpJiBie").val(fangJian.jiBie);
+    $("#inpJiaGe").val(fangJian.jiaGe);
     $("#inpState").val(fangJian.state).removeAttr("readonly");
     $("#inpFuzeRen").val(fangJian.fuzeRen);
     $("#inpRemark").val(fangJian.remark);
@@ -82,6 +86,8 @@ function saveFangJian() {
     }
     fangJian.fjHao = $("#inpFjHao").val();
     fangJian.luoCeng = $("#inpLuoCeng").val();
+    fangJian.jiBie = $("#inpJiBie").val();
+    fangJian.jiaGe = parseFloat($("#inpJiaGe").val(),2);
     fangJian.state = $("#inpState").val();
     fangJian.fuzeRen = $("#inpFuzeRen").val();
     fangJian.remark = $("#inpRemark").val();
