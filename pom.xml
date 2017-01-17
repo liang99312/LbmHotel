@@ -90,7 +90,13 @@
 			<version>1.2.2</version>
 		</dependency>
 		<!-- 导入java ee jar 包 -->
-		<dependency>
+                <dependency>
+                        <groupId>com.fasterxml.jackson.core</groupId>
+                        <artifactId>jackson-annotations</artifactId>
+                        <version>2.1.0</version>
+                        <type>jar</type>
+                </dependency>
+                <dependency>
 			<groupId>javax</groupId>
 			<artifactId>javaee-api</artifactId>
 			<version>7.0</version>

@@ -1,35 +1,41 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.lanbo.hotel.dao.IFangJianDao" >
-  <resultMap id="BaseResultMap" type="com.lanbo.hotel.pojo.FangJian" >
+<mapper namespace="com.lanbo.hotel.dao.IYuDingDao" > 
+  <resultMap id="BaseResultMap" type="com.lanbo.hotel.pojo.YuDing" >
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="fjhao" property="fjHao" jdbcType="VARCHAR" />
-    <result column="luoceng" property="luoCeng" jdbcType="VARCHAR" />
+    <result column="kehu" property="keHu" jdbcType="VARCHAR" />
+    <result column="zjhao" property="zjHao" jdbcType="VARCHAR" />
+    <result column="ydsj" property="ydSj" jdbcType="TIMESTAMP" javaType="java.util.Date"/>
+    <result column="rzsj" property="rzSj" jdbcType="TIMESTAMP" javaType="java.util.Date"/>
     <result column="fuzeren" property="fuzeRen" jdbcType="VARCHAR" />
     <result column="state" property="state" jdbcType="VARCHAR" />
     <result column="remark" property="remark" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, fjhao, luoceng, fuzeren, state, remark
+    id, fjhao, kehu, zjhao, ydsj, rzsj, fuzeren, state, remark
   </sql>
   <select id="selectById" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
-    from fangjian_t
+    from yuding_t
     where id = #{id,jdbcType=INTEGER}
   </select>
   <delete id="deleteById" parameterType="java.lang.Integer" >
-    delete from fangjian_t
+    delete from yuding_t
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.lanbo.hotel.pojo.FangJian" >
-    insert into fangjian_t (fjhao, luoceng, fuzeren, state, remark)
-    values (#{fjHao,jdbcType=VARCHAR}, #{luoCeng,jdbcType=VARCHAR}, #{fuzeRen,jdbcType=VARCHAR,}, #{state,jdbcType=VARCHAR},#{remark,jdbcType=VARCHAR})
+  <insert id="insert" parameterType="com.lanbo.hotel.pojo.YuDing" >
+    insert into yuding_t (fjhao, kehu,zjhao, ydsj, rzsj, fuzeren, state, remark)
+    values (#{fjHao,jdbcType=VARCHAR}, #{keHu,jdbcType=VARCHAR}, #{zjHao,jdbcType=VARCHAR}, #{ydSj,jdbcType=TIMESTAMP}, #{rzSj,jdbcType=TIMESTAMP}, #{fuzeRen,jdbcType=VARCHAR,}, #{state,jdbcType=VARCHAR},#{remark,jdbcType=VARCHAR})
   </insert>
-  <update id="updateById" parameterType="com.lanbo.hotel.pojo.FangJian" >
-    update fangjian_t
+  <update id="updateById" parameterType="com.lanbo.hotel.pojo.YuDing" >
+    update yuding_t
     set fjhao = #{fjHao,jdbcType=VARCHAR},
-      luoceng = #{luoCeng,jdbcType=VARCHAR},
+      kehu = #{keHu,jdbcType=VARCHAR},
+      zjhao = #{keHu,jdbcType=VARCHAR},
+      ydsj = #{ydSj,jdbcType=TIMESTAMP},
+      rzsj = #{rzSj,jdbcType=TIMESTAMP},
       state = #{state,jdbcType=VARCHAR},
       remark = #{remark,jdbcType=VARCHAR},
       fuzeren = #{fuzeRen,jdbcType=VARCHAR}
@@ -38,7 +44,7 @@
   <select id="selectByPage" resultMap="BaseResultMap" parameterType="hashmap">
     select
     <include refid="Base_Column_List" />
-    from fangjian_t where 1=1 
+    from yuding_t where 1=1 
     <if test="fjHao != null and fjHao !=''">
         and fjhao LIKE concat('%',#{fjHao},'%')
     </if>
@@ -47,18 +53,10 @@
     </if>
     order by id limit #{beginRow},#{pageSize}
   </select>
-  <select id="selectAllFangJianHao" resultType="java.lang.String" parameterType="hashmap">
-    select 
-    fjhao 
-    from fangjian_t where 1=1 
-    <if test="state != null and state !=''">
-        and state = #{state}
-    </if>
-  </select>
   <select id="selectRows" resultType="int" parameterType="hashmap">
     select
     count(1)
-    from fangjian_t where 1=1
+    from yuding_t where 1=1
     <if test="fjHao != null and fjHao !=''">
         and fjhao LIKE concat('%',#{fjHao},'%') 
     </if>
@@ -66,14 +64,9 @@
         and state = #{state}
     </if>
   </select>
-  <update id="updateState" parameterType="com.lanbo.hotel.pojo.FangJian" >
-    update fangjian_t set 
-      state = #{state,jdbcType=VARCHAR} 
+  <update id="updateState" parameterType="com.lanbo.hotel.pojo.YuDing" >
+    update yuding_t
+      state = #{state,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <select id="selectHaos" resultType="int" parameterType="com.lanbo.hotel.pojo.FangJian" >
-    select
-    count(1)
-    from fangjian_t where fjhao = #{fjHao,jdbcType=VARCHAR} and id != #{id,jdbcType=INTEGER}
-  </select>
 </mapper>

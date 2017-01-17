@@ -1,7 +1,7 @@
 package com.lanbo.hotel.dao;
 
-import com.lanbo.hotel.pojo.FangJian;
+import com.lanbo.hotel.pojo.YuDing;
 
 public interface IYuDingDao extends IBaseDao{
-    int updateState(FangJian record);
+    int updateState(YuDing record);
 }

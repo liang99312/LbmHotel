@@ -11,7 +11,7 @@ CREATE TABLE `hotel`.`user_t` (
   `quanxian` VARCHAR(1000) NULL,
   PRIMARY KEY (`id`))ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
-insert into user_t (id,username,loadname, password, sex, age, zhiwei, quanxian) 
+insert into `hotel`.user_t (id,username,loadname, password, sex, age, zhiwei, quanxian) 
   values(1,'admin','a','a','',0,'','');
 
 CREATE TABLE `hotel`.`fangjian_t` (

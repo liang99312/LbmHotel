@@ -1,6 +1,8 @@
 package com.lanbo.hotel.pojo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import java.util.Date;
+import org.springframework.format.annotation.DateTimeFormat;
 
 public class YuDing{
     private Integer id =-1;
@@ -11,11 +13,17 @@ public class YuDing{
     
     private String zjHao;
 
+    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date ydSj;
     
+    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date rzSj;
     
     private String state;
+    
+    private String fuzeRen;
     
     private String remark;
 
@@ -73,6 +81,14 @@ public class YuDing{
 
     public void setState(String state) {
         this.state = state;
+    }
+
+    public String getFuzeRen() {
+        return fuzeRen;
+    }
+
+    public void setFuzeRen(String fuzeRen) {
+        this.fuzeRen = fuzeRen;
     }
 
     public String getRemark() {
