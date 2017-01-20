@@ -46,4 +46,9 @@ public class YuDingServiceImpl implements IYuDingService {
     public List<YuDing> getSelectPage(HashMap map) {
         return (List<YuDing>)this.yuDingDao.selectByPage(map);
     }
+
+    @Override
+    public int selectRzJiBies(YuDing yuDing) {
+        return this.yuDingDao.selectRzJiBies(yuDing);
+    }
 }

@@ -11,4 +11,5 @@ public interface IYuDingService {
         public boolean updateYuDing(YuDing yuDing);
         public int getSelectRows(HashMap map);
         public List<YuDing> getSelectPage(HashMap map);
+        public int selectRzJiBies(YuDing yuDing);
 }

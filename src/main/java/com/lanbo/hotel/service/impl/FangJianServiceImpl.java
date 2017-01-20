@@ -57,4 +57,9 @@ public class FangJianServiceImpl implements IFangJianService {
         return this.fangJianDao.selectAllFangJianHao(map);
     }
 
+    @Override
+    public int getJiBies(FangJian fangJian) {
+        return this.fangJianDao.selectJiBies(fangJian);
+    }
+
 }

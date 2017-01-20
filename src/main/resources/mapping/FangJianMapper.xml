@@ -80,4 +80,9 @@
     count(1)
     from fangjian_t where fjhao = #{fjHao,jdbcType=VARCHAR} and id != #{id,jdbcType=INTEGER}
   </select>
+  <select id="selectJiBies" resultType="int" parameterType="com.lanbo.hotel.pojo.FangJian" >
+    select
+    count(1)
+    from fangjian_t where jibie = #{jiBie,jdbcType=VARCHAR}
+  </select>
 </mapper>

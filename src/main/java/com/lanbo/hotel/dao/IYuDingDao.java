@@ -4,4 +4,5 @@ import com.lanbo.hotel.pojo.YuDing;
 
 public interface IYuDingDao extends IBaseDao{
     int updateState(YuDing record);
+    int selectRzJiBies(YuDing record);
 }
