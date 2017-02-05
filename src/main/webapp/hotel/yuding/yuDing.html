@@ -32,12 +32,12 @@ and open the template in the editor.
                 <table id="data_table" class="table table-hover">
                     <thead>
                         <tr>
-                            <th>房间号</th>
                             <th>客户</th>
                             <th>证件号</th>
                             <th>预定时间</th>
                             <th>预住时间</th>
                             <th>预住天数</th>
+                            <th>预住房间数</th>
                             <th>状态</th>
                             <th>备注</th>
                             <th>操作</th>
@@ -61,8 +61,20 @@ and open the template in the editor.
                     <div class="modal-body">
                         <div class="content">
                             <div class="form-group">
-                                <label for="inpFjHao">房&ensp;间&ensp;号：</label>
-                                <input type="text" id="inpFjHao" />
+                                <label for="inpRzSj">预住时间：</label>
+                                <input type="text" id="inpRzSj" />
+                            </div>
+                            <div class="form-group">
+                                <label for="inpRzTs">预住天数：</label>
+                                <input type="text" id="inpRzTs" />
+                            </div>
+                            <div class="form-group">
+                                <label for="inpRzFjs">预住房间数：</label>
+                                <input type="text" id="inpRzFjs" />
+                            </div>
+                            <div class="form-group">
+                                <label for="inpFjJiBie">房间类型：</label>
+                                <input type="text" id="inpFjJiBie" />
                             </div>
                             <div class="form-group">
                                 <label for="inpKeHu">客&ensp;&ensp;&ensp;&ensp;户：</label>
@@ -71,14 +83,6 @@ and open the template in the editor.
                             <div class="form-group">
                                 <label for="inpZjHao">证&ensp;件&ensp;号：</label>
                                 <input type="text" id="inpZjHao" />
-                            </div>
-                            <div class="form-group">
-                                <label for="inpRzSj">预住时间：</label>
-                                <input type="text" id="inpRzSj" />
-                            </div>
-                            <div class="form-group">
-                                <label for="inpRzTs">预住天数：</label>
-                                <input type="text" id="inpRzTs" />
                             </div>
                             <div class="form-group">
                                 <label for="inpState">状&ensp;&ensp;&ensp;&ensp;态：</label>
