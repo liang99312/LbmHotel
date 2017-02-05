@@ -26,7 +26,7 @@ public class SessionFilter extends OncePerRequestFilter {
             throws ServletException, IOException {  
   
         // 不拦截的url  
-        String[] notFilter = new String[] {"/index.jsp","loadUser"};  
+        String[] notFilter = new String[] {"/index.jsp","/admin.jsp","loadUser","frontend"};  
   
         // 请求的url  
         String url = request.getRequestURI();  
