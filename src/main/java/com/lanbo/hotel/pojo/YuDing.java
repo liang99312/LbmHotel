@@ -6,8 +6,6 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 public class YuDing{
     private Integer id =-1;
-
-    private String fjHao;
     
     private String keHu;
     
@@ -21,7 +19,9 @@ public class YuDing{
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date rzSj;
     
-    private Integer rzTs = 1;
+    private Integer rzTs = 0;
+    
+    private Integer rzFjs = 0;
     
     private String state;
     
@@ -35,14 +35,6 @@ public class YuDing{
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public String getFjHao() {
-        return fjHao;
-    }
-
-    public void setFjHao(String fjHao) {
-        this.fjHao = fjHao;
     }
 
     public String getKeHu() {
@@ -81,6 +73,14 @@ public class YuDing{
         return rzTs;
     }
 
+    public Integer getRzFjs() {
+        return rzFjs;
+    }
+
+    public void setRzFjs(Integer rzFjs) {
+        this.rzFjs = rzFjs;
+    }
+
     public void setRzTs(Integer rzTs) {
         this.rzTs = rzTs;
     }
@@ -109,9 +109,4 @@ public class YuDing{
         this.remark = remark;
     }
 
-    @Override
-    public String toString() {
-        return fjHao;
-    }
-    
 }
