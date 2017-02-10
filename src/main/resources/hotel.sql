@@ -27,12 +27,12 @@ CREATE TABLE `hotel`.`fangjian_t` (
 
 CREATE TABLE `hotel`.`yuding_t` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `fjhao` VARCHAR(45) NULL,
   `kehu` VARCHAR(45) NULL,
   `zjhao` VARCHAR(45) NULL,
   `ydsj` DATETIME NULL,
   `rzsj` DATETIME NULL,
   `rzts` INT NULL DEFAULT 0,
+  `rzfjs` INT NULL DEFAULT 0,
   `fuzeren` VARCHAR(45) NULL,
   `state` VARCHAR(45) NULL,
   `remark` VARCHAR(200) NULL,

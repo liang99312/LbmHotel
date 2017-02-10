@@ -3,18 +3,18 @@
 <mapper namespace="com.lanbo.hotel.dao.IYuDingDao" > 
   <resultMap id="BaseResultMap" type="com.lanbo.hotel.pojo.YuDing" >
     <id column="id" property="id" jdbcType="INTEGER" />
-    <result column="fjhao" property="fjHao" jdbcType="VARCHAR" />
     <result column="kehu" property="keHu" jdbcType="VARCHAR" />
     <result column="zjhao" property="zjHao" jdbcType="VARCHAR" />
     <result column="ydsj" property="ydSj" jdbcType="TIMESTAMP" javaType="java.util.Date"/>
     <result column="rzsj" property="rzSj" jdbcType="TIMESTAMP" javaType="java.util.Date"/>
     <result column="rzts" property="rzTs" jdbcType="INTEGER" />
-    <result column="fuzeren" property="fuzeRen" jdbcType="VARCHAR" />
+    <result column="rzfjs" property="rzFjs" jdbcType="INTEGER" />
     <result column="state" property="state" jdbcType="VARCHAR" />
+    <result column="fuzeren" property="fuzeRen" jdbcType="VARCHAR" />
     <result column="remark" property="remark" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, fjhao, kehu, zjhao, ydsj, rzsj, rzts, fuzeren, state, remark
+    id, kehu, zjhao, ydsj, rzsj, rzts, rzfjs, state, fuzeren, remark
   </sql>
   <select id="selectById" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -27,17 +27,17 @@
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.lanbo.hotel.pojo.YuDing" >
-    insert into yuding_t (fjhao, kehu,zjhao, ydsj, rzsj, rzts, fuzeren, state, remark)
-    values (#{fjHao,jdbcType=VARCHAR}, #{keHu,jdbcType=VARCHAR}, #{zjHao,jdbcType=VARCHAR}, #{ydSj,jdbcType=TIMESTAMP}, #{rzSj,jdbcType=TIMESTAMP}, #{rzTs,jdbcType=INTEGER}, #{fuzeRen,jdbcType=VARCHAR,}, #{state,jdbcType=VARCHAR},#{remark,jdbcType=VARCHAR})
+    insert into yuding_t (kehu, zjhao, ydsj, rzsj, rzts, rzfjs, state, fuzeren, remark)
+    values (#{keHu,jdbcType=VARCHAR}, #{zjHao,jdbcType=VARCHAR}, #{ydSj,jdbcType=TIMESTAMP}, #{rzSj,jdbcType=TIMESTAMP}, #{rzTs,jdbcType=INTEGER}, #{rzFjs,jdbcType=INTEGER}, #{state,jdbcType=VARCHAR}, #{fuzeRen,jdbcType=VARCHAR},#{remark,jdbcType=VARCHAR})
   </insert>
   <update id="updateById" parameterType="com.lanbo.hotel.pojo.YuDing" >
     update yuding_t
-    set fjhao = #{fjHao,jdbcType=VARCHAR},
-      kehu = #{keHu,jdbcType=VARCHAR},
-      zjhao = #{keHu,jdbcType=VARCHAR},
+    set kehu = #{keHu,jdbcType=VARCHAR},
+      zjhao = #{zjHao,jdbcType=VARCHAR},
       ydsj = #{ydSj,jdbcType=TIMESTAMP},
       rzsj = #{rzSj,jdbcType=TIMESTAMP},
       rzts = #{rzTs,jdbcType=INTEGER},
+      rzfjs = #{rzFjs,jdbcType=INTEGER},
       state = #{state,jdbcType=VARCHAR},
       remark = #{remark,jdbcType=VARCHAR},
       fuzeren = #{fuzeRen,jdbcType=VARCHAR}
@@ -46,10 +46,7 @@
   <select id="selectByPage" resultMap="BaseResultMap" parameterType="hashmap">
     select
     <include refid="Base_Column_List" />
-    from yuding_t where 1=1 
-    <if test="fjHao != null and fjHao !=''">
-        and fjhao LIKE concat('%',#{fjHao},'%')
-    </if>
+    from yuding_t where 1=1
     <if test="state != null and state !=''">
         and state = #{state}
     </if>
@@ -59,9 +56,6 @@
     select
     count(1)
     from yuding_t where 1=1
-    <if test="fjHao != null and fjHao !=''">
-        and fjhao LIKE concat('%',#{fjHao},'%') 
-    </if>
     <if test="state != null and state !=''">
         and state = #{state}
     </if>
@@ -75,7 +69,6 @@
     select
     count(1)
     from yuding_t where 1=1
-    and jibie = #{jiBie,jdbcType=VARCHAR} and rzSj <= #{rzSj,jdbcType=TIMESTAMP}
-    and date_add(rzSj, interval rzts day)>= #{rzSj,jdbcType=TIMESTAMP}
+   <!--and jibie = #{jiBie,jdbcType=VARCHAR} and rzSj <= #{rzSj,jdbcType=TIMESTAMP} and date_add(rzSj, interval rzts day)>= #{rzSj,jdbcType=TIMESTAMP} --> 
   </select>
 </mapper>
