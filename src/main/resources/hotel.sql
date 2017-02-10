@@ -37,3 +37,15 @@ CREATE TABLE `hotel`.`yuding_t` (
   `state` VARCHAR(45) NULL,
   `remark` VARCHAR(200) NULL,
   PRIMARY KEY (`id`))ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+CREATE TABLE `hotel`.`kehu_t` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `bianhao` VARCHAR(45) NULL,
+  `name` VARCHAR(45) NULL,
+  `sex` VARCHAR(45) NULL,
+  `age` INT NULL DEFAULT 0,
+  `sfzhao` VARCHAR(45) NULL,
+  `dianhua` VARCHAR(45) NULL,
+  `dengji` VARCHAR(45) NULL,
+  `remark` VARCHAR(200) NULL,
+  PRIMARY KEY (`id`))ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;

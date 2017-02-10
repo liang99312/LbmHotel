@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lanbo.hotel.dao.IKeHuDao" >
+  <resultMap id="BaseResultMap" type="com.lanbo.hotel.pojo.KeHu" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="bianhao" property="bianHao" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="sex" property="sex" jdbcType="VARCHAR" />
+    <result column="age" property="age" jdbcType="INTEGER" />
+    <result column="sfzhao" property="sfzHao" jdbcType="VARCHAR" />
+    <result column="dianhua" property="dianHua" jdbcType="VARCHAR" />
+    <result column="dengji" property="dengJi" jdbcType="VARCHAR" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, bianhao, name, sex, age, sfzhao, dianhua, dengji, remark
+  </sql>
+  <select id="selectById" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from kehu_t
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteById" parameterType="java.lang.Integer" >
+    delete from kehu_t
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.lanbo.hotel.pojo.KeHu" >
+    insert into kehu_t (bianhao, name, sex, age, sfzhao, dianhua, dengji, remark)
+    values (#{bianHao,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR}, #{age,jdbcType=INTEGER}, #{sfzHao,jdbcType=VARCHAR,}, #{dianHua,jdbcType=VARCHAR}, #{dengJi,jdbcType=VARCHAR},#{remark,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateById" parameterType="com.lanbo.hotel.pojo.KeHu" >
+    update kehu_t
+    set bianhao = #{bianHao,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=VARCHAR},
+      age = #{age,jdbcType=INTEGER},
+      sfzhao = #{sfzHao,jdbcType=VARCHAR},
+      dianhua = #{dianHua,jdbcType=VARCHAR},
+      dengji = #{dengJi,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPage" resultMap="BaseResultMap" parameterType="hashmap">
+    select
+    <include refid="Base_Column_List" />
+    from kehu_t where 1=1 
+    <if test="name != null and name !=''">
+        and name LIKE concat('%',#{name},'%')
+    </if>
+    <if test="dengJi != null and dengJi !=''">
+        and dengji = #{dengJi}
+    </if>
+    order by id limit #{beginRow},#{pageSize}
+  </select>
+  <select id="selectRows" resultType="int" parameterType="hashmap">
+    select
+    count(1)
+    from kehu_t where 1=1
+    <if test="name != null and name !=''">
+        and name LIKE concat('%',#{name},'%')
+    </if>
+    <if test="dengJi != null and dengJi !=''">
+        and dengji = #{dengJi}
+    </if>
+  </select>
+  <update id="updateDengJi" parameterType="com.lanbo.hotel.pojo.KeHu" >
+    update kehu_t set 
+      dengji = #{dengJi,jdbcType=VARCHAR} 
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectHaos" resultType="int" parameterType="com.lanbo.hotel.pojo.KeHu" >
+    select
+    count(1)
+    from kehu_t where (name = #{name,jdbcType=VARCHAR} or dianhua = #{dianHua,jdbcType=VARCHAR} or sfzhao = #{sfzHao,jdbcType=VARCHAR}) and id != #{id,jdbcType=INTEGER}
+  </select>
+</mapper>
