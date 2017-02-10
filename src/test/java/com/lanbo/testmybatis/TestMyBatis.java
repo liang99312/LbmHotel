@@ -44,7 +44,6 @@ public class TestMyBatis {
                 
                 Timestamp ts = new Timestamp(System.currentTimeMillis());  
                 YuDing yd = new YuDing();
-                yd.setFjHao("202");
                 yd.setFuzeRen("ab");
                 yd.setKeHu("李四1");
                 yd.setYdSj(ts);
