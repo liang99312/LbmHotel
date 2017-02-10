@@ -2,40 +2,70 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>登录系统</title>
-        <link href="/LbmHotel/content/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
-        <link href="/LbmHotel/content/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+        <title>LBM首页</title>
         <script src="/LbmHotel/js/jquery2.js"></script>
         <style>  
             body {
-                background:url(/LbmHotel/img/bg_login.jpg) #f8f6e9;
-            }
-            .mycenter{
-                margin-top: 100px;
-                margin-left: auto;
-                margin-right: auto;
-                height: 350px;
-                width:500px;
-                padding: 5%;
-                padding-left: 5%;
-                padding-right: 5%;
-            }
-            .mycenter mysign{
-                width: 440px;
+                background:#f8f6e9;
+                margin:0 auto;
             }
             .mycenter input,checkbox,button{
                 margin-top:2%;
-                margin-left: 10%;
+                margin-left: 20%;
                 margin-right: 10%;
             }
             .mycheckbox{
                 margin-top:10px;
-                margin-left: 40px;
                 margin-bottom: 10px;
-                height: 10px;
+            }
+            #dvMain{
+                background-image:   url(/LbmHotel/img/bg1.jpg);
+                background-position: center 0; 
+                background-repeat: no-repeat; 
+                background-attachment:fixed; 
+                background-size: cover; 
+                -webkit-background-size: cover;/* 兼容Webkit内核浏览器如Chrome和Safari */ 
+                -o-background-size: cover;/* 兼容Opera */ 
+                zoom: 1; 
+            }
+            #dvMain a{
+                cursor: pointer;
             }
         </style>
         <script>
+            var i = 2;  
+            function remainTime(){  
+                if(i===2){
+                    $("#dvMain").css("background-image","url(/LbmHotel/img/bg1.jpg)");
+                    $("#spDz").html("宁静");
+                    $("#spDz").css("writing-mode","horizontal-tb");
+                    $("#spXz").html("大自然的清新安宁");
+                    $("#spXz").css("writing-mode","horizontal-tb");
+                    $("#dvSp").css("top","170px");
+                    $("#dvSp").css("left","20%");
+                }else if(i===1){
+                    $("#dvMain").css("background-image","url(/LbmHotel/img/bg2.jpg)");
+                    $("#spDz").html("舒适&nbsp;");
+                    $("#spDz").css("writing-mode","vertical-rl");
+                    $("#spXz").html("如家般的随性无忧");
+                    $("#spXz").css("writing-mode","vertical-rl");
+                    $("#dvSp").css("top","470px");
+                    $("#dvSp").css("left","70%");
+                }else if(i===0){
+                    $("#dvMain").css("background-image","url(/LbmHotel/img/bg3.jpg)");
+                    $("#spDz").html("便捷&nbsp;");
+                    $("#spDz").css("writing-mode","vertical-rl");
+                    $("#spXz").html("方便快捷的服务");
+                    $("#spXz").css("writing-mode","vertical-rl");
+                    $("#dvSp").css("top","170px");
+                    $("#dvSp").css("left","20%");
+                    i=3;
+                }
+                i--;
+                setTimeout("remainTime()",3000);  
+            }  
+            remainTime();
+
             function SetCookie(name, value, iDay)
             {
                 var oDate = new Date();
@@ -48,7 +78,7 @@
                 for (var i = 0; i < arr[i].length; i++) //历遍数组
                 {
                     var arr2 = arr[i].split('='); //原来割好的数组是：user=simon，再用split('=')分割成：user simon 这样可以通过arr2[0] arr2[1]来分别获取user和simon 
-                    if (arr2[0] == name) //如果数组的属性名等于传进来的name
+                    if (arr2[0] === name) //如果数组的属性名等于传进来的name
                     {
                         return arr2[1]; //就返回属性名对应的值
                     }
@@ -59,79 +89,49 @@
             {
                 SetCookie(name, 1, -1); //-1就是告诉系统已经过期，系统就会立刻去删除cookie
             };
-            $(document).ready(function () {
-                var load_name = GetCookie("load_name");
-                if (load_name !== undefined && load_name !== null) {
-                    $("#loadName").val(load_name);
+            
+            function fun(e){  
+                var x = e.clientX;  
+                var y = e.clientY ;  
+                if(y<80){
+                    if($("#dvMenu").is(":hidden"))
+                        $("#dvMenu").fadeIn(500);
+                }else{
+                    $("#dvMenu").fadeOut(500);
                 }
-                var load_password = GetCookie("load_password");
-                if (load_password !== undefined && load_password !== null) {
-                    $("#passWord").val(load_password);
-                }
-                var load_rem = GetCookie("load_rem");
-                if (load_rem !== undefined && load_rem !== null && load_rem === "true") {
-                    $("#remeber").prop("checked",true);
-                }
-                $("#loadName").keypress(function (e) {
-                    if (e.which === 13) {
-                        if ($("#loadName").val() === "") {
-                            alert("请输入用户名");
-                            $("#loadName").focus();
-                            return;
-                        } else {
-                            $("#passWord").focus();
-                        }
-                    }
-                });
-                $("#passWord").keypress(function (e) {
-                    if (e.which === 13) {
-                        load();
-                    }
-                });
-                $("#loadName").focus();
-            });
-
-            function load() {
-                var loadName = $("#loadName").val();
-                var password = $("#passWord").val();
-                if (loadName === "") {
-                    return alert("请输入用户名");
-                }
-                var d = {"loadName": loadName, "password": password};
-                $.ajax({
-                    url: "/LbmHotel/user/loadUser",
-                    data: JSON.stringify(d),
-                    contentType: "application/json",
-                    type: "post",
-                    cache: false,
-                    error: function (msg, textStatus) {
-                        alert("登录失败:请联系系统管理员");
-                    },
-                    success: function (json) {
-                        if (json.result === 1) {
-                            if ($("#remeber").is(":checked")) {
-                                SetCookie("load_name", loadName);
-                                SetCookie("load_password", password);
-                                SetCookie("load_rem", "true");
-                            } else {
-                                DeleteCookie("load_name");
-                                DeleteCookie("load_password");
-                                DeleteCookie("load_rem");
-                            }
-                            window.top.location.href = "/LbmHotel/user/home";
-                        } else {
-                            alert("登录失败:用户名或密码错误");
-                            $("#loadName").focus();
-                        }
-                    }
-                });
             }
+            $(document).ready(function(){
+                $("#aLoad").click(function(event){
+                    $("#dvLoad").css("z-index","100");
+                    $("#dvLoad").show();
+                    event.stopPropagation();
+                });
+                $("#dvMain,#dvBottom").click(function(){
+                    $("#dvLoad").css("z-index","1");
+                    $("#dvLoad").hide();
+                 });
+            });
         </script>
     </head>
     <body>
-        <div class="mycenter">
+        <div id="dvMain" onmousemove = "fun(event)" style="width:100%;height:950px;z-index:10;float: left;">
+            <div id="dvSp" style="position: absolute;width: 200px; height: 300px; top: 170px;left: 20%;font-size: 22px;font-weight: normal;">
+                <span id="spDz" style="font-size:40px">宁静</span><br/>
+                <span id="spXz">大自然的清新安宁</span>
+            </div>
+            <div id="dvMenu" style="background: rgba(210,210,210,0.4);position: absolute;width: 100%;height:80px;top: 0;left:0;text-align: center;vertical-align: middle;justify-content:center;align-items:center;display:-webkit-flex;">
+                <a>预订</a>
+                <span style="color: #0000ff;font-size:32px;font-weight:bold;padding-left:30px;padding-right: 30px;">LBM</span>
+                <a>我的</a>
+                <a id="aLoad" style="padding-left:20px;">登录</a>
+            </div>
+        </div>
+        <div id="dvBottom" style="width:100%;height:100px;z-index:10;float: left;text-align: center;vertical-align: middle;justify-content:center;align-items:center;display:-webkit-flex;">
+            <span>地址：广西柳州市鱼峰区古亭大道10000号<br/>联系电话：0772-3652987</span>
+        </div>
+        <div class="mycenter" id="dvLoad" style="background: rgba(151, 204, 243, 0.6);z-index:1;display: none;position: absolute;width: 320px;height:210px;top: 100px;left:40%;border-radius:5px;">
             <div class="mysign">
-                <div class="col-lg-11 text-center text-info">
+                <div class="col-lg-11 text-center text-info" style="text-align: center;">
                     <h2>请登录</h2>
                 </div>
                 <div class="col-lg-10">
@@ -143,11 +143,11 @@
                 </div>
                 <div class="col-lg-10"></div>
                 <div class="col-lg-10 mycheckbox checkbox">
-                    <input type="checkbox" id="remeber" class="col-lg-1">记住密码</input>
+                    <input type="checkbox" id="remeber" class="col-lg-1" style="width:20px;margin-right: 0;"/>记住密码
                 </div>
                 <div class="col-lg-10"></div>
-                <div class="col-lg-10">
-                    <button type="button" class="btn btn-success col-lg-12" onclick="load();">登录</button>
+                <div class="col-lg-10" style="text-align: center;">
+                    <button type="button" class="btn btn-success col-lg-12" onclick="load();" style="margin-left: 0;">登录</button>
                 </div>
             </div>
         </div>
