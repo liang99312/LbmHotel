@@ -38,7 +38,10 @@ public class SessionFilter extends OncePerRequestFilter {
                 if(null==obj){  
                     // 如果session中不存在登录者实体，则弹出框提示重新登录  
                     PrintWriter out = response.getWriter();  
-                    String loginPage = request.getContextPath()+"/index.jsp";  
+                    String loginPage = request.getContextPath()+"/admin.jsp";  
+                    if(url.contains("front") || "/LbmHotel/".equals(url)){
+                        loginPage = request.getContextPath()+"/index.jsp";  
+                    }
                     StringBuilder builder = new StringBuilder();  
                     builder.append("<script type=\"text/javascript\">");  
                     builder.append("window.top.location.href='");  
