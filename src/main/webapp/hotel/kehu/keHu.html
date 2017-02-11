@@ -9,8 +9,94 @@ and open the template in the editor.
         <title>TODO supply a title</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="/LbmHotel/content/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+        <link href="/LbmHotel/content/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+        <link href="/LbmHotel/content/autocomplete/autocomplete.css" rel="stylesheet" />
+        <script src="/LbmHotel/js/jquery2.js"></script>
+        <script src="/LbmHotel/content/bootstrap/js/bootstrap.min.js"></script>
+        <script src="/LbmHotel/content/bootstrap/js/bootstrap-paginator.js"></script>
+        <script src="/LbmHotel/content/autocomplete/autocomplete.js"></script>
+        <script src="/LbmHotel/hotel/common/hotel.js"></script>
+        <script src="/LbmHotel/hotel/kehu/keHu.js"></script>
     </head>
-    <body>
-        <div>客户***</div>
+    <body style='height:800px;'>
+        <div style="float:left; width: 100%">
+            <button type="button" class="btn btn-primary btn-sm" onclick="addKeHu();">新增客户</button>
+            <span>&nbsp;编号：</span><input id="selBianHao" type="text" />
+            <span>&nbsp;等级：</span><select id="selDianHua" style="width: 170px;height:26px;"><option value="">全部</option><option value="初级">初级</option><option value="中级">中级</option><option value="高级">高级</option></select>
+            <button type="button" class="btn btn-primary btn-sm" onclick="selectKeHu();" style="margin-left: 2px;">查找</button>
+            <div id="list1" class="table-responsive" style="height: 672px">
+                <table id="data_table" class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>编号</th>
+                            <th>姓名</th>
+                            <th>性别</th>
+                            <th>年龄</th>
+                            <th>身份证</th>
+                            <th>电话</th>
+                            <th>等级</th>
+                            <th>备注</th>
+                        </tr>
+                    </thead>
+                    <tbody id='data_table_body'>
+                        <tr><td>请查询客户记录</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <ul id="example"></ul>
+        </div>
+        <div class="modal fade" id="keHuModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header" style="background: #ace1ff;height: 40px;border-top-left-radius: 6px;border-top-right-radius: 6px;padding:10px">
+                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                        <h4 class="modal-title" id="keHuModel_title">添加客户</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="content">
+                            <div class="form-group">
+                                <label for="inpBianHao">编&ensp;&ensp;号：</label>
+                                <input type="text" id="inpBianHao" />
+                            </div>
+                            <div class="form-group">
+                                <label for="inpName">姓&ensp;&ensp;名：</label>
+                                <input type="text" id="inpName" />
+                            </div>
+                            <div class="form-group">
+                                <label for="inpSex">性&ensp;&ensp;别：</label>
+                                <input type="text" id="inpSex" />
+                            </div>
+                            <div class="form-group">
+                                <label for="inpAge">年&ensp;&ensp;龄：</label>
+                                <input type="text" id="inpAge" />
+                            </div>
+                            <div class="form-group">
+                                <label for="inpSfzHao">身份证：</label>
+                                <input type="text" id="inpSfzHao" />
+                            </div>
+                            <div class="form-group">
+                                <label for="inpDianHua">电&ensp;&ensp;话：</label>
+                                <input type="text" id="inpDianHua" />
+                            </div>
+                            <div class="form-group">
+                                <label for="inpDengJi">等&ensp;&ensp;级：</label>
+                                <select id="inpDengJi" style="width: 174px;height: 26px;">
+                                    <option value="初级">初级</option><option value="中级">中级</option><option value="高级">高级</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="inpRemark">备&ensp;&ensp;注：</label>
+                                <input type="text" id="inpRemark" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer" style="text-align: center;padding: 8px;">
+                        <button type="submit" class="btn btn-primary" onclick="saveKeHu()">保存</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </body>
 </html>
