@@ -26,8 +26,8 @@
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.lanbo.hotel.pojo.KeHu" >
-    insert into kehu_t (bianhao, name, sex, age, sfzhao, dianhua, dengji, remark)
-    values (#{bianHao,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR}, #{age,jdbcType=INTEGER}, #{sfzHao,jdbcType=VARCHAR,}, #{dianHua,jdbcType=VARCHAR}, #{dengJi,jdbcType=VARCHAR},#{remark,jdbcType=VARCHAR})
+    insert into kehu_t (bianhao, name, sex, age, sfzhao, dianhua, dengji, password, remark)
+    values (#{bianHao,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR}, #{age,jdbcType=INTEGER}, #{sfzHao,jdbcType=VARCHAR,}, #{dianHua,jdbcType=VARCHAR}, #{dengJi,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR})
   </insert>
   <update id="updateById" parameterType="com.lanbo.hotel.pojo.KeHu" >
     update kehu_t
@@ -73,5 +73,18 @@
     select
     count(1)
     from kehu_t where (name = #{name,jdbcType=VARCHAR} or dianhua = #{dianHua,jdbcType=VARCHAR} or sfzhao = #{sfzHao,jdbcType=VARCHAR}) and id != #{id,jdbcType=INTEGER}
+  </select>
+  <update id="updatePassword" parameterType="com.lanbo.hotel.pojo.KeHu" >
+    update kehu_t
+    <set >
+      password = #{password,jdbcType=VARCHAR}
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByNameAndPassword" resultMap="BaseResultMap" >
+    select 
+    <include refid="Base_Column_List" />
+    from kehu_t
+    where (bianhao = #{0} or dianhua = #{0} or sfzhao = #{0}) and password = #{1}
   </select>
 </mapper>

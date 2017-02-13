@@ -47,5 +47,6 @@ CREATE TABLE `hotel`.`kehu_t` (
   `sfzhao` VARCHAR(45) NULL,
   `dianhua` VARCHAR(45) NULL,
   `dengji` VARCHAR(45) NULL,
+  `password` VARCHAR(45) NULL,
   `remark` VARCHAR(200) NULL,
   PRIMARY KEY (`id`))ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
