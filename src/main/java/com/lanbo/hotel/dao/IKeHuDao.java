@@ -5,4 +5,6 @@ import com.lanbo.hotel.pojo.KeHu;
 public interface IKeHuDao extends IBaseDao{
     int updateDengJi(KeHu record);
     int selectHaos(KeHu record);
+    int updatePassword(KeHu record);
+    KeHu selectByNameAndPassword(String loadName,String password);
 }

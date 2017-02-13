@@ -17,6 +17,8 @@ public class KeHu{
     
     private String dengJi;
     
+    private String password;
+    
     private String remark;
 
     public Integer getId() {
@@ -81,6 +83,14 @@ public class KeHu{
 
     public void setDengJi(String dengJi) {
         this.dengJi = dengJi;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getRemark() {
