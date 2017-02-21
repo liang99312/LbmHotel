@@ -13,7 +13,7 @@
     <result column="remark" property="remark" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, bianhao, name, sex, age, sfzhao, dianhua, dengji, remark
+    id, bianhao, name, sex, age, sfzhao, dianhua, dengji, remark, password
   </sql>
   <select id="selectById" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
