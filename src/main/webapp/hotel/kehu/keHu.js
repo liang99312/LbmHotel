@@ -45,6 +45,7 @@ function addKeHu() {
     $("#inpDengJi").val("");
     $("#inpSfzHao").val("");
     $("#inpDianHua").val("");
+    $("#inpPassword").val("123456");
     $("#inpRemark").val("");
     $("#keHuModal").modal("show");
 }
@@ -66,6 +67,7 @@ function editKeHu(index) {
     $("#inpDengJi").val(keHu.dengJi).removeAttr("readonly");
     $("#inpSfzHao").val(keHu.sfzHao);
     $("#inpDianHua").val(keHu.dianHua);
+    $("#inpPassword").val(keHu.password);
     $("#inpRemark").val(keHu.remark);
     $("#keHuModal").modal("show");
 }
@@ -89,6 +91,7 @@ function saveKeHu() {
     keHu.dengJi = $("#inpDengJi").val();
     keHu.sfzHao = $("#inpSfzHao").val();
     keHu.dianHua = $("#inpDianHua").val();
+    keHu.password = $("#inpPassword").val();
     keHu.remark = $("#inpRemark").val();
     $.ajax({
         url: url,
