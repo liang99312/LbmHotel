@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lanbo.hotel.dao.IFangXingDao" >
+  <resultMap id="BaseResultMap" type="com.lanbo.hotel.pojo.FangXing" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="fxhao" property="fxHao" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="jiage" property="jiaGe" jdbcType="FLOAT" />
+    <result column="zhutu" property="zhuTu" jdbcType="VARCHAR" />
+    <result column="tupian" property="tuPian" jdbcType="VARCHAR" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, fxhao, name, jiage, zhutu, tupian, remark
+  </sql>
+  <select id="selectById" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from fangxing_t
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteById" parameterType="java.lang.Integer" >
+    delete from fangxing_t
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.lanbo.hotel.pojo.FangXing" >
+    insert into fangxing_t (fxhao, name, jiage, zhutu, tupian, remark)
+    values (#{fxHao,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{jiaGe,jdbcType=FLOAT}, #{zhuTu,jdbcType=VARCHAR,}, #{tuPian,jdbcType=VARCHAR},#{remark,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateById" parameterType="com.lanbo.hotel.pojo.FangXing" >
+    update fangxing_t
+    set fxhao = #{fxHao,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      jiage = #{jiaGe,jdbcType=FLOAT},
+      tupian = #{tuPian,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      zhutu = #{zhuTu,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPage" resultMap="BaseResultMap" parameterType="hashmap">
+    select
+    <include refid="Base_Column_List" />
+    from fangxing_t where 1=1 
+    <if test="fxHao != null and fxHao !=''">
+        and fxhao LIKE concat('%',#{fxHao},'%')
+    </if>
+    order by id limit #{beginRow},#{pageSize}
+  </select>
+  <select id="selectAllFangXingHao" resultType="java.lang.String" parameterType="hashmap">
+    select 
+    fxhao 
+    from fangxing_t where 1=1 
+  </select>
+  <select id="selectRows" resultType="int" parameterType="hashmap">
+    select
+    count(1)
+    from fangxing_t where 1=1
+    <if test="fxHao != null and fxHao !=''">
+        and fxhao LIKE concat('%',#{fxHao},'%') 
+    </if>
+  </select>
+  <select id="selectHaos" resultType="int" parameterType="com.lanbo.hotel.pojo.FangXing" >
+    select
+    count(1)
+    from fangxing_t where fxhao = #{fxHao,jdbcType=VARCHAR} and id != #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAllFangXingHao" resultType="java.lang.String" parameterType="hashmap">
+    select 
+    fjhao 
+    from fangxing_t where 1=1
+  </select>
+</mapper>
