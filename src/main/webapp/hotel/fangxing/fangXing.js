@@ -1,4 +1,4 @@
-var fangJians;
+var fangXings;
 var optFlag = 1;
 var editIndex = -1;
 $(document).ready(function () {
@@ -9,91 +9,82 @@ function setTrager(){
     $('#inpFuzeRen').AutoComplete({'data': h_userNames.list}); 
 }
 
-function jxFangJian(json) {
+function jxFangXing(json) {
     $("#data_table_body tr").remove();
-    fangJians = [];
-    fangJians = json.list;
+    fangXings = [];
+    fangXings = json.list;
     $.each(json.list, function (index, item) { //遍历返回的json
-        var trStr = '<tr><td>' + item.fjHao + '</td><td>' + item.luoCeng + '</td><td>' + item.jiBie + '</td><td>' + item.jiaGe + '</td><td>' + item.fuzeRen + '</td><td>' + item.state + '</td><td>' + item.remark + '</td><td>'
-                + '<button class="btn btn-info btn-xs icon-edit" onclick="editFangJian(' + index + ' );" style="padding-top: 4px;padding-bottom: 3px;"></button>&nbsp;'
-                + '<button class="btn btn-danger btn-xs icon-remove" onclick="delFangJian(' + index + ' );" style="padding-top: 4px;padding-bottom: 3px;"></button></td></tr>';
+        var trStr = '<tr><td>' + item.fxHao + '</td><td>' + item.name + '</td><td>' + item.jiaGe + '</td><td>' + item.remark + '</td><td>'
+                + '<button class="btn btn-info btn-xs icon-edit" onclick="editFangXing(' + index + ' );" style="padding-top: 4px;padding-bottom: 3px;"></button>&nbsp;'
+                + '<button class="btn btn-danger btn-xs icon-remove" onclick="delFangXing(' + index + ' );" style="padding-top: 4px;padding-bottom: 3px;"></button></td></tr>';
         $("#data_table_body").append(trStr);
     });
 }
 
-function selectFangJian() {
-    var fangJian = {};
+function selectFangXing() {
+    var fangXing = {};
     var tj = {"pageSize": 20, "currentPage": 1};
-    if ($("#selFjHao").val() !== "") {
-        fangJian.fjHao = $("#selFjHao").val();
+    if ($("#selFxHao").val() !== "") {
+        fangXing.fxHao = $("#selFxHao").val();
     }
     if ($("#selState").val() !== "") {
-        fangJian.state = $("#selState").val();
+        fangXing.state = $("#selState").val();
     }
-    tj.paramters = fangJian;
+    tj.paramters = fangXing;
     var options = {};
-    options.url = "/LbmHotel/fangJian/getFangJianPage";
+    options.url = "/LbmHotel/fangXing/getFangXingPage";
     options.tj = tj;
-    options.func = jxFangJian;
+    options.func = jxFangXing;
     options.ul = "#example";
     queryPaginator(options);
 }
 
-function addFangJian() {
+function addFangXing() {
     optFlag = 1;
-    $("#fangJianModel_title").html("新增房型");
-    $("#inpFjHao").val("");
-    $("#inpLuoCeng").val("");
-    $("#inpJiBie").val("");
+    $("#fangXingModel_title").html("新增房型");
+    $("#inpFxHao").val("");
+    $("#inpName").val("");
     $("#inpJiaGe").val("0");
-    $("#inpState").val("就绪").attr("readonly", "true");
-    $("#inpFuzeRen").val("");
     $("#inpRemark").val("");
-    $("#fangJianModal").modal("show");
+    $("#fangXingModal").modal("show");
 }
 
 
-function editFangJian(index) {
+function editFangXing(index) {
     optFlag = 2;
-    if (fangJians[index] === undefined) {
+    if (fangXings[index] === undefined) {
         optFlag = 1;
         return alert("请选择房型");
     }
-    var fangJian = fangJians[index];
+    var fangXing = fangXings[index];
     editIndex = index;
-    $("#fangJianModel_title").html("修改房型");
-    $("#inpFjHao").val(fangJian.fjHao);
-    $("#inpLuoCeng").val(fangJian.luoCeng);
-    $("#inpJiBie").val(fangJian.jiBie);
-    $("#inpJiaGe").val(fangJian.jiaGe);
-    $("#inpState").val(fangJian.state).removeAttr("readonly");
-    $("#inpFuzeRen").val(fangJian.fuzeRen);
-    $("#inpRemark").val(fangJian.remark);
-    $("#fangJianModal").modal("show");
+    $("#fangXingModel_title").html("修改房型");
+    $("#inpFxHao").val(fangXing.fxHao);
+    $("#inpName").val(fangXing.name);
+    $("#inpJiaGe").val(fangXing.jiaGe);
+    $("#inpRemark").val(fangXing.remark);
+    $("#fangXingModal").modal("show");
 }
 
-function saveFangJian() {
-    var fangJian = {};
+function saveFangXing() {
+    var fangXing = {};
     var url = "";
     if (optFlag === 2) {
-        if (fangJians[editIndex] === undefined) {
+        if (fangXings[editIndex] === undefined) {
             return;
         }
-        fangJian = fangJians[editIndex];
-        url = "/LbmHotel/fangJian/updateFangJian";
+        fangXing = fangXings[editIndex];
+        url = "/LbmHotel/fangXing/updateFangXing";
     } else if (optFlag === 1) {
-        url = "/LbmHotel/fangJian/addFangJian";
+        url = "/LbmHotel/fangXing/addFangXing";
     }
-    fangJian.fjHao = $("#inpFjHao").val();
-    fangJian.luoCeng = $("#inpLuoCeng").val();
-    fangJian.jiBie = $("#inpJiBie").val();
-    fangJian.jiaGe = parseFloat($("#inpJiaGe").val(),2);
-    fangJian.state = $("#inpState").val();
-    fangJian.fuzeRen = $("#inpFuzeRen").val();
-    fangJian.remark = $("#inpRemark").val();
-    $.ajax({
+    fangXing.fxHao = $("#inpFxHao").val();
+    fangXing.name = $("#inpName").val();
+    fangXing.jiaGe = parseFloat($("#inpJiaGe").val(),2);
+    fangXing.remark = $("#inpRemark").val();
+    $("#formFangXing").ajaxSubmit({
         url: url,
-        data: JSON.stringify(fangJian),
+        data: JSON.stringify(fangXing),
         contentType: "application/json",
         type: "post",
         cache: false,
@@ -102,23 +93,23 @@ function saveFangJian() {
         },
         success: function (json) {
             if (json.result) {
-                $("#fangJianModal").modal("hide");
-                selectFangJian();
+                $("#fangXingModal").modal("hide");
+                selectFangXing();
             } else
                 alert("保存失败:" + json.msg !== undefined ? json.msg : "");
         }
     });
 }
 
-function delFangJian(index) {
-    if (fangJians[index] === undefined) {
+function delFangXing(index) {
+    if (fangXings[index] === undefined) {
         return alert("请选择房型");
     }
-    var fangJian = fangJians[index];
-    if (confirm("确定删除房型：" + fangJian.fjHao + "?")) {
+    var fangXing = fangXings[index];
+    if (confirm("确定删除房型：" + fangXing.fxHao + "?")) {
         $.ajax({
-            url: "/LbmHotel/fangJian/delFangJian",
-            data: JSON.stringify(fangJian),
+            url: "/LbmHotel/fangXing/delFangXing",
+            data: JSON.stringify(fangXing),
             contentType: "application/json",
             type: "post",
             cache: false,
@@ -129,7 +120,7 @@ function delFangJian(index) {
                 if (!json.result)
                     alert("删除失败:" + json.msg !== undefined ? json.msg : "");
                 else
-                    selectFangJian();
+                    selectFangXing();
             }
         });
     }
