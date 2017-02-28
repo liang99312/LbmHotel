@@ -46,11 +46,6 @@
     </if>
     order by id limit #{beginRow},#{pageSize}
   </select>
-  <select id="selectAllFangXingHao" resultType="java.lang.String" parameterType="hashmap">
-    select 
-    fxhao 
-    from fangxing_t where 1=1 
-  </select>
   <select id="selectRows" resultType="int" parameterType="hashmap">
     select
     count(1)
@@ -64,7 +59,7 @@
     count(1)
     from fangxing_t where fxhao = #{fxHao,jdbcType=VARCHAR} and id != #{id,jdbcType=INTEGER}
   </select>
-  <select id="selectAllFangXingHao" resultType="java.lang.String" parameterType="hashmap">
+  <select id="selectAllFangXingHao" resultType="java.lang.String">
     select 
     fjhao 
     from fangxing_t where 1=1
