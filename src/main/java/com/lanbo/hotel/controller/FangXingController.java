@@ -8,6 +8,7 @@ package com.lanbo.hotel.controller;
 import com.lanbo.hotel.pojo.Page;
 import com.lanbo.hotel.pojo.FangXing;
 import com.lanbo.hotel.service.IFangXingService;
+import com.lanbo.hotel.util.FileUtil;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -19,7 +20,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  *
@@ -34,19 +37,37 @@ public class FangXingController {
     
     @RequestMapping("/fangXing")
     public String goFangXing(HttpServletRequest request, HttpServletResponse response) {
-        return "fangjian/fangXing";
+        return "fangxing/fangXing";
     }
     
     @RequestMapping(value = "/addFangXing", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
     @ResponseBody
-    public Map<String, Object> addFangXing(@RequestBody FangXing model) {
+    public Map<String, Object> addFangXing(@RequestBody FangXing model,@RequestParam MultipartFile[] files,
+            HttpServletRequest request) {
         model.setId(-1);
         Map<String, Object> map = new HashMap();
         if(this.fangXingService.selectHaos(model)){
             map.put("result", false);
-            map.put("msg", "该房间号已存在，请重新输入");
+            map.put("msg", "该房型号已存在，请重新输入");
             return map;
         }
+        String zhuTu = "";
+        String tuPian = "";
+        for (int i = 0; i < files.length; i++) {
+            MultipartFile f = files[i];
+            String suffix = f.getOriginalFilename().substring(f.getOriginalFilename().lastIndexOf("."));
+            long now = System.currentTimeMillis();
+            String fileName = String.valueOf(now) + suffix;
+            String path = request.getSession().getServletContext().getRealPath("/") + "files/" + fileName;
+            if (i == 0) {
+                zhuTu = fileName;
+            } else {
+                tuPian = tuPian + tuPian + ";";
+            }
+            FileUtil.saveFile(f, path);
+        }
+        model.setZhuTu(zhuTu);
+        model.setTuPian(tuPian);
         boolean result = this.fangXingService.addFangXing(model);
         if (result) {
             map.put("result", true);
@@ -59,13 +80,31 @@ public class FangXingController {
 
     @RequestMapping(value = "/updateFangXing", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
     @ResponseBody
-    public Map<String, Object> updateFangXing(@RequestBody FangXing model) {
+    public Map<String, Object> updateFangXing(@RequestBody FangXing model,@RequestParam MultipartFile[] files,
+            HttpServletRequest request) {
         Map<String, Object> map = new HashMap();
         if(this.fangXingService.selectHaos(model)){
             map.put("result", false);
             map.put("msg", "该客户的预定已存在，请重新输入");
             return map;
         }
+        String zhuTu = "";
+        String tuPian = "";
+        for (int i = 0; i < files.length; i++) {
+            MultipartFile f = files[i];
+            String suffix = f.getOriginalFilename().substring(f.getOriginalFilename().lastIndexOf("."));
+            long now = System.currentTimeMillis();
+            String fileName = String.valueOf(now) + suffix;
+            String path = request.getSession().getServletContext().getRealPath("/") + "files/" + fileName;
+            if (i == 0) {
+                zhuTu = fileName;
+            } else {
+                tuPian = tuPian + tuPian + ";";
+            }
+            FileUtil.saveFile(f, path);
+        }
+        model.setZhuTu(zhuTu);
+        model.setTuPian(tuPian);
         boolean result = this.fangXingService.updateFangXing(model);
         if (result) {
             map.put("result", true);

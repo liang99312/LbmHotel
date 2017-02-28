@@ -52,7 +52,7 @@ public class FangXingServiceImpl implements IFangXingService {
     }
 
     public List getAllFangXingHao() {
-        return this.fangXingDao.getAllFangXingHao();
+        return this.fangXingDao.selectAllFangXingHao();
     }
 
 }
