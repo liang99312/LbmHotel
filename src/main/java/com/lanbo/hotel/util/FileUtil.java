@@ -29,4 +29,13 @@ public class FileUtil {
         }
         return false;
     }
+    
+    public static boolean createFloder(String path){
+        File f = new File(path);
+        if(f.exists()){
+            return true;
+        }
+        f.mkdirs();
+        return true;
+    }
 }
