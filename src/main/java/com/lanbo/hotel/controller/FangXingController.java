@@ -5,6 +5,7 @@
  */
 package com.lanbo.hotel.controller;
 
+import com.alibaba.fastjson.JSON;
 import com.lanbo.hotel.pojo.Page;
 import com.lanbo.hotel.pojo.FangXing;
 import com.lanbo.hotel.service.IFangXingService;
@@ -39,11 +40,12 @@ public class FangXingController {
     public String goFangXing(HttpServletRequest request, HttpServletResponse response) {
         return "fangxing/fangXing";
     }
-    
+        
     @RequestMapping(value = "/addFangXing", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
     @ResponseBody
-    public Map<String, Object> addFangXing(@RequestBody FangXing model,@RequestParam MultipartFile[] files,
+    public Map<String, Object> addFangXing(@RequestParam("files") MultipartFile[] files,@RequestParam("model") String modelString,
             HttpServletRequest request) {
+        FangXing model = JSON.parseObject(modelString, FangXing.class);
         model.setId(-1);
         Map<String, Object> map = new HashMap();
         if(this.fangXingService.selectHaos(model)){
@@ -58,7 +60,7 @@ public class FangXingController {
             String suffix = f.getOriginalFilename().substring(f.getOriginalFilename().lastIndexOf("."));
             long now = System.currentTimeMillis();
             String fileName = String.valueOf(now) + suffix;
-            String path = request.getSession().getServletContext().getRealPath("/") + "files/" + fileName;
+            String path = request.getSession().getServletContext().getRealPath("/") + "/files/" + fileName;
             if (i == 0) {
                 zhuTu = fileName;
             } else {
@@ -80,8 +82,9 @@ public class FangXingController {
 
     @RequestMapping(value = "/updateFangXing", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
     @ResponseBody
-    public Map<String, Object> updateFangXing(@RequestBody FangXing model,@RequestParam MultipartFile[] files,
+    public Map<String, Object> updateFangXing(@RequestParam("files") MultipartFile[] files,@RequestParam("model") String modelString,
             HttpServletRequest request) {
+        FangXing model = JSON.parseObject(modelString, FangXing.class);
         Map<String, Object> map = new HashMap();
         if(this.fangXingService.selectHaos(model)){
             map.put("result", false);
@@ -95,7 +98,7 @@ public class FangXingController {
             String suffix = f.getOriginalFilename().substring(f.getOriginalFilename().lastIndexOf("."));
             long now = System.currentTimeMillis();
             String fileName = String.valueOf(now) + suffix;
-            String path = request.getSession().getServletContext().getRealPath("/") + "files/" + fileName;
+            String path = request.getSession().getServletContext().getRealPath("/") + "/files/" + fileName;
             if (i == 0) {
                 zhuTu = fileName;
             } else {
