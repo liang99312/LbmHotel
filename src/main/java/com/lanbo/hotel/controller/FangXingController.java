@@ -40,15 +40,15 @@ public class FangXingController {
     public String goFangXing(HttpServletRequest request, HttpServletResponse response) {
         return "fangxing/fangXing";
     }
-        
+    
     @RequestMapping(value = "/addFangXing", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
     @ResponseBody
-    public Map<String, Object> addFangXing(@RequestParam("files") MultipartFile[] files,@RequestParam("model") String modelString,
+    public Map<String, Object> addFangXing(@RequestParam("files") MultipartFile[] files, @RequestParam("model") String modelString,
             HttpServletRequest request) {
         FangXing model = JSON.parseObject(modelString, FangXing.class);
         model.setId(-1);
         Map<String, Object> map = new HashMap();
-        if(this.fangXingService.selectHaos(model)){
+        if (this.fangXingService.selectHaos(model)) {
             map.put("result", false);
             map.put("msg", "该房型号已存在，请重新输入");
             return map;
@@ -59,12 +59,14 @@ public class FangXingController {
             MultipartFile f = files[i];
             String suffix = f.getOriginalFilename().substring(f.getOriginalFilename().lastIndexOf("."));
             long now = System.currentTimeMillis();
-            String fileName = String.valueOf(now) + suffix;
-            String path = request.getSession().getServletContext().getRealPath("/") + "/files/" + fileName;
+            String fileName = String.valueOf(now) + String.valueOf(i) + suffix;
+            String path = request.getSession().getServletContext().getRealPath("/") + "/files";
+            FileUtil.createFloder(path);
+            path = path + "/" + fileName;
             if (i == 0) {
                 zhuTu = fileName;
             } else {
-                tuPian = tuPian + tuPian + ";";
+                tuPian = tuPian + fileName + ";";
             }
             FileUtil.saveFile(f, path);
         }
@@ -79,14 +81,14 @@ public class FangXingController {
         }
         return map;
     }
-
+    
     @RequestMapping(value = "/updateFangXing", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
     @ResponseBody
-    public Map<String, Object> updateFangXing(@RequestParam("files") MultipartFile[] files,@RequestParam("model") String modelString,
+    public Map<String, Object> updateFangXing(@RequestParam("files") MultipartFile[] files, @RequestParam("model") String modelString,
             HttpServletRequest request) {
         FangXing model = JSON.parseObject(modelString, FangXing.class);
         Map<String, Object> map = new HashMap();
-        if(this.fangXingService.selectHaos(model)){
+        if (this.fangXingService.selectHaos(model)) {
             map.put("result", false);
             map.put("msg", "该客户的预定已存在，请重新输入");
             return map;
@@ -97,12 +99,14 @@ public class FangXingController {
             MultipartFile f = files[i];
             String suffix = f.getOriginalFilename().substring(f.getOriginalFilename().lastIndexOf("."));
             long now = System.currentTimeMillis();
-            String fileName = String.valueOf(now) + suffix;
-            String path = request.getSession().getServletContext().getRealPath("/") + "/files/" + fileName;
+            String fileName = String.valueOf(now) + String.valueOf(i) + suffix;
+            String path = request.getSession().getServletContext().getRealPath("/") + "/files";
+            FileUtil.createFloder(path);
+            path = path + "/" + fileName;
             if (i == 0) {
                 zhuTu = fileName;
             } else {
-                tuPian = tuPian + tuPian + ";";
+                tuPian = tuPian + fileName + ";";
             }
             FileUtil.saveFile(f, path);
         }
@@ -117,7 +121,7 @@ public class FangXingController {
         }
         return map;
     }
-
+    
     @RequestMapping(value = "/delFangXing", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
     @ResponseBody
     public Map<String, Object> delFangXing(@RequestBody FangXing model) {
@@ -130,12 +134,12 @@ public class FangXingController {
         }
         return map;
     }
-
+    
     @RequestMapping(value = "/getFangXingPage", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
     @ResponseBody
     public Page getFangXingPage(@RequestBody Page model) {
         HashMap map = model.getParamters();
-        if(map == null){
+        if (map == null) {
             map = new HashMap();
         }
         if (model.getRows() == 0) {
@@ -164,7 +168,7 @@ public class FangXingController {
         List result = this.fangXingService.getAllFangXingHao();
         Map<String, Object> map = new HashMap();
         map.put("result", true);
-        map.put("list",result);
+        map.put("list", result);
         return map;
     }
     
