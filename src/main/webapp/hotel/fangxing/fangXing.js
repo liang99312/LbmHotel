@@ -82,9 +82,10 @@ function saveFangXing() {
     fangXing.name = $("#inpName").val();
     fangXing.jiaGe = parseFloat($("#inpJiaGe").val(),2);
     fangXing.remark = $("#inpRemark").val();
+    var dataString = {"model":JSON.stringify(fangXing)};
     $("#formFangXing").ajaxSubmit({
         url: url,
-        data: JSON.stringify(fangXing),
+        data: dataString,
         contentType: "application/json",
         type: "post",
         cache: false,
