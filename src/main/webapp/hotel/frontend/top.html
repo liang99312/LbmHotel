@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <style>
+            #dvTool a{
+                cursor: pointer;
+                text-decoration:none;
+            }
+        </style>
+        <script>
+            function goHome(){
+                window.top.location.href="/LbmHotel/frontend/goIndex";
+            }
+            function goMine(){
+                window.top.location.href="/LbmHotel/frontend/goMine";
+            }
+            function goYuLan(){
+                window.top.location.href="/LbmHotel/frontend/goYuLan";
+            }
+        </script>
+    </head>
+    <body>
+        <div style="height: 30px;"><span style="line-height: 30px; margin-left: 6%">LBM酒店欢迎您</span></div>
+        <div style="height: 100px;background-color: #99ccff;">
+            <div id="dvTool" style="margin-left: 6%;vertical-align: middle;line-height: 95px;">
+                <a href="#" onclick="goHome()">首页</a>
+                <a href="#" onclick="goMine()" style="margin-left: 30px;">我的信息</a>
+                <a href="#" onclick="goYuLan()" style="margin-left: 30px;">客房信息</a>
+            </div>
+        </div>
+    </body>
+</html>

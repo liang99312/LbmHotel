@@ -6,45 +6,29 @@ and open the template in the editor.
 -->
 <html>
     <head>
-        <title>TODO supply a title</title>
+        <title>LBM酒店</title>
         <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="/LbmHotel/js/jquery2.js"></script>
+        <script src="/LbmHotel/hotel/frontend/yuLan.js"></script>
+        <style>
+            #content a{
+                cursor: pointer;
+                text-decoration:none;
+            }
+        </style>
     </head>
     <body>
-        <div>
-            <a>首页</a>
-            <a>我的信息</a>
-            <a>客房信息</a>
+        <div style="height: 130px;width: 100%;float: left;">
+            <iframe width="100%" style="border-width:0;" marginwidth="0" marginheight="0" src="./goTop" ></iframe>
         </div>
-        <div>
-            <div><span>客房预览</span></div>
-            <div>
-                <div>
-                    <a>
-                    <img src="#" />
-                    <span>豪华套房</span>
-                    </a>
-                </div>
-                <div>
-                    <a>
-                    <img src="#" />
-                    <span>一级房</span>
-                    </a>
-                </div>
-                <div>
-                    <a>
-                    <img src="#" />
-                    <span>二级房</span>
-                    </a>
-                </div>
-                <div>
-                    <a>
-                    <img src="#" />
-                    <span>标准间</span>
-                    </a>
-                </div>
+        <div style="padding-top: 10px;padding-bottom: 20px;min-height: 900px;width: 100%;float: left;">
+            <div><span style="line-height: 30px; margin-left: 6%">客房预览</span></div>
+            <div id="content" style="margin-left: 6%;margin-top: 20px;">
+                
             </div>
         </div>
-        <div>底部</div>
+        <div style="height: 40px;width: 100%;padding-bottom: 0px;float: left;">
+            <iframe width="100%" height="40px" style="border-width:0;" marginwidth="0" marginheight="0" src="./goBottom" ></iframe>
+        </div>
     </body>
 </html>
