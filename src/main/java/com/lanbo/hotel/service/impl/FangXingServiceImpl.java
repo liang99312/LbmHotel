@@ -55,4 +55,8 @@ public class FangXingServiceImpl implements IFangXingService {
         return this.fangXingDao.selectAllFangXingHao();
     }
 
+    public List getAllFangXing() {
+        return this.fangXingDao.selectAllFangXing();
+    }
+
 }

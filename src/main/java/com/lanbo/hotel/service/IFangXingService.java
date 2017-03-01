@@ -1,7 +1,6 @@
 package com.lanbo.hotel.service;
 
 import com.lanbo.hotel.pojo.FangXing;
-import com.lanbo.hotel.pojo.FangXing;
 import java.util.HashMap;
 import java.util.List;
 
@@ -14,4 +13,5 @@ public interface IFangXingService {
         public List<FangXing> getSelectPage(HashMap map);
         public boolean selectHaos(FangXing fangXing);
         public List getAllFangXingHao();
+        public List getAllFangXing();
 }

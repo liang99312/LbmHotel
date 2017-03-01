@@ -172,4 +172,13 @@ public class FangXingController {
         return map;
     }
     
+    @RequestMapping(value = "/getAllFangXing", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+    @ResponseBody
+    public Map<String, Object> getAllFangXing() {
+        List result = this.fangXingService.getAllFangXing();
+        Map<String, Object> map = new HashMap();
+        map.put("result", true);
+        map.put("list", result);
+        return map;
+    }
 }
