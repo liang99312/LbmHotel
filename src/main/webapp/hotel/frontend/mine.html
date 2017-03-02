@@ -11,9 +11,38 @@ and open the template in the editor.
         <script src="/LbmHotel/js/jquery2.js"></script>
         <script src="/LbmHotel/hotel/frontend/mine.js"></script>
         <style>
-            #content a{
+            *{padding:0;margin:0};
+            #content a,li{
                 cursor: pointer;
                 text-decoration:none;
+            }
+            .dvDd{
+                margin-top: 10px;
+            }
+            .dvDd table{
+                width:100%;
+                border: 1px solid #eaf8ff;
+                line-height: 60px;
+                border-collapse: collapse; 
+                border-spacing: 0;
+                table-layout: fixed;
+            }
+            .dvDd td{
+                border: 1px solid #eaf8ff;
+                text-align: center;
+            }
+            .dvDd .dvDdBt{
+                border-color: #aed8ff;
+                border: 1px solid #daf3ff;
+                background: #eaf8ff;
+                height: 50px;
+                line-height: 50px;
+                vertical-align: middle;
+            }
+            .dvDd .dvDdTable{
+                border-color: #aed8ff;
+                border: 1px solid #eaf8ff;
+                background: #FFFFFF
             }
         </style>
     </head>
@@ -21,10 +50,62 @@ and open the template in the editor.
         <div style="height: 130px;width: 100%;float: left;">
             <iframe width="100%" style="border-width:0;" marginwidth="0" marginheight="0" src="./goTop" ></iframe>
         </div>
-        <div style="padding-top: 10px;padding-bottom: 20px;min-height: 900px;width: 100%;float: left;">
-            <div id="content" style="margin-left: 6%;margin-top: 20px;">
-                <div style="width:100px;float: left;"></div>
-                <div style="float:left;width: "></div>
+        <div style="padding-top: 10px;padding-bottom: 20px;min-height: 800px;width: 100%;float: left;">
+            <div id="content" style="margin-left: 10%; margin-right: 10%;margin-top: 10px;">
+                <div style="width:17%;float: left; border: 1px solid #E5E5E5; height: 800px;line-height: 40px;">
+                    <ul>
+                        <li id="myDd">我的订单</li>
+                        <li id="xgPwd">修改密码</li>
+                    </ul>
+                </div>
+                <div style="float:left; margin-left: 5px; border: 1px solid #E5E5E5; background-color: #F6F6F6;height: 800px;width:80%;">
+                    <div id="dvPwd" style="margin-left:30px;line-height: 50px;display: none;">
+                        <span style="font-size:18px;font-weight: bold;">修改密码：</span><br/>
+                        <span>原密码：</span><input type="password" /><br/>
+                        <span>新密码：</span><input type="password" /><br/>
+                        <input type="button" value="确定" />
+                    </div>
+                    <div id="dvMyDd" >
+                        <div style="text-align:right;margin-right: 100px;margin-top: 10px;">
+                            <input type="button" value="上一页" />
+                            <input type="button" value="上一页" />
+                        </div>
+                        <div id="dvDetail">
+                            <div class="dvDd">
+                                <div class="dvDdBt">
+                                    <span>20170101 订单号：201701010002</span>
+                                </div>
+                                <div class="dvDdTable">
+                                    <table>
+                                        <tr>
+                                            <td>单人间</td>
+                                            <td>￥100</td>
+                                            <td>预住时间：20170105</td>
+                                            <td>证件号：450923198512246447</td>
+                                            <td><input type="button" value="退订" /></td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="dvDd">
+                                <div class="dvDdBt">
+                                    <span>20170101 订单号：201701010002</span>
+                                </div>
+                                <div class="dvDdTable">
+                                    <table>
+                                        <tr>
+                                            <td>单人间</td>
+                                            <td>￥100</td>
+                                            <td>预住时间：20170105</td>
+                                            <td>证件号：450923198512246447</td>
+                                            <td><input type="button" value="退订" /></td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
         <div style="height: 40px;width: 100%;padding-bottom: 0px;float: left;">

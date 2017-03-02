@@ -7,31 +7,49 @@ and open the template in the editor.
 <html>
     <head>
         <meta charset="UTF-8">
+        <script src="/LbmHotel/js/jquery2.js"></script>
+        <script src="/LbmHotel/hotel/frontend/top.js"></script>
         <style>
+            *{padding:0;margin:0};
             #dvTool a{
                 cursor: pointer;
                 text-decoration:none;
             }
+            .mycenter input,checkbox,button{
+                margin-top:2%;
+                margin-left: 20%;
+                margin-right: 10%;
+            }
         </style>
-        <script>
-            function goHome(){
-                window.top.location.href="/LbmHotel/frontend/goIndex";
-            }
-            function goMine(){
-                window.top.location.href="/LbmHotel/frontend/goMine";
-            }
-            function goYuLan(){
-                window.top.location.href="/LbmHotel/frontend/goYuLan";
-            }
-        </script>
     </head>
     <body>
-        <div style="height: 30px;"><span style="line-height: 30px; margin-left: 6%">LBM酒店欢迎您</span></div>
+        <div style="height: 30px;"><span style="line-height: 30px; margin-left: 10%">LBM酒店欢迎您</span></div>
         <div style="height: 100px;background-color: #99ccff;">
-            <div id="dvTool" style="margin-left: 6%;vertical-align: middle;line-height: 95px;">
+            <div id="dvTool" style="margin-left: 10%;vertical-align: middle;line-height: 95px;">
                 <a href="#" onclick="goHome()">首页</a>
-                <a href="#" onclick="goMine()" style="margin-left: 30px;">我的信息</a>
-                <a href="#" onclick="goYuLan()" style="margin-left: 30px;">客房信息</a>
+                <a href="#" onclick="goYuLan()" style="margin-left: 30px;">客房预览</a>
+                <a href="#" onclick="goMine()" style="margin-left: 30px;">请登录</a>/
+                <a href="#" onclick="goZhuCe()">注册</a>
+            </div>
+        </div>
+        <div class="mycenter" id="dvLoad" style="background: rgba(246, 246, 246, 1);z-index:10;display: none;position: absolute;width: 320px;height:125px;top: 5px;left:40%;border-radius:5px;">
+            <div class="mysign">
+                <div class="col-lg-11 text-center text-info" style="text-align: center;">
+                    <h3 style="margin-top:5px;margin-bottom: 5px;">请登录</h3>
+                </div>
+                <div class="col-lg-10">
+                    <input type="text" class="form-control" name="username" id="loadName" placeholder="请输入账户名" required autofocus/>
+                </div>
+                <div class="col-lg-10"></div>
+                <div class="col-lg-10">
+                    <input type="password" class="form-control" name="password" id ="passWord" placeholder="请输入密码" required autofocus/>
+                </div>
+                <div class="col-lg-10"></div>
+                <div class="col-lg-10"></div>
+                <div class="col-lg-10" style="text-align: center;">
+                    <button type="button" class="btn btn-success col-lg-12" onclick="load();" style="margin-left: 0;">登录</button>
+                    <button type="button" class="btn btn-success col-lg-12" onclick="closeLoad();" style="margin-left: 0;">关闭</button>
+                </div>
             </div>
         </div>
     </body>

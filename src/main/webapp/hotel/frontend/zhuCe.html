@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>LBM酒店</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style>
+            *{padding:0;margin:0};
+        </style>
+    </head>
+    <body>
+        <div style="height: 130px;width: 100%;float: left;">
+            <iframe width="100%" style="border-width:0;" marginwidth="0" marginheight="0" src="./goTop" ></iframe>
+        </div>
+        <div style="padding-top: 10px;padding-bottom: 20px;min-height: 800px;width: 100%;float: left;">
+            <div id="content" style="margin-left: 10%; margin-right: 10%;margin-top: 20px;">
+                <div style="margin: 0 auto;width: 400px;" class="modal-body">
+                    <div style="text-align: center;">
+                        <span style="line-height: 30px; font-size: 20px;">用户注册</span>
+                    </div>
+                    <div class="content" style="text-align: center;line-height: 40px;">
+                        <div class="form-group">
+                            <label for="inpBianHao">编&ensp;&ensp;号：</label>
+                            <input type="text" id="inpBianHao" />
+                        </div>
+                        <div class="form-group">
+                            <label for="inpName">姓&ensp;&ensp;名：</label>
+                            <input type="text" id="inpName" />
+                        </div>
+                        <div class="form-group">
+                            <label for="inpSex">性&ensp;&ensp;别：</label>
+                            <select id="inpSex" style="width: 174px;height: 26px;">
+                                <option selected="selected" value="男">男</option><option value="女">女</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="inpAge">年&ensp;&ensp;龄：</label>
+                            <input type="text" id="inpAge" />
+                        </div>
+                        <div class="form-group">
+                            <label for="inpSfzHao">身份证：</label>
+                            <input type="text" id="inpSfzHao" />
+                        </div>
+                        <div class="form-group">
+                            <label for="inpDianHua">电&ensp;&ensp;话：</label>
+                            <input type="text" id="inpDianHua" />
+                        </div>
+                        <div class="form-group">
+                            <label for="inpPassword">密&ensp;&ensp;码：</label>
+                            <input type="password" id="inpPassword" />
+                        </div>
+                        <div class="form-group">
+                            <label for="inpRemark">备&ensp;&ensp;注：</label>
+                            <input type="text" id="inpRemark" />
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer" style="text-align: center;padding: 8px;">
+                    <button type="submit" class="btn btn-primary" onclick="saveKeHu()" style="width: 60px;height:30px;">提交</button>
+                </div>
+            </div>
+        </div>
+        <div style="height: 40px;width: 100%;padding-bottom: 0px;float: left;">
+            <iframe width="100%" height="40px" style="border-width:0;" marginwidth="0" marginheight="0" src="./goBottom" ></iframe>
+        </div>
+    </body>
+</html>

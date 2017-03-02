@@ -57,7 +57,7 @@ function jxFangXing(json){
         for(var i=0;i<tps.length;i++){
             var e = tps[i];
             if(e !== null && e !== ""){
-                var s = "<img style='max-width:1000px;' src='/LbmHotel/files/"+e+"' /><br/>";
+                var s = "<img style='width:1024px;' src='/LbmHotel/files/"+e+"' /><br/>";
                 tpStr = tpStr + s;
             }
         }

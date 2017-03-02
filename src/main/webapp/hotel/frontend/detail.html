@@ -11,6 +11,7 @@ and open the template in the editor.
         <script src="/LbmHotel/js/jquery2.js"></script>
         <script src="/LbmHotel/hotel/frontend/detail.js"></script>
         <style>
+            *{padding:0;margin:0};
             #content a{
                 cursor: pointer;
                 text-decoration:none;
@@ -21,19 +22,20 @@ and open the template in the editor.
         <div style="height: 130px;width: 100%;float: left;">
             <iframe width="100%" style="border-width:0;" marginwidth="0" marginheight="0" src="./goTop" ></iframe>
         </div>
-        <div style="padding-top: 10px;padding-bottom: 20px;min-height: 900px;width: 100%;float: left;">
-            <div id="content" style="margin-left: 6%;margin-top: 20px;">
-                <div style="width:100%;float: left;">
-                    <div style="width:50%;float: left;text-align: right;">
-                        <img style='width:600px;'  id="iZhuTu" />
+        <div style="padding-top: 10px;padding-bottom: 20px;min-height: 800px;width: 100%;float: left;">
+            <div id="content" style="margin-left: 10%; margin-right: 10%;margin-top: 20px;">
+                <div style="width:100%;float: left; border: 1px solid #E5E5E5; background-color: #F6F6F6">
+                    <div style="float: left;text-align: left;">
+                        <img style='width:400px;height:400px;'  id="iZhuTu" />
                     </div>
-                    <div style="width:45%;float: left;padding-left: 20px;">
-                        <span id="iName"></span><br/>
-                        <span id="iJiaGe"></span><br/>
-                        <input type="button" value="预定" />
+                    <div style="float: left;padding-left: 20px;line-height: 50px;">
+                        <span style="font-size:18px;">LbmHotel客房信息：</span><br/>
+                        <span style="font-size:24px;font-weight: bold;" id="iName"></span><br/>
+                        <span style="font-size: 24px;font-weight: 700;font-family: Tahoma,Arial,Helvetica,sans-serif;color: #f40;" id="iJiaGe"></span><br/>
+                        <input style="width:100px;height:50px;color: #00be67;font-size: 24px;font-weight: 700;" type="button" value="预定" />
                     </div>
                 </div>
-                <div id="dvTuPian" style="width:100%;float: left;">
+                <div id="dvTuPian" style="width:100%;float: left; border: 1px solid #E5E5E5; background-color: #F6F6F6;margin-top: 20px;">
                     
                 </div>
             </div>
