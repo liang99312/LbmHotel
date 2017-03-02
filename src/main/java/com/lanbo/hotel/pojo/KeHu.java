@@ -15,7 +15,7 @@ public class KeHu{
     
     private String dianHua;
     
-    private String dengJi;
+    private String dengJi;//初级、中级、高级
     
     private String password;
     

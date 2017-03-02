@@ -153,4 +153,25 @@ public class FrontendController {
         KeHu kh = (KeHu) request.getSession().getAttribute("kehu");
         return kh;
     }
+    
+    @RequestMapping(value = "/zhuCe", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+    @ResponseBody
+    public Map<String, Object> zhuCe(@RequestBody KeHu model) {
+        model.setId(-1);
+        model.setDengJi("初级");
+        Map<String, Object> map = new HashMap();
+        if(this.keHuService.selectHaos(model)){
+            map.put("result", false);
+            map.put("msg", "该用户名、身份证号、手机号已存在，请重新输入");
+            return map;
+        }
+        boolean result = this.keHuService.addKeHu(model);
+        if (result) {
+            map.put("result", true);
+        } else {
+            map.put("result", false);
+            map.put("msg", "注册失败");
+        }
+        return map;
+    }
 }
