@@ -6,7 +6,9 @@
 package com.lanbo.hotel.controller;
 
 import com.lanbo.hotel.pojo.FangXing;
+import com.lanbo.hotel.pojo.KeHu;
 import com.lanbo.hotel.service.IFangXingService;
+import com.lanbo.hotel.service.IKeHuService;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
@@ -34,6 +36,9 @@ public class FrontendController {
     @Resource
     private IFangXingService fangXingService;
     
+    @Resource
+    private IKeHuService keHuService;    
+    
     @RequestMapping("/goIndex")
     public void goIndex(HttpServletRequest request, HttpServletResponse response) {
         PrintWriter out = null;
@@ -48,7 +53,7 @@ public class FrontendController {
             builder.append("</script>");
             out.print(builder.toString());
         } catch (IOException ex) {
-            Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(FrontendController.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             out.close();
         }
@@ -57,6 +62,11 @@ public class FrontendController {
     @RequestMapping("/goYuLan")
     public String goYuLan(HttpServletRequest request, HttpServletResponse response) {
         return "frontend/yuLan";
+    }
+    
+    @RequestMapping("/goZhuCe")
+    public String goZhuCe(HttpServletRequest request, HttpServletResponse response) {
+        return "frontend/zhuCe";
     }
     
     @RequestMapping("/goTop")
@@ -97,5 +107,50 @@ public class FrontendController {
         map.put("result", true);
         map.put("obj", obj);
         return map;
+    }
+        
+    @RequestMapping(value = "/load", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+    @ResponseBody
+    public Map<String, Object> load(@RequestBody KeHu model, HttpServletRequest request,
+            HttpServletResponse response) {
+        KeHu kh = this.keHuService.getLoadKeHu(model.getName(), model.getPassword());
+        Map<String, Object> map = new HashMap();
+        if (kh == null) {
+            map.put("result", -1);
+            request.getSession().setAttribute("kehu", null);
+        } else {
+            request.getSession().setAttribute("kehu", kh);
+            map.put("result", 1);
+        }
+        return map;
+    }
+    
+    @RequestMapping(value = "/changePassword", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+    @ResponseBody
+    public Map<String, Object> changePassword(@RequestBody KeHu model, HttpServletRequest request,
+            HttpServletResponse response) {
+        KeHu kh = this.keHuService.getLoadKeHu(model.getName(), model.getRemark());
+        Map<String, Object> map = new HashMap();
+        if (kh == null) {
+            map.put("result", false);
+            map.put("msg","原密码输入有误");
+        } else {
+            kh.setPassword(model.getPassword());
+            boolean result = this.keHuService.updatePassword(kh);
+            if(!result){
+                map.put("result", false);
+                map.put("msg", "修改数据库失败");
+            }else
+                map.put("result", true);
+        }
+        return map;
+    }
+    
+    @RequestMapping(value = "/getLordKeHu", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+    @ResponseBody
+    public KeHu getLordKeHu(HttpServletRequest request,
+            HttpServletResponse response) {
+        KeHu kh = (KeHu) request.getSession().getAttribute("kehu");
+        return kh;
     }
 }
