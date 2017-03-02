@@ -122,9 +122,11 @@
             </div>
             <div id="dvMenu" style="background: rgba(210,210,210,0.4);position: absolute;width: 100%;height:80px;top: 0;left:0;text-align: center;vertical-align: middle;justify-content:center;align-items:center;display:-webkit-flex;">
                 <a href="/LbmHotel/frontend/goYuLan">预订</a>
+                <a  style="padding-left:20px;" href="/LbmHotel/frontend/goYuLan">客房预览</a>
                 <span style="color: #0000ff;font-size:32px;font-weight:bold;padding-left:30px;padding-right: 30px;">LBM</span>
                 <a id="aMine">我的信息</a>
-                <a id="aLoad" style="padding-left:20px;">登录</a>
+                <a id="aLoad" style="padding-left:20px;">登录</a>/
+                <a id="aZhuCe" href="/LbmHotel/frontend/goZhuCe">注册</a>
             </div>
         </div>
         <div id="dvBottom" style="width:100%;height:100px;z-index:10;float: left;text-align: center;vertical-align: middle;justify-content:center;align-items:center;display:-webkit-flex;">
