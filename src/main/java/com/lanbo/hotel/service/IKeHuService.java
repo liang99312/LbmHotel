@@ -12,4 +12,6 @@ public interface IKeHuService {
         public int getSelectRows(HashMap map);
         public List<KeHu> getSelectPage(HashMap map);
         public boolean selectHaos(KeHu keHu);
+        public KeHu getLoadKeHu(String loadName,String password);
+        public boolean updatePassword(KeHu keHu);
 }

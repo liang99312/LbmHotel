@@ -50,4 +50,12 @@ public class KeHuServiceImpl implements IKeHuService {
     public boolean selectHaos(KeHu keHu) {
         return this.keHuDao.selectHaos(keHu)>0;
     }
+
+    public KeHu getLoadKeHu(String loadName, String password) {
+        return this.keHuDao.selectByNameAndPassword(loadName, password);
+    }
+
+    public boolean updatePassword(KeHu keHu) {
+        return this.keHuDao.updatePassword(keHu) == 1;
+    }
 }
