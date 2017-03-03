@@ -7,8 +7,10 @@ public class FangJian{
     
     private String luoCeng;
     
-    private String jiBie;
+    private Integer fangXing_id;
     
+    private String fangXing;
+
     private Float jiaGe;
 
     private String fuzeRen;
@@ -49,12 +51,12 @@ public class FangJian{
         this.fuzeRen = fuzeRen;
     }
 
-    public String getJiBie() {
-        return jiBie;
+    public String getFangXing() {
+        return fangXing;
     }
 
-    public void setJiBie(String jiBie) {
-        this.jiBie = jiBie;
+    public void setFangXing(String fangXing) {
+        this.fangXing = fangXing;
     }
 
     public Float getJiaGe() {
@@ -63,6 +65,14 @@ public class FangJian{
     
     public void setJiaGe(Float jiaGe) {
         this.jiaGe = jiaGe;
+    }
+
+    public Integer getFangXing_id() {
+        return fangXing_id;
+    }
+
+    public void setFangXing_id(Integer fangXing_id) {
+        this.fangXing_id = fangXing_id;
     }
 
     public String getState() {

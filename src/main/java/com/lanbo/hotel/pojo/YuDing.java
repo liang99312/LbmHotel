@@ -7,6 +7,8 @@ import org.springframework.format.annotation.DateTimeFormat;
 public class YuDing{
     private Integer id =-1;
     
+    private Integer keHu_id;
+    
     private String keHu;
     
     private String zjHao;
@@ -22,6 +24,20 @@ public class YuDing{
     private Integer rzTs = 0;
     
     private Integer rzFjs = 0;
+    
+    private String name;
+    
+    private String sex;
+    
+    private String sfzHao;
+    
+    private String dianHua;
+    
+    private Integer fangXing_id;
+    
+    private String fangXing;
+    
+    private Float jiaGe;
     
     private String state;
     
@@ -107,6 +123,70 @@ public class YuDing{
 
     public void setRemark(String remark) {
         this.remark = remark;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getSex() {
+        return sex;
+    }
+
+    public void setSex(String sex) {
+        this.sex = sex;
+    }
+
+    public String getSfzHao() {
+        return sfzHao;
+    }
+
+    public void setSfzHao(String sfzHao) {
+        this.sfzHao = sfzHao;
+    }
+
+    public String getDianHua() {
+        return dianHua;
+    }
+
+    public void setDianHua(String dianHua) {
+        this.dianHua = dianHua;
+    }
+
+    public String getFangXing() {
+        return fangXing;
+    }
+
+    public void setFangXing(String fangXing) {
+        this.fangXing = fangXing;
+    }
+
+    public Float getJiaGe() {
+        return jiaGe;
+    }
+
+    public void setJiaGe(Float jiaGe) {
+        this.jiaGe = jiaGe;
+    }
+
+    public Integer getKeHu_id() {
+        return keHu_id;
+    }
+
+    public void setKeHu_id(Integer keHu_id) {
+        this.keHu_id = keHu_id;
+    }
+
+    public Integer getFangXing_id() {
+        return fangXing_id;
+    }
+
+    public void setFangXing_id(Integer fangXing_id) {
+        this.fangXing_id = fangXing_id;
     }
 
 }
