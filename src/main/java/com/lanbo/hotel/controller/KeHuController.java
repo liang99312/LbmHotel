@@ -116,4 +116,14 @@ public class KeHuController {
         model.setList(this.keHuService.getSelectPage(map));
         return model;
     }
+    
+    @RequestMapping(value = "/getAllKeHu", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+    @ResponseBody
+    public Map<String, Object> getAllKeHu() {
+        List result = this.keHuService.getAllKeHu();
+        Map<String, Object> map = new HashMap();
+        map.put("result", true);
+        map.put("list", result);
+        return map;
+    }
 }

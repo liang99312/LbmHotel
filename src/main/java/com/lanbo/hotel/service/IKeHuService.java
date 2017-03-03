@@ -14,4 +14,5 @@ public interface IKeHuService {
         public boolean selectHaos(KeHu keHu);
         public KeHu getLoadKeHu(String loadName,String password);
         public boolean updatePassword(KeHu keHu);
+        public List getAllKeHu();
 }

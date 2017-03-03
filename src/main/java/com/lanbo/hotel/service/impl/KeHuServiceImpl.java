@@ -58,4 +58,8 @@ public class KeHuServiceImpl implements IKeHuService {
     public boolean updatePassword(KeHu keHu) {
         return this.keHuDao.updatePassword(keHu) == 1;
     }
+
+    public List getAllKeHu() {
+        return this.keHuDao.selectAllKeHu();
+    }
 }
