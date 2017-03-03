@@ -19,6 +19,10 @@ $(document).ready(function () {
     cxLoadKeHu();
 });
 
+function refreshData(){
+    cxLoadKeHu();
+}
+
 function cxLoadKeHu(){
     $.ajax({
         url: "/LbmHotel/frontend/getLordKeHu",
@@ -28,7 +32,11 @@ function cxLoadKeHu(){
         error: function (msg, textStatus) {
         },
         success: function (json) {
-            jxKeHu(json);
+            if(json === null || json === ""){
+                window.top.location.href = "/LbmHotel/frontend/goIndex";
+            }else{
+                jxKeHu(json);
+            }
         }
     });
 }

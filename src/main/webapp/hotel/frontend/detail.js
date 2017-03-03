@@ -1,16 +1,36 @@
 var id = 0;
-
+var fangXing;
+var loadKeHu;
 $(document).ready(function () {
 
     var args = new Object();
     args = GetUrlParms();
-//如果要查找参数key:
+    //如果要查找参数key:
     if (args["id"] != undefined)
     {
         id = args["id"];
     }
+    $('#inpRzSj').datetimepicker({language:  'zh-CN',format: 'yyyy-mm-dd hh:ii',weekStart: 7,todayBtn:  1,autoclose: 1,todayHighlight: 1,startView: 2,forceParse: 0,showMeridian: 1});
     cxFangXing();
+    cxKeHu();
 });
+
+function cxKeHu() {
+    loadKeHu = null;
+    $.ajax({
+        url: "/LbmHotel/frontend/getLordKeHu",
+        contentType: "application/json",
+        type: "post",
+        cache: false,
+        error: function (msg, textStatus) {
+        },
+        success: function (json) {
+            if (json !== null && json !== "") {
+                loadKeHu = json;
+            }
+        }
+    });
+}
 
 function GetUrlParms()
 {
@@ -49,6 +69,7 @@ function cxFangXing() {
 
 function jxFangXing(json){
     if(json !== undefined && json !== null){
+        fangXing = json;
         $("#iZhuTu").attr("src","/LbmHotel/files/"+json.zhuTu);
         $("#iName").html(json.name);
         $("#iJiaGe").html("价格：￥"+json.jiaGe);
@@ -63,4 +84,21 @@ function jxFangXing(json){
         }
         $("#dvTuPian").html(tpStr);
     }
+}
+
+function refreshData(){
+    cxKeHu();
+}
+
+function showYdKf(){
+    if(loadKeHu === null){
+        return alert("请登录");
+    }
+    $("#inpFangXing").val(fangXing.name);
+    $("#inpName").val(loadKeHu.name);
+    $("#inpSex").val(loadKeHu.sex);
+    $("#inpSfzHao").val(loadKeHu.sfzHao);
+    $("#inpDianHua").val(loadKeHu.dianHua);
+    
+    $("#dvYdKf").show();
 }

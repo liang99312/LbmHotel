@@ -21,6 +21,7 @@ function saveKeHu(){
         success: function (json) {
             if (json.result) {
                 alert("注册成功");
+                window.top.location.href = "/LbmHotel/frontend/goIndex";
             } else
                 alert("注册失败");
         }

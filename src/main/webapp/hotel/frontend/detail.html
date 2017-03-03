@@ -8,13 +8,21 @@ and open the template in the editor.
     <head>
         <title>LBM酒店</title>
         <meta charset="UTF-8">
+        <link href="/LbmHotel/content/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+        <link href="/LbmHotel/content/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+        <link href="/LbmHotel/content/bootstrap/css/bootstrap-datetimepicker.min.css" rel="stylesheet" />
         <script src="/LbmHotel/js/jquery2.js"></script>
+        <script src="/LbmHotel/content/bootstrap/js/bootstrap-datetimepicker.min.js"></script>
+        <script src="/LbmHotel/content/bootstrap/js/bootstrap-datetimepicker.zh-CN.js"></script>
         <script src="/LbmHotel/hotel/frontend/detail.js"></script>
         <style>
             *{padding:0;margin:0}
             #content a{
                 cursor: pointer;
                 text-decoration:none;
+            }
+            #dvYdKf input{
+                line-height:20px;
             }
         </style>
     </head>
@@ -26,20 +34,57 @@ and open the template in the editor.
             <div id="content" style="margin-left: 10%; margin-right: 10%;margin-top: 20px;">
                 <div style="width:100%;float: left; border: 1px solid #E5E5E5; background-color: #F6F6F6">
                     <div style="float: left;text-align: left;">
-                        <img style='width:400px;height:400px;'  id="iZhuTu" />
+                        <img style='width:600px;height:400px;'  id="iZhuTu" />
                     </div>
-                    <div style="float: left;padding-left: 20px;line-height: 50px;">
+                    <div style="float: left;padding-left: 20px;line-height: 50px;width:424px;">
                         <span style="font-size:18px;">LbmHotel客房信息：</span><br/>
                         <span style="font-size:24px;font-weight: bold;" id="iName"></span><br/>
                         <span style="font-size: 24px;font-weight: 700;font-family: Tahoma,Arial,Helvetica,sans-serif;color: #f40;" id="iJiaGe"></span><br/>
-                        <input style="width:100px;height:50px;color: #00be67;font-size: 24px;font-weight: 700;" type="button" value="预定" />
+                        <input style="width:100px;height:50px;color: #00be67;font-size: 24px;font-weight: 700;" type="button" value="预定" onclick="showYdKf()"/>
+                    </div>
+                    <div id="dvYdKf" style="display: none;border-left: 1px solid #E5E5E5;line-height: 50px;height:400px;float:left;">
+                        <div style="float:left;width:100%; height: 50px;text-align: left; border-bottom: 1px solid #E5E5E5;">
+                            <span style="font-size:18px;font-weight: bold;">&nbsp;预定客房：</span><br/>
+                        </div>
+                        <div style="margin-left:30px;text-align: left;line-height: 40px;">
+                            <div>
+                                <label for="inpRzSj">预住时间：</label>
+                                <input type="text" id="inpRzSj" />
+                            </div>
+                            <div>
+                                <label for="inpRzTs">预住天数：</label>
+                                <input type="text" id="inpRzTs" value="1" />
+                            </div>
+                            <div>
+                                <label for="inpName">姓&ensp;&ensp;&ensp;&ensp;名：</label>
+                                <input type="text" id="inpName" />
+                            </div>
+                            <div>
+                                <label for="inpSex">性&ensp;&ensp;&ensp;&ensp;别：</label>
+                                <select id="inpSex" style="width: 174px;height: 26px;">
+                                    <option selected="selected" value="男">男</option><option value="女">女</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label for="inpSfzHao">身&ensp;份&ensp;证：</label>
+                                <input type="text" id="inpSfzHao" />
+                            </div>
+                            <div>
+                                <label for="inpDianHua">电&ensp;&ensp;&ensp;&ensp;话：</label>
+                                <input type="text" id="inpDianHua" />
+                            </div>
+                        </div>
+                        <div style="text-align: center;padding: 8px;">
+                            <button type="button" onclick="saveYuDing()" style="width:60px;height:30px;font: caption;">提交</button>
+                        </div>
                     </div>
                 </div>
                 <div id="dvTuPian" style="width:100%;float: left; border: 1px solid #E5E5E5; background-color: #F6F6F6;margin-top: 20px;">
-                    
+
                 </div>
             </div>
         </div>
+
         <div style="height: 40px;width: 100%;padding-bottom: 0px;float: left;">
             <iframe width="100%" height="40px" style="border-width:0;" marginwidth="0" marginheight="0" src="./goBottom" ></iframe>
         </div>

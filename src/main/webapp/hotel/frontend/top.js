@@ -50,6 +50,9 @@ function load() {
                 $("#aLoad,#aZhuCe,#sXieGang").hide();
                 $("#aHuanYing").html(loadKeHu.name);
                 $("#sHuanYing").show();
+                if (window.parent.refreshData !== undefined) {
+                    window.parent.refreshData();
+                }
             }
         }
     });
@@ -71,6 +74,9 @@ function loadOut() {
             loadKeHu = null;
             $("#aLoad,#aZhuCe,#sXieGang").show();
             $("#sHuanYing").hide();
+            if (window.parent.refreshData !== undefined) {
+                window.parent.refreshData();
+            }
         }
     });
 }

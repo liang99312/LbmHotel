@@ -460,7 +460,8 @@
 
     var defaultEmphasisHandler = function (keyword, data) {
         var regex = RegExp("(" + keyword.replace(/([.?*+^$[\]\\(){}|-])/g, "\\$1") + ")", 'ig');
-        data.label = data.label.replace(regex, "<em>$1</em>");
+        if(data.label !== undefined)
+            data.label = data.label.replace(regex, "<em>$1</em>");
     };
 
 })(jQuery);

@@ -1,12 +1,28 @@
 var fangJians;
 var optFlag = 1;
 var editIndex = -1;
+var selectFangXing;
 $(document).ready(function () {
-    getUserNames(setTrager);
+    getUserNames(setTrager_fzr);
+    getFangXings(setTrager_fx);
 });
 
-function setTrager(){
+function setTrager_fzr(){
     $('#inpFuzeRen').AutoComplete({'data': h_userNames.list}); 
+}
+
+function setTrager_fx(){
+    for(var i=0;i<h_fangXings.list.length;i++){
+        var e = h_fangXings.list[i];
+        e.label = e.name;
+    }
+    $('#inpFangXing').AutoComplete({'data': h_fangXings.list,'afterSelectedHandler':selectFangXing}); 
+}
+
+function selectFangXing(json){
+    selectFangXing = json;
+    $('#inpFangXing').val(json.name);
+    $('#inpJiaGe').val(json.jiaGe);
 }
 
 function jxFangJian(json) {
@@ -14,7 +30,7 @@ function jxFangJian(json) {
     fangJians = [];
     fangJians = json.list;
     $.each(json.list, function (index, item) { //遍历返回的json
-        var trStr = '<tr><td>' + item.fjHao + '</td><td>' + item.luoCeng + '</td><td>' + item.jiBie + '</td><td>' + item.jiaGe + '</td><td>' + item.fuzeRen + '</td><td>' + item.state + '</td><td>' + item.remark + '</td><td>'
+        var trStr = '<tr><td>' + item.fjHao + '</td><td>' + item.luoCeng + '</td><td>' + item.fangXing + '</td><td>' + item.jiaGe + '</td><td>' + item.fuzeRen + '</td><td>' + item.state + '</td><td>' + item.remark + '</td><td>'
                 + '<button class="btn btn-info btn-xs icon-edit" onclick="editFangJian(' + index + ' );" style="padding-top: 4px;padding-bottom: 3px;"></button>&nbsp;'
                 + '<button class="btn btn-danger btn-xs icon-remove" onclick="delFangJian(' + index + ' );" style="padding-top: 4px;padding-bottom: 3px;"></button></td></tr>';
         $("#data_table_body").append(trStr);
@@ -44,7 +60,7 @@ function addFangJian() {
     $("#fangJianModel_title").html("新增房间");
     $("#inpFjHao").val("");
     $("#inpLuoCeng").val("");
-    $("#inpJiBie").val("");
+    $("#inpFangXing").val("");
     $("#inpJiaGe").val("0");
     $("#inpState").val("就绪").attr("readonly", "true");
     $("#inpFuzeRen").val("");
@@ -60,11 +76,15 @@ function editFangJian(index) {
         return alert("请选择房间");
     }
     var fangJian = fangJians[index];
+    selectFangXing = {};
+    selectFangXing.id=fangJian.fangXing_id;
+    selectFangXing.name=fangJian.fangXing;
+    selectFangXing.jiaGe=fangJian.jiaGe;
     editIndex = index;
     $("#fangJianModel_title").html("修改房间");
     $("#inpFjHao").val(fangJian.fjHao);
     $("#inpLuoCeng").val(fangJian.luoCeng);
-    $("#inpJiBie").val(fangJian.jiBie);
+    $("#inpFangXing").val(fangJian.fangXing);
     $("#inpJiaGe").val(fangJian.jiaGe);
     $("#inpState").val(fangJian.state).removeAttr("readonly");
     $("#inpFuzeRen").val(fangJian.fuzeRen);
@@ -86,7 +106,10 @@ function saveFangJian() {
     }
     fangJian.fjHao = $("#inpFjHao").val();
     fangJian.luoCeng = $("#inpLuoCeng").val();
-    fangJian.jiBie = $("#inpJiBie").val();
+    fangJian.fangXing = $("#inpFangXing").val();
+    if(selectFangXing !== null){
+        fangJian.fangXing_id = selectFangXing.id;
+    }
     fangJian.jiaGe = parseFloat($("#inpJiaGe").val(),2);
     fangJian.state = $("#inpState").val();
     fangJian.fuzeRen = $("#inpFuzeRen").val();

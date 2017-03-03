@@ -1,5 +1,6 @@
 var h_fangJianHaos;
 var h_userNames;
+var h_fangXings;
 
 function getFangJianHaos(d,func){
     hajax("/LbmHotel/fangJian/getAllFangJianHao",d,"h_fangJianHaos",func);
@@ -8,6 +9,11 @@ function getFangJianHaos(d,func){
 function getUserNames(func){
     hajax("/LbmHotel/user/getAllUserName",null,"h_userNames",func);
 }
+
+function getFangXings(func){
+    hajax("/LbmHotel/fangXing/getAllFangXing",null,"h_fangXings",func);
+}
+
 
 function hajax(url,d,result,func){
     $.ajax({
