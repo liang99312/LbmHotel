@@ -87,4 +87,9 @@
     from kehu_t
     where (bianhao = #{0} or dianhua = #{0} or sfzhao = #{0}) and password = #{1}
   </select>
+  <select id="selectAllKeHu" resultMap="BaseResultMap" >
+    select 
+    <include refid="Base_Column_List" />
+    from kehu_t
+  </select>
 </mapper>

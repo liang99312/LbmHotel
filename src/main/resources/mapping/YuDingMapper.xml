@@ -22,7 +22,7 @@
     <result column="remark" property="remark" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, kehu_id, kehu, zjhao, ydsj, rzsj, rzts, rzfjs,name,sex,sfzhao,dianhua,fangxing_id,fangxing,jiage, state, fuzeren, remark,
+    id, kehu_id, kehu, zjhao, ydsj, rzsj, rzts, rzfjs,name,sex,sfzhao,dianhua,fangxing_id,fangxing,jiage, state, fuzeren, remark
   </sql>
   <select id="selectById" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
