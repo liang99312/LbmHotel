@@ -85,6 +85,10 @@ function closeLoad() {
     $("#dvLoad").hide();
 }
 
+function goZhuCe() {
+    window.top.location.href = "/LbmHotel/frontend/goZhuCe";
+}
+
 function goHome() {
     window.top.location.href = "/LbmHotel/frontend/goIndex";
 }

@@ -385,6 +385,12 @@
                 return false;
 
             if ($.isPlainObject(value)) {
+                if(value.label === undefined){
+                    value.label = value.name;
+                }
+                if(value.value === undefined){
+                    value.value = value.name;
+                }
                 var item = $.extend(false, {}, value);
             } else if (typeof (value) === 'string') {
                 var item = {'label': value, 'value': value, 'image': value};

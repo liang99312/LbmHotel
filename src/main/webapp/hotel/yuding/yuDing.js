@@ -1,10 +1,25 @@
 var yuDings;
 var optFlag = 1;
 var editIndex = -1;
+var selFangXing;
 $(document).ready(function () {
     getUserNames(setTrager);
+    getKeHus(setTrager_kh);
+    getFangXings(setTrager_fx);
     $('#inpRzSj').datetimepicker({language:  'zh-CN',format: 'yyyy-mm-dd hh:ii',weekStart: 7,todayBtn:  1,autoclose: 1,todayHighlight: 1,startView: 2,forceParse: 0,showMeridian: 1});
 });
+
+function setTrager_kh(){
+    $('#inpKeHu').AutoComplete({'data': h_keHus.list}); 
+}
+
+function setTrager_fx(){
+    $('#inpFangXing').AutoComplete({'data': h_fangXings.list,'afterSelectedHandler':selectFangXing}); 
+}
+
+function selectFangXing(json){
+    selFangXing = json;
+}
 
 function setTrager(){
     $('#inpFuzeRen').AutoComplete({'data': h_userNames.list}); 

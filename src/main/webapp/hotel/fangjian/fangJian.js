@@ -12,10 +12,6 @@ function setTrager_fzr(){
 }
 
 function setTrager_fx(){
-    for(var i=0;i<h_fangXings.list.length;i++){
-        var e = h_fangXings.list[i];
-        e.label = e.name;
-    }
     $('#inpFangXing').AutoComplete({'data': h_fangXings.list,'afterSelectedHandler':selectFangXing}); 
 }
 
