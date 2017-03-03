@@ -81,6 +81,10 @@ public class FrontendController {
     
     @RequestMapping("/goMine")
     public String goMine(HttpServletRequest request, HttpServletResponse response) {
+        if(request.getSession().getAttribute("kehu")==null){
+            goIndex(request,response);
+            return "";
+        }
         return "frontend/mine";
     }
     
@@ -121,7 +125,18 @@ public class FrontendController {
         } else {
             request.getSession().setAttribute("kehu", kh);
             map.put("result", 1);
+            map.put("loadKeHu", kh);
         }
+        return map;
+    }
+    
+    @RequestMapping(value = "/loadOut", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+    @ResponseBody
+    public Map<String, Object> loadOut(HttpServletRequest request,
+            HttpServletResponse response) {
+        request.getSession().setAttribute("kehu", null);
+        Map<String, Object> map = new HashMap();
+        map.put("result", 1);
         return map;
     }
     
@@ -157,6 +172,8 @@ public class FrontendController {
     @RequestMapping(value = "/zhuCe", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
     @ResponseBody
     public Map<String, Object> zhuCe(@RequestBody KeHu model) {
+        long time = System.currentTimeMillis();
+        model.setBianHao(String.valueOf(time));
         model.setId(-1);
         model.setDengJi("初级");
         Map<String, Object> map = new HashMap();
