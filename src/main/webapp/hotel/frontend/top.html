@@ -10,7 +10,10 @@ and open the template in the editor.
         <script src="/LbmHotel/js/jquery2.js"></script>
         <script src="/LbmHotel/hotel/frontend/top.js"></script>
         <style>
-            *{padding:0;margin:0};
+            *{
+                padding:0;margin:0
+            }
+            
             #dvTool a{
                 cursor: pointer;
                 text-decoration:none;
@@ -28,8 +31,11 @@ and open the template in the editor.
             <div id="dvTool" style="margin-left: 10%;vertical-align: middle;line-height: 95px;">
                 <a href="#" onclick="goHome()">首页</a>
                 <a href="#" onclick="goYuLan()" style="margin-left: 30px;">客房预览</a>
-                <a href="#" onclick="goMine()" style="margin-left: 30px;">请登录</a>/
-                <a href="#" onclick="goZhuCe()">注册</a>
+                <a href="#" onclick="goMine()" style="margin-left: 30px;">我的信息</a>
+                <a id="aLoad" href="#" onclick="goMine()" style="margin-left: 30px;">请登录</a>
+                <span id="sXieGang">/</span>
+                <a id="aZhuCe" href="#" onclick="goZhuCe()">注册</a>
+                <span id="sHuanYing" style="display:none;margin-right: 20%;float: right;">欢迎您！<a id="aHuanYing">XXX</a><a href="#" id="loadOut" onclick="loadOut()" style="color:red">&nbsp;&nbsp;退出</a></span>
             </div>
         </div>
         <div class="mycenter" id="dvLoad" style="background: rgba(246, 246, 246, 1);z-index:10;display: none;position: absolute;width: 320px;height:125px;top: 5px;left:40%;border-radius:5px;">
