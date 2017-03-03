@@ -101,6 +101,7 @@
                     $("#dvMenu").fadeOut(500);
                 }
             }
+            var loadKeHu = null;
             $(document).ready(function(){
                 $("#aLoad").click(function(event){
                     $("#dvLoad").css("z-index","100");
@@ -111,7 +112,89 @@
                     $("#dvLoad").css("z-index","1");
                     $("#dvLoad").hide();
                  });
+                 cxKeHu();
             });
+            
+            function cxKeHu(){
+                loadKeHu = null;
+                $.ajax({
+                    url: "/LbmHotel/frontend/getLordKeHu",
+                    contentType: "application/json",
+                    type: "post",
+                    cache: false,
+                    error: function (msg, textStatus) {
+                    },
+                    success: function (json) {
+                        if(json !== null && json !== ""){
+                            loadKeHu = json;
+                            $("#aLoad,#aZhuCe,#sXieGang").hide();
+                            $("#aHuanYing").html(loadKeHu.name);
+                            $("#sHuanYing").show();
+                        }
+                    }
+                });
+            }
+            
+            function load(){
+                loadKeHu = null;
+                var loadName = $("#loadName").val();
+                var password = $("#passWord").val();
+                if (loadName === "") {
+                    return alert("请输入用户名");
+                }
+                var keHu = {"name": loadName,"password":password};
+                $.ajax({
+                    url: "/LbmHotel/frontend/load",
+                    data: JSON.stringify(keHu),
+                    contentType: "application/json",
+                    type: "post",
+                    cache: false,
+                    error: function (msg, textStatus) {
+                        alert("登录失败，请检查用户名密码！");
+                    },
+                    success: function (json) {
+                        if(json.result === -1){
+                            alert("登录失败，请检查用户名密码！");
+                        }else if(json.loadKeHu !== null && json.loadKeHu !== ""){
+                            loadKeHu = json.loadKeHu;
+                            $("#dvLoad").css("z-index","1");
+                            $("#dvLoad").hide();
+                            $("#aLoad,#aZhuCe,#sXieGang").hide();
+                            $("#aHuanYing").html(loadKeHu.name);
+                            $("#sHuanYing").show();
+                        }
+                    }
+                });
+            }
+        
+            function goMine(){
+                if(loadKeHu !== null){
+                    window.top.location.href = "/LbmHotel/frontend/goMine";
+                }else{
+                    $("#dvLoad").css("z-index","100");
+                    $("#dvLoad").show();
+                    event.stopPropagation();
+                }
+            }
+            function loadOut(){
+                if(!confirm("确定退出？")){
+                    return;
+                }
+                $.ajax({
+                    url: "/LbmHotel/frontend/loadOut",
+                    contentType: "application/json",
+                    type: "post",
+                    cache: false,
+                    error: function (msg, textStatus) {
+                        alert("退出失败！");
+                    },
+                    success: function (json) {
+                        loadKeHu = null;
+                        $("#aLoad,#aZhuCe,#sXieGang").show();
+                        $("#sHuanYing").hide();
+                    }
+                });
+            }
         </script>
     </head>
     <body>
@@ -122,11 +205,13 @@
             </div>
             <div id="dvMenu" style="background: rgba(210,210,210,0.4);position: absolute;width: 100%;height:80px;top: 0;left:0;text-align: center;vertical-align: middle;justify-content:center;align-items:center;display:-webkit-flex;">
                 <a href="/LbmHotel/frontend/goYuLan">预订</a>
-                <a  style="padding-left:20px;" href="/LbmHotel/frontend/goYuLan">客房预览</a>
+                <a style="padding-left:20px;" href="/LbmHotel/frontend/goYuLan">客房预览</a>
                 <span style="color: #0000ff;font-size:32px;font-weight:bold;padding-left:30px;padding-right: 30px;">LBM</span>
-                <a id="aMine">我的信息</a>
-                <a id="aLoad" style="padding-left:20px;">登录</a>/
+                <a href="#" id="aMine" onclick="goMine()">我的信息</a>
+                <a id="aLoad" style="padding-left:20px;">登录</a>
+                <span id="sXieGang">/</span>
                 <a id="aZhuCe" href="/LbmHotel/frontend/goZhuCe">注册</a>
+                <span id="sHuanYing" style="display:none;padding-left:20px;">欢迎您！<a id="aHuanYing">XXX</a><a href="#" id="loadOut" onclick="loadOut()" style="color:red">&nbsp;&nbsp;退出</a></span>
             </div>
         </div>
         <div id="dvBottom" style="width:100%;height:100px;z-index:10;float: left;text-align: center;vertical-align: middle;justify-content:center;align-items:center;display:-webkit-flex;">
