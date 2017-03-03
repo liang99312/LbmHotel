@@ -3,37 +3,37 @@
 <mapper namespace="com.lanbo.hotel.dao.IFangJianDao" >
   <resultMap id="BaseResultMap" type="com.lanbo.hotel.pojo.FangJian" >
     <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="fangxing_id" property="fangXing_id" jdbcType="INTEGER" />
     <result column="fjhao" property="fjHao" jdbcType="VARCHAR" />
     <result column="luoceng" property="luoCeng" jdbcType="VARCHAR" />
-    <result column="jibie" property="jiBie" jdbcType="VARCHAR" />
+    <result column="fangxing" property="fangXing" jdbcType="VARCHAR" />
     <result column="jiage" property="jiaGe" jdbcType="FLOAT" />
     <result column="fuzeren" property="fuzeRen" jdbcType="VARCHAR" />
     <result column="state" property="state" jdbcType="VARCHAR" />
     <result column="remark" property="remark" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, fjhao, luoceng, jibie, jiage, fuzeren, state, remark
+    a.id, a.fjhao, a.luoceng,a.fangxing_id, b.name as fangxing, b.jiage, a.fuzeren, a.state, a.remark
   </sql>
   <select id="selectById" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
-    from fangjian_t
-    where id = #{id,jdbcType=INTEGER}
+    from fangjian_t a left join fangxing_t b on a.fangxing_id = b.id 
+    where a.id = #{id,jdbcType=INTEGER}
   </select>
   <delete id="deleteById" parameterType="java.lang.Integer" >
     delete from fangjian_t
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.lanbo.hotel.pojo.FangJian" >
-    insert into fangjian_t (fjhao, luoceng, jibie, jiage, fuzeren, state, remark)
-    values (#{fjHao,jdbcType=VARCHAR}, #{luoCeng,jdbcType=VARCHAR}, #{jiBie,jdbcType=VARCHAR}, #{jiaGe,jdbcType=FLOAT}, #{fuzeRen,jdbcType=VARCHAR,}, #{state,jdbcType=VARCHAR},#{remark,jdbcType=VARCHAR})
+    insert into fangjian_t (fjhao, luoceng, fangxing_id, fuzeren, state, remark)
+    values (#{fjHao,jdbcType=VARCHAR}, #{luoCeng,jdbcType=VARCHAR}, #{fangXing_id,jdbcType=INTEGER}, #{fuzeRen,jdbcType=VARCHAR,}, #{state,jdbcType=VARCHAR},#{remark,jdbcType=VARCHAR})
   </insert>
   <update id="updateById" parameterType="com.lanbo.hotel.pojo.FangJian" >
     update fangjian_t
     set fjhao = #{fjHao,jdbcType=VARCHAR},
       luoceng = #{luoCeng,jdbcType=VARCHAR},
-      jibie = #{jiBie,jdbcType=VARCHAR},
-      jiage = #{jiaGe,jdbcType=FLOAT},
+      fangxing_id = #{fangXing_id,jdbcType=INTEGER},
       state = #{state,jdbcType=VARCHAR},
       remark = #{remark,jdbcType=VARCHAR},
       fuzeren = #{fuzeRen,jdbcType=VARCHAR}
@@ -42,14 +42,14 @@
   <select id="selectByPage" resultMap="BaseResultMap" parameterType="hashmap">
     select
     <include refid="Base_Column_List" />
-    from fangjian_t where 1=1 
+    from fangjian_t a left join fangxing_t b on a.fangxing_id = b.id  where 1=1 
     <if test="fjHao != null and fjHao !=''">
-        and fjhao LIKE concat('%',#{fjHao},'%')
+        and a.fjhao LIKE concat('%',#{fjHao},'%')
     </if>
     <if test="state != null and state !=''">
-        and state = #{state}
+        and a.state = #{state}
     </if>
-    order by id limit #{beginRow},#{pageSize}
+    order by a.id limit #{beginRow},#{pageSize}
   </select>
   <select id="selectAllFangJianHao" resultType="java.lang.String" parameterType="hashmap">
     select 
@@ -79,10 +79,5 @@
     select
     count(1)
     from fangjian_t where fjhao = #{fjHao,jdbcType=VARCHAR} and id != #{id,jdbcType=INTEGER}
-  </select>
-  <select id="selectJiBies" resultType="int" parameterType="com.lanbo.hotel.pojo.FangJian" >
-    select
-    count(1)
-    from fangjian_t where jibie = #{jiBie,jdbcType=VARCHAR}
   </select>
 </mapper>

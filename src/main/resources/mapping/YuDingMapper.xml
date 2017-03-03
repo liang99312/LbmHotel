@@ -3,18 +3,26 @@
 <mapper namespace="com.lanbo.hotel.dao.IYuDingDao" > 
   <resultMap id="BaseResultMap" type="com.lanbo.hotel.pojo.YuDing" >
     <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="kehu_id" property="keHu_id" jdbcType="INTEGER" />
     <result column="kehu" property="keHu" jdbcType="VARCHAR" />
     <result column="zjhao" property="zjHao" jdbcType="VARCHAR" />
     <result column="ydsj" property="ydSj" jdbcType="TIMESTAMP" javaType="java.util.Date"/>
     <result column="rzsj" property="rzSj" jdbcType="TIMESTAMP" javaType="java.util.Date"/>
     <result column="rzts" property="rzTs" jdbcType="INTEGER" />
     <result column="rzfjs" property="rzFjs" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="sex" property="sex" jdbcType="VARCHAR" />
+    <result column="sfzhao" property="sfzHao" jdbcType="VARCHAR" />
+    <result column="dianhua" property="dianHua" jdbcType="VARCHAR" />
+    <result column="fangxing_id" property="fangXing_id" jdbcType="INTEGER" />
+    <result column="fangxing" property="fangXing" jdbcType="VARCHAR" />
+    <result column="jiage" property="jiaGe" jdbcType="FLOAT" />
     <result column="state" property="state" jdbcType="VARCHAR" />
     <result column="fuzeren" property="fuzeRen" jdbcType="VARCHAR" />
     <result column="remark" property="remark" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, kehu, zjhao, ydsj, rzsj, rzts, rzfjs, state, fuzeren, remark
+    id, kehu_id, kehu, zjhao, ydsj, rzsj, rzts, rzfjs,name,sex,sfzhao,dianhua,fangxing_id,fangxing,jiage, state, fuzeren, remark,
   </sql>
   <select id="selectById" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -27,17 +35,27 @@
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.lanbo.hotel.pojo.YuDing" >
-    insert into yuding_t (kehu, zjhao, ydsj, rzsj, rzts, rzfjs, state, fuzeren, remark)
-    values (#{keHu,jdbcType=VARCHAR}, #{zjHao,jdbcType=VARCHAR}, #{ydSj,jdbcType=TIMESTAMP}, #{rzSj,jdbcType=TIMESTAMP}, #{rzTs,jdbcType=INTEGER}, #{rzFjs,jdbcType=INTEGER}, #{state,jdbcType=VARCHAR}, #{fuzeRen,jdbcType=VARCHAR},#{remark,jdbcType=VARCHAR})
+    insert into yuding_t (kehu_id,kehu, zjhao, ydsj, rzsj, rzts, rzfjs,name,sex,sfzhao,dianhua,fangxing_id,fangxing,jiage, state, fuzeren, remark)
+    values (#{keHu_id,jdbcType=INTEGER},#{keHu,jdbcType=VARCHAR}, #{zjHao,jdbcType=VARCHAR}, #{ydSj,jdbcType=TIMESTAMP}, #{rzSj,jdbcType=TIMESTAMP}, #{rzTs,jdbcType=INTEGER}, #{rzFjs,jdbcType=INTEGER},
+      #{name,jdbcType=VARCHAR},#{sex,jdbcType=VARCHAR},#{sfzHao,jdbcType=VARCHAR},#{dianHua,jdbcType=VARCHAR},#{fangXing_id,jdbcType=INTEGER},#{fangXing,jdbcType=VARCHAR},#{jiaGe,jdbcType=FLOAT},
+      #{state,jdbcType=VARCHAR}, #{fuzeRen,jdbcType=VARCHAR},#{remark,jdbcType=VARCHAR})
   </insert>
   <update id="updateById" parameterType="com.lanbo.hotel.pojo.YuDing" >
     update yuding_t
-    set kehu = #{keHu,jdbcType=VARCHAR},
+    set kehu_id = #{keHu_id,jdbcType=INTEGER},
+      kehu = #{keHu,jdbcType=VARCHAR},
       zjhao = #{zjHao,jdbcType=VARCHAR},
       ydsj = #{ydSj,jdbcType=TIMESTAMP},
       rzsj = #{rzSj,jdbcType=TIMESTAMP},
       rzts = #{rzTs,jdbcType=INTEGER},
       rzfjs = #{rzFjs,jdbcType=INTEGER},
+      name = #{state,jdbcType=VARCHAR},
+      sex = #{state,jdbcType=VARCHAR},
+      sfzhao = #{state,jdbcType=VARCHAR},
+      dianhua = #{state,jdbcType=VARCHAR},
+      fangxing_id = #{state,jdbcType=INTEGER},
+      fangxing = #{state,jdbcType=VARCHAR},
+      jiage = #{jiaGe,jdbcType=FLOAT},
       state = #{state,jdbcType=VARCHAR},
       remark = #{remark,jdbcType=VARCHAR},
       fuzeren = #{fuzeRen,jdbcType=VARCHAR}
