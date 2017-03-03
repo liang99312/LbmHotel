@@ -18,8 +18,7 @@ CREATE TABLE `hotel`.`fangjian_t` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `fjhao` VARCHAR(45) NULL,
   `luoceng` VARCHAR(45) NULL,
-  `jibie` VARCHAR(45) NULL,
-  `jiage` FLOAT NULL,
+  `fangxing_id` INT null,
   `fuzeren` VARCHAR(45) NULL,
   `state` VARCHAR(45) NULL,
   `remark` VARCHAR(200) NULL,
@@ -27,6 +26,7 @@ CREATE TABLE `hotel`.`fangjian_t` (
 
 CREATE TABLE `hotel`.`yuding_t` (
   `id` INT NOT NULL AUTO_INCREMENT,
+  `kehu_id` INT NULL,
   `kehu` VARCHAR(45) NULL,
   `zjhao` VARCHAR(45) NULL,
   `ydsj` DATETIME NULL,
@@ -34,6 +34,13 @@ CREATE TABLE `hotel`.`yuding_t` (
   `rzts` INT NULL DEFAULT 0,
   `rzfjs` INT NULL DEFAULT 0,
   `fuzeren` VARCHAR(45) NULL,
+  `name` VARCHAR(45) NULL,
+  `sex` VARCHAR(45) NULL,
+  `sfzhao` VARCHAR(45) NULL,
+  `dianhua` VARCHAR(45) NULL,
+  `fangxing_id` INT NULL,
+  `fangxing` VARCHAR(45) NULL,
+  `jiage` FLOAT NULL,
   `state` VARCHAR(45) NULL,
   `remark` VARCHAR(200) NULL,
   PRIMARY KEY (`id`))ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
