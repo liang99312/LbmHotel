@@ -12,6 +12,7 @@ import com.lanbo.hotel.pojo.YuDing;
 import com.lanbo.hotel.service.IFangXingService;
 import com.lanbo.hotel.service.IKeHuService;
 import com.lanbo.hotel.service.IYuDingService;
+import com.lanbo.hotel.util.DataUtil;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -151,9 +152,10 @@ public class FrontendController {
     @ResponseBody
     public Map<String, Object> changePassword(@RequestBody KeHu model, HttpServletRequest request,
             HttpServletResponse response) {
-        KeHu kh = this.keHuService.getLoadKeHu(model.getName(), model.getRemark());
+        KeHu kh = (KeHu) request.getSession().getAttribute("KeHu");
+        boolean flag = kh.getPassword().equals(model.getRemark());
         Map<String, Object> map = new HashMap();
-        if (kh == null) {
+        if (!flag) {
             map.put("result", false);
             map.put("msg","原密码输入有误");
         } else {
@@ -201,9 +203,14 @@ public class FrontendController {
     
     @RequestMapping(value = "/addYuDing", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
     @ResponseBody
-    public Map<String, Object> addYuDing(@RequestBody YuDing model) {
+    public Map<String, Object> addYuDing(@RequestBody YuDing model,HttpServletRequest request,
+            HttpServletResponse response) {
+        KeHu kh = (KeHu) request.getSession().getAttribute("KeHu");
         model.setId(-1);
         model.setState("未生效");
+        model.setZjHao(DataUtil.getBianHao());
+        model.setKeHu(kh.getName());
+        model.setKeHu_id(kh.getId());
         Map<String, Object> map = new HashMap();
         boolean result = this.yuDingService.addYuDing(model);
         if (result) {

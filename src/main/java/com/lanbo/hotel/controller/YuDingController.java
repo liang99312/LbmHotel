@@ -6,8 +6,10 @@
 package com.lanbo.hotel.controller;
 
 import com.lanbo.hotel.pojo.Page;
+import com.lanbo.hotel.pojo.User;
 import com.lanbo.hotel.pojo.YuDing;
 import com.lanbo.hotel.service.IYuDingService;
+import com.lanbo.hotel.util.DataUtil;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -40,6 +42,7 @@ public class YuDingController {
     @ResponseBody
     public Map<String, Object> addYuDing(@RequestBody YuDing model) {
         model.setId(-1);
+        model.setZjHao(DataUtil.getBianHao());
         Map<String, Object> map = new HashMap();
         boolean result = this.yuDingService.addYuDing(model);
         if (result) {
@@ -67,8 +70,11 @@ public class YuDingController {
     
     @RequestMapping(value = "/checkYuDing", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
     @ResponseBody
-    public Map<String, Object> checkYuDing(@RequestBody YuDing model) {
+    public Map<String, Object> checkYuDing(@RequestBody YuDing model,HttpServletRequest request,
+            HttpServletResponse response) {
         Map<String, Object> map = new HashMap();
+        User user = (User) request.getSession().getAttribute("user");
+        model.setFuzeRen(user.getUserName());
         boolean result = this.yuDingService.checkYuDing(model);
         if (result) {
             map.put("result", true);
