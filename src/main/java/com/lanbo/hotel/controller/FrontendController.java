@@ -7,10 +7,14 @@ package com.lanbo.hotel.controller;
 
 import com.lanbo.hotel.pojo.FangXing;
 import com.lanbo.hotel.pojo.KeHu;
+import com.lanbo.hotel.pojo.Page;
+import com.lanbo.hotel.pojo.YuDing;
 import com.lanbo.hotel.service.IFangXingService;
 import com.lanbo.hotel.service.IKeHuService;
+import com.lanbo.hotel.service.IYuDingService;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -38,6 +42,9 @@ public class FrontendController {
     
     @Resource
     private IKeHuService keHuService;    
+    
+    @Resource
+    private IYuDingService yuDingService;   
     
     @RequestMapping("/goIndex")
     public void goIndex(HttpServletRequest request, HttpServletResponse response) {
@@ -190,5 +197,73 @@ public class FrontendController {
             map.put("msg", "注册失败");
         }
         return map;
+    }
+    
+    @RequestMapping(value = "/addYuDing", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+    @ResponseBody
+    public Map<String, Object> addYuDing(@RequestBody YuDing model) {
+        model.setId(-1);
+        model.setState("未生效");
+        Map<String, Object> map = new HashMap();
+        boolean result = this.yuDingService.addYuDing(model);
+        if (result) {
+            map.put("result", true);
+        } else {
+            map.put("result", false);
+            map.put("msg", "写入数据库失败");
+        }
+        return map;
+    }
+    
+    @RequestMapping(value = "/tdYuDing", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+    @ResponseBody
+    public Map<String, Object> tdYuDing(@RequestBody YuDing model) {
+        model.setId(-1);
+        model.setState("已退订");
+        Map<String, Object> map = new HashMap();
+        boolean result = this.yuDingService.checkYuDing(model);
+        if (result) {
+            map.put("result", true);
+        } else {
+            map.put("result", false);
+            map.put("msg", "写入数据库失败");
+        }
+        return map;
+    }
+    
+    @RequestMapping(value = "/getYuDingPage", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+    @ResponseBody
+    public Page getYuDingPage(@RequestBody Page model,HttpServletRequest request,
+            HttpServletResponse response) {
+        model.setPageSize(10);
+        HashMap map = model.getParamters();
+        if(map == null){
+            map = new HashMap();
+        }
+        if (model.getRows() == 0) {
+            model.setRows(this.yuDingService.getSelectRows(map));
+        }
+        if (model.getRows() == 0) {
+            model.setCurrentPage(1);
+            model.setList(new ArrayList());
+            model.setParamters(new HashMap());
+            model.setRows(0);
+            model.setTotalPage(0);
+            return model;
+        }
+        if (model.getTotalPage() == 0) {
+            model.setTotalPage(model.getTotalPage());
+        }
+        map.put("beginRow", model.getBegin());
+        map.put("pageSize", model.getPageSize());
+        Object obj = request.getSession().getAttribute("KeHu");
+        if(obj == null){
+            model.setList(new ArrayList());
+        }else{
+            KeHu kh = (KeHu) obj;
+            map.put("id", kh.getId());
+            model.setList(this.yuDingService.getSelectPage(map));
+        }
+        return model;
     }
 }

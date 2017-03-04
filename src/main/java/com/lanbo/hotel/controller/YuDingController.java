@@ -41,11 +41,6 @@ public class YuDingController {
     public Map<String, Object> addYuDing(@RequestBody YuDing model) {
         model.setId(-1);
         Map<String, Object> map = new HashMap();
-        if(false){
-            map.put("result", false);
-            map.put("msg", "该客户的预定已存在，请重新输入");
-            return map;
-        }
         boolean result = this.yuDingService.addYuDing(model);
         if (result) {
             map.put("result", true);
@@ -60,12 +55,21 @@ public class YuDingController {
     @ResponseBody
     public Map<String, Object> updateYuDing(@RequestBody YuDing model) {
         Map<String, Object> map = new HashMap();
-        if(false){
-            map.put("result", false);
-            map.put("msg", "该客户的预定已存在，请重新输入");
-            return map;
-        }
         boolean result = this.yuDingService.updateYuDing(model);
+        if (result) {
+            map.put("result", true);
+        } else {
+            map.put("result", false);
+            map.put("msg", "修改数据库失败");
+        }
+        return map;
+    }
+    
+    @RequestMapping(value = "/checkYuDing", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+    @ResponseBody
+    public Map<String, Object> checkYuDing(@RequestBody YuDing model) {
+        Map<String, Object> map = new HashMap();
+        boolean result = this.yuDingService.checkYuDing(model);
         if (result) {
             map.put("result", true);
         } else {

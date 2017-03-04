@@ -51,4 +51,8 @@ public class YuDingServiceImpl implements IYuDingService {
     public int selectRzJiBies(YuDing yuDing) {
         return this.yuDingDao.selectRzJiBies(yuDing);
     }
+
+    public boolean checkYuDing(YuDing yuDing) {
+        return this.yuDingDao.updateState(yuDing) == 1;
+    }
 }
