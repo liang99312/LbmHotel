@@ -1,4 +1,5 @@
 var keHu;
+var page;
 $(document).ready(function () {
     $("#myDd").click(function(){
        $("#dvMyDd").show(); 
@@ -49,4 +50,58 @@ function jxKeHu(keHu){
     $("#inpDengJi").val(keHu.dengJi);
     $("#inpSfzHao").val(keHu.sfzHao);
     $("#inpDianHua").val(keHu.dianHua);
+}
+
+function tdYuDing(id){
+    var yuDing = {"id":id,"state":"已取消"};
+    if (confirm("确定取消订单?")) {
+        $.ajax({
+            url: "/LbmHotel/yuDing/tdYuDing",
+            data: JSON.stringify(yuDing),
+            contentType: "application/json",
+            type: "post",
+            cache: false,
+            error: function (msg, textStatus) {
+                alert("取消订单失败");
+            },
+            success: function (json) {
+                if (!json.result)
+                    alert("取消订单失败:" + json.msg !== undefined ? json.msg : "");
+                else{
+                    alert("取消订单成功");
+                    $("#btn"+id).val("已取消").attr("disabled","disabled");
+                }
+            }
+        });
+    }
+}
+
+function selectYuDing(){
+    $.ajax({
+        url: "/LbmHotel/frontend/getYuDingPage",
+        contentType: "application/json",
+        type: "post",
+        cache: false,
+        error: function (msg, textStatus) {
+        },
+        success: function (json) {
+            if(json === null || json === ""){
+                window.top.location.href = "/LbmHotel/frontend/goIndex";
+            }else{
+                jxKeHu(json);
+            }
+        }
+    });
+}
+
+function addYuDing(json){
+    var btnStr = "<input type='button' id='btn"+json.id+"' value='退订' onclick='tdYuDing("+json.id+")' />"
+    if(json.state !== "未生效"){
+        btnStr = "<input type='button' disabled='disabled' id='btn"+json.id+"' value='"+json.state+"' />";
+    }
+    var html = "<div class='dvDd'><div class='dvDdBt'><span>"+json.ydSj+" 订单号："+json.zjHao+"</span></div>\n\
+                <div class='dvDdTable'><table><tr><td>"+json.fangXing+"</td><td>￥"+json.jiaGe+"</td><td>预住时间："+json.rzSj+"</td>\n\
+                <td>证件号："+json.sfzHao+"</td><td>"+btnStr+"</td></tr></table></div></div>";
+    $("#dvDetail").append(html);
+    
 }

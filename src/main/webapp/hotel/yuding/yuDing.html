@@ -61,32 +61,22 @@ and open the template in the editor.
                         <h4 class="modal-title" id="yuDingModel_title">添加预定</h4>
                     </div>
                     <div class="modal-body">
-                        <div class="content">
+                        <div class="content" id="dvContent">
                             <div class="form-group">
+                                <label for="inpFangXing">房间类型：</label>
+                                <input type="text" id="inpFangXing" />
                                 <label for="inpRzSj">预住时间：</label>
                                 <input type="text" id="inpRzSj" />
                             </div>
                             <div class="form-group">
-                                <label for="inpFangXing">房间类型：</label>
-                                <input type="text" id="inpFangXing" />
-                            </div>
-                            <div class="form-group">
                                 <label for="inpRzTs">预住天数：</label>
                                 <input type="text" id="inpRzTs" />
-                            </div>
-                            <div class="form-group">
                                 <label for="inpRzFjs">房&ensp;间&ensp;数：</label>
                                 <input type="text" id="inpRzFjs" value="1"/>
                             </div>
                             <div class="form-group">
-                                <label for="inpKeHu">客&ensp;&ensp;&ensp;&ensp;户：</label>
-                                <input type="text" id="inpKeHu" />
-                            </div>
-                            <div class="form-group">
                                 <label for="inpName">入&ensp;住&ensp;人：</label>
                                 <input type="text" id="inpName" />
-                            </div>
-                            <div class="form-group">
                                 <label for="inpSex">性&ensp;&ensp;&ensp;&ensp;别：</label>
                                 <select id="inpSex" style="width: 174px;height: 26px;">
                                     <option selected="selected" value="男">男</option><option value="女">女</option>
@@ -95,12 +85,12 @@ and open the template in the editor.
                             <div class="form-group">
                                 <label for="inpSfzHao">身&ensp;份&ensp;证：</label>
                                 <input type="text" id="inpSfzHao" />
-                            </div>
-                            <div class="form-group">
                                 <label for="inpDianHua">电&ensp;&ensp;&ensp;&ensp;话：</label>
                                 <input type="text" id="inpDianHua" />
                             </div>
                             <div class="form-group">
+                                <label for="inpKeHu">客&ensp;&ensp;&ensp;&ensp;户：</label>
+                                <input type="text" id="inpKeHu" />
                                 <label for="inpState">状&ensp;&ensp;&ensp;&ensp;态：</label>
                                 <select id="inpState" style="width: 174px;height: 26px;">
                                     <option value="已生效">已生效</option><option value="已入住">已入住</option><option value="已失效">已失效</option>
@@ -108,12 +98,12 @@ and open the template in the editor.
                             </div>
                             <div class="form-group">
                                 <label for="inpRemark">备&ensp;&ensp;&ensp;&ensp;注：</label>
-                                <input type="text" id="inpRemark" />
+                                <input type="text" id="inpRemark" style="width: 427px;" />
                             </div>
                         </div>
                     </div>
                     <div class="modal-footer" style="text-align: center;padding: 8px;">
-                        <button type="submit" class="btn btn-primary" onclick="saveYuDing()">保存</button>
+                        <button id="btnSave" type="submit" class="btn btn-primary" onclick="saveYuDing()">保存</button>
                     </div>
                 </div>
             </div>
