@@ -74,9 +74,9 @@ and open the template in the editor.
                             <span style="font-size:18px;font-weight: bold;">&nbsp;修改密码：</span><br/>
                         </div>
                         <div style="margin-left:30px;">
-                            <span>原密码：</span><input type="password" /><br/>
-                            <span>新密码：</span><input type="password" /><br/>
-                            <input style="width:60px;height:30px;" type="button" value="确定" />
+                            <span>原密码：</span><input id="inpOldPassword" type="password" /><br/>
+                            <span>新密码：</span><input id="inpPassword" type="password" /><br/>
+                            <input style="width:60px;height:30px;" type="button" onclick="changePassword()" value="确定" />
                         </div>
                     </div>
                     <div id="dvGrXx" style="line-height: 50px;display: none;">
@@ -133,7 +133,7 @@ and open the template in the editor.
                                             <td>单人间</td>
                                             <td>￥100</td>
                                             <td>预住时间：20170105</td>
-                                            <td>证件号：450923198512246447</td>
+                                            <td style='line-height:25px;'>证件号：450923198512246447</td>
                                             <td><input type="button" value="退订" /></td>
                                         </tr>
                                     </table>
@@ -149,7 +149,7 @@ and open the template in the editor.
                                             <td>单人间</td>
                                             <td>￥100</td>
                                             <td>预住时间：20170105</td>
-                                            <td>证件号：450923198512246447</td>
+                                            <td style='line-height:25px;'>证件号：450923198512246447</td>
                                             <td><input type="button" value="退订" /></td>
                                         </tr>
                                     </table>

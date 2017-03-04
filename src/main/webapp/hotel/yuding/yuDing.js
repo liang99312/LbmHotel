@@ -111,6 +111,7 @@ function checkYuDing(){
     selFangXing = {};
     selFangXing.id = yuDing.fangXing_id;
     selFangXing.name = yuDing.fangXing;
+    selFangXing.jiaGe = yuDing.jiaGe;
     selKeHu = {};
     selKeHu.id = yuDing.keHu_id;
     selKeHu.name = yuDing.keHu;
@@ -146,10 +147,23 @@ function saveYuDing() {
     } else if (optFlag === 1) {
         url = "/LbmHotel/yuDing/addYuDing";
     }
-    yuDing.fjHao = $("#inpFjHao").val();
-    yuDing.luoCeng = $("#inpLuoCeng").val();
-    yuDing.state = $("#inpState").val();
-    yuDing.fuzeRen = $("#inpFuzeRen").val();
+    if(selFangXing === undefined || selFangXing === null){
+        return alert("请选择房型");
+    }
+    if(selKeHu !== undefined && selKeHu !== null){
+        yuDing.keHu = selKeHu.name;
+        yuDing.keHu_id = selKeHu.id;
+    }
+    yuDing.fangXing = selFangXing.name;
+    yuDing.fangXing_id = selFangXing.id;
+    yuDing.jiaGe = selFangXing.jiaGe;
+    yuDing.rzSj = $("#inpRzSj").val();
+    yuDing.rzTs = $("#inpRzTs").val();
+    yuDing.rzFjs = $("#inpRzFjs").val();
+    yuDing.name = $("#inpName").val();
+    yuDing.sex = $("#inpSex").val();
+    yuDing.sfzHao = $("#inpSfzHao").val();
+    yuDing.dianHua = $("#inpDianHua").val();
     yuDing.remark = $("#inpRemark").val();
     $.ajax({
         url: url,

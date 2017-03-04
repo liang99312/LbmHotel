@@ -6,7 +6,7 @@ $(document).ready(function () {
     var args = new Object();
     args = GetUrlParms();
     //如果要查找参数key:
-    if (args["id"] != undefined)
+    if (args["id"] !== undefined)
     {
         id = args["id"];
     }
@@ -99,6 +99,36 @@ function showYdKf(){
     $("#inpSex").val(loadKeHu.sex);
     $("#inpSfzHao").val(loadKeHu.sfzHao);
     $("#inpDianHua").val(loadKeHu.dianHua);
-    
     $("#dvYdKf").show();
+}
+
+function saveYuDing(){
+    var yuDing = {};
+    yuDing.rzSj = $("#inpRzSj").val();
+    yuDing.rzTs = $("#inpRzTs").val();
+    yuDing.rzFjs = $("#inpRzFjs").val();
+    yuDing.name = $("#inpName").val();
+    yuDing.sex = $("#inpSex").val();
+    yuDing.sfzHao = $("#inpSfzHao").val();
+    yuDing.dianHua = $("#inpDianHua").val();
+    yuDing.fangXing = fangXing.name;
+    yuDing.fangXing_id = fangXing.id;
+    yuDing.jiaGe = fangXing.jiaGe;
+    $.ajax({
+        url: "/LbmHotel/frontend/addYuDing",
+        data: JSON.stringify(yuDing),
+        contentType: "application/json",
+        type: "post",
+        cache: false,
+        error: function (msg, textStatus) {
+            alert("保存失败");
+        },
+        success: function (json) {
+            if (json.result) {
+                $("#yuDingModal").modal("hide");
+                selectYuDing();
+            } else
+                alert("保存失败:" + json.msg !== undefined ? json.msg : "");
+        }
+    });
 }
