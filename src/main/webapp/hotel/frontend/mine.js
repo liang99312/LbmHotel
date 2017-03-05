@@ -100,7 +100,7 @@ function selectYuDing(tj) {
 }
 
 function jxPage() {
-    $("#dvDetail").html("");
+    $("#dvDetail").html("<span>没有订单信息</span>");
     for (var i = 0; i < page.list.length; i++) {
         addYuDing(page.list[i]);
     }

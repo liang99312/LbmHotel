@@ -104,16 +104,19 @@ function showYdKf(){
 
 function saveYuDing(){
     var yuDing = {};
-    yuDing.rzSj = $("#inpRzSj").val();
+    if($("#inpRzSj").val() === ""){
+        return alert("请选择入住时间");
+    }
+    yuDing.rzSj = $("#inpRzSj").val()+":00";
     yuDing.rzTs = $("#inpRzTs").val();
-    yuDing.rzFjs = $("#inpRzFjs").val();
+    yuDing.rzFjs = 1;
     yuDing.name = $("#inpName").val();
     yuDing.sex = $("#inpSex").val();
     yuDing.sfzHao = $("#inpSfzHao").val();
     yuDing.dianHua = $("#inpDianHua").val();
     yuDing.fangXing = fangXing.name;
     yuDing.fangXing_id = fangXing.id;
-    yuDing.jiaGe = fangXing.jiaGe;
+    yuDing.jiaGe = parseFloat(fangXing.jiaGe);
     $.ajax({
         url: "/LbmHotel/frontend/addYuDing",
         data: JSON.stringify(yuDing),
@@ -125,8 +128,8 @@ function saveYuDing(){
         },
         success: function (json) {
             if (json.result) {
-                $("#yuDingModal").modal("hide");
-                selectYuDing();
+                alert("预订成功");
+                $("#dvYdKf").hide();
             } else
                 alert("保存失败:" + json.msg !== undefined ? json.msg : "");
         }
