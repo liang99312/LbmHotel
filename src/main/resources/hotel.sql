@@ -67,3 +67,26 @@ CREATE TABLE `hotel`.`fangxing_t` (
   `tupian` VARCHAR(2000) NULL,
   `remark` VARCHAR(200) NULL,
   PRIMARY KEY (`id`))ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+CREATE TABLE `hotel`.`ruzhu_t` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `kehu_id` INT NULL,
+  `kehu` VARCHAR(45) NULL,
+  `bianhao` VARCHAR(45) NULL,
+  `yuDing` VARCHAR(45) NULL,
+  `fjhao` VARCHAR(45) NULL,
+  `jzsj` DATETIME NULL,
+  `rzsj` DATETIME NULL,
+  `rzts` INT NULL DEFAULT 0,
+  `fuzeren` VARCHAR(45) NULL,
+  `name` VARCHAR(45) NULL,
+  `sex` VARCHAR(45) NULL,
+  `sfzhao` VARCHAR(45) NULL,
+  `dianhua` VARCHAR(45) NULL,
+  `fangxing_id` INT NULL,
+  `fangxing` VARCHAR(45) NULL,
+  `jiage` FLOAT NULL,
+  `jine` FLOAT NULL,
+  `state` VARCHAR(45) NULL,
+  `remark` VARCHAR(200) NULL,
+  PRIMARY KEY (`id`))ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
