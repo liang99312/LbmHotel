@@ -9,11 +9,11 @@
 	<url>http://maven.apache.org</url>
 
 	<properties>
-		<!-- spring版本�? -->
+		<!-- spring版本�? -->
 		<spring.version>4.0.2.RELEASE</spring.version>
-		<!-- mybatis版本�? -->
+		<!-- mybatis版本�? -->
 		<mybatis.version>3.2.6</mybatis.version>
-		<!-- log4j日志文件管理包版�? -->
+		<!-- log4j日志文件管理包版�? -->
 		<slf4j.version>1.7.7</slf4j.version>
 		<log4j.version>1.2.17</log4j.version>
 	 <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -24,10 +24,10 @@
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<version>4.11</version>
-			<!-- 表示�?发的时�?�引入，发布的时候不会加载此�? -->
+			<!-- 表示�?发的时�?�引入，发布的时候不会加载此�? -->
 			<scope>test</scope>
 		</dependency>
-		<!-- spring核心�? -->
+		<!-- spring核心�? -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-core</artifactId>
@@ -78,19 +78,19 @@
 			<artifactId>spring-test</artifactId>
 			<version>${spring.version}</version>
 		</dependency>
-		<!-- mybatis核心�? -->
+		<!-- mybatis核心�? -->
 		<dependency>
 			<groupId>org.mybatis</groupId>
 			<artifactId>mybatis</artifactId>
 			<version>${mybatis.version}</version>
 		</dependency>
-		<!-- mybatis/spring�? -->
+		<!-- mybatis/spring�? -->
 		<dependency>
 			<groupId>org.mybatis</groupId>
 			<artifactId>mybatis-spring</artifactId>
 			<version>1.2.2</version>
 		</dependency>
-		<!-- 导入java ee jar �? -->
+		<!-- 导入java ee jar �? -->
                 <dependency>
                         <groupId>com.fasterxml.jackson.core</groupId>
                         <artifactId>jackson-annotations</artifactId>
@@ -108,7 +108,7 @@
                     <version>3.0.1</version>
                     <scope>provided</scope>
                 </dependency>
-		<!-- 导入Mysql数据库链接jar�? -->
+		<!-- 导入Mysql数据库链接jar�? -->
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
@@ -120,13 +120,13 @@
 			<artifactId>commons-dbcp</artifactId>
 			<version>1.2.2</version>
 		</dependency>
-		<!-- JSTL标签�? -->
+		<!-- JSTL标签�? -->
 		<dependency>
 			<groupId>jstl</groupId>
 			<artifactId>jstl</artifactId>
 			<version>1.2</version>
 		</dependency>
-		<!-- 日志文件管理�? -->
+		<!-- 日志文件管理�? -->
 		<!-- log start -->
 		<dependency>
 			<groupId>log4j</groupId>
@@ -161,7 +161,7 @@
 			<artifactId>jackson-mapper-asl</artifactId>
 			<version>1.9.13</version>
 		</dependency>
-		<!-- 上传组件�? -->
+		<!-- 上传组件�? -->
 		<dependency>
 			<groupId>commons-fileupload</groupId>
 			<artifactId>commons-fileupload</artifactId>
@@ -177,7 +177,11 @@
 			<artifactId>commons-codec</artifactId>
 			<version>1.9</version>
 		</dependency>
-                
+                <dependency>
+                    <groupId>joda-time</groupId>
+                    <artifactId>joda-time</artifactId>
+                    <version>2.3</version>
+                </dependency>
 		
 	</dependencies>
 	<build>
