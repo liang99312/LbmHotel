@@ -16,6 +16,7 @@ import com.lanbo.hotel.util.DataUtil;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -89,7 +90,7 @@ public class FrontendController {
     
     @RequestMapping("/goMine")
     public String goMine(HttpServletRequest request, HttpServletResponse response) {
-        if(request.getSession().getAttribute("kehu")==null){
+        if(request.getSession().getAttribute("KeHu")==null){
             goIndex(request,response);
             return "";
         }
@@ -129,9 +130,9 @@ public class FrontendController {
         Map<String, Object> map = new HashMap();
         if (kh == null) {
             map.put("result", -1);
-            request.getSession().setAttribute("kehu", null);
+            request.getSession().setAttribute("KeHu", null);
         } else {
-            request.getSession().setAttribute("kehu", kh);
+            request.getSession().setAttribute("KeHu", kh);
             map.put("result", 1);
             map.put("loadKeHu", kh);
         }
@@ -142,7 +143,7 @@ public class FrontendController {
     @ResponseBody
     public Map<String, Object> loadOut(HttpServletRequest request,
             HttpServletResponse response) {
-        request.getSession().setAttribute("kehu", null);
+        request.getSession().setAttribute("KeHu", null);
         Map<String, Object> map = new HashMap();
         map.put("result", 1);
         return map;
@@ -174,7 +175,7 @@ public class FrontendController {
     @ResponseBody
     public KeHu getLordKeHu(HttpServletRequest request,
             HttpServletResponse response) {
-        KeHu kh = (KeHu) request.getSession().getAttribute("kehu");
+        KeHu kh = (KeHu) request.getSession().getAttribute("KeHu");
         return kh;
     }
     
@@ -208,6 +209,7 @@ public class FrontendController {
         KeHu kh = (KeHu) request.getSession().getAttribute("KeHu");
         model.setId(-1);
         model.setState("未生效");
+        model.setYdSj(new Date());
         model.setZjHao(DataUtil.getBianHao());
         model.setKeHu(kh.getName());
         model.setKeHu_id(kh.getId());
