@@ -1,10 +1,10 @@
-var h_fangJianHaos;
+var h_fangJians_jx;
 var h_userNames;
 var h_fangXings;
 var h_keHus;
 
-function getFangJianHaos(d,func){
-    hajax("/LbmHotel/fangJian/getAllFangJianHao",d,"h_fangJianHaos",func);
+function getFangJians_jx(d,func){
+    hajax("/LbmHotel/fangJian/getAllFangJian",d,"h_fangJians_jx",func);
 }
 
 function getUserNames(func){

@@ -1,12 +1,12 @@
 var ruZhus;
 var optFlag = 1;
 var editIndex = -1;
-var selFangXing;
+var selFangJian;
 var seKeHu;
 $(document).ready(function () {
     //getUserNames(setTrager);
     getKeHus(setTrager_kh);
-    getFangXings(setTrager_fx);
+    getFangJians_jx({"state":"就绪"},setTrager_fj);
     $('#inpRzSj').datetimepicker({language:  'zh-CN',format: 'yyyy-mm-dd hh:ii',weekStart: 7,todayBtn:  1,autoclose: 1,todayHighlight: 1,startView: 2,forceParse: 0,showMeridian: 1});
 });
 
@@ -14,12 +14,12 @@ function setTrager_kh(){
     $('#inpKeHu').AutoComplete({'data': h_keHus.list}); 
 }
 
-function setTrager_fx(){
-    $('#inpFangXing').AutoComplete({'data': h_fangXings.list,'afterSelectedHandler':selectFangXing}); 
+function setTrager_fj(){
+    $('#inpFjHao').AutoComplete({'data': h_fangJians_jx.list,'afterSelectedHandler':selectFangJian}); 
 }
 
-function selectFangXing(json){
-    selFangXing = json;
+function selectFangJian(json){
+    selFangJian = json;
 }
 
 function setTrager(){
@@ -59,7 +59,7 @@ function selectRuZhu() {
 
 function addRuZhu() {
     optFlag = 1;
-    $("#ruZhuModel_title").html("新增预定");
+    $("#ruZhuModel_title").html("登记入住");
     $("#dvContent input").val("").removeAttr("readonly");
     $("#inpState").val("已生效").attr("readonly","readonly");
     $("#btnSave").html("保存");
@@ -71,15 +71,12 @@ function editRuZhu(index) {
     optFlag = 2;
     if (ruZhus[index] === undefined) {
         optFlag = 1;
-        return alert("请选择预定");
+        return alert("请选择入住");
     }
     var ruZhu = ruZhus[index];
     editIndex = index;
-    $("#ruZhuModel_title").html("修改预定");
+    $("#ruZhuModel_title").html("修改入住");
     $("#btnSave").html("保存");
-    selFangXing = {};
-    selFangXing.id = ruZhu.fangXing_id;
-    selFangXing.name = ruZhu.fangXing;
     selKeHu = {};
     selKeHu.id = ruZhu.keHu_id;
     selKeHu.name = ruZhu.keHu;
@@ -102,16 +99,16 @@ function checkRuZhu(){
     optFlag = 3;
     if (ruZhus[index] === undefined) {
         optFlag = 1;
-        return alert("请选择预定");
+        return alert("请选择入住");
     }
     var ruZhu = ruZhus[index];
     editIndex = index;
-    $("#ruZhuModel_title").html("审核预定");
+    $("#ruZhuModel_title").html("审核入住");
     $("#btnSave").html("审核");
-    selFangXing = {};
-    selFangXing.id = ruZhu.fangXing_id;
-    selFangXing.name = ruZhu.fangXing;
-    selFangXing.jiaGe = ruZhu.jiaGe;
+    selFangJian = {};
+    selFangJian.id = ruZhu.fangXing_id;
+    selFangJian.name = ruZhu.fangXing;
+    selFangJian.jiaGe = ruZhu.jiaGe;
     selKeHu = {};
     selKeHu.id = ruZhu.keHu_id;
     selKeHu.name = ruZhu.keHu;
@@ -147,16 +144,16 @@ function saveRuZhu() {
     } else if (optFlag === 1) {
         url = "/LbmHotel/ruZhu/addRuZhu";
     }
-    if(selFangXing === undefined || selFangXing === null){
+    if(selFangJian === undefined || selFangJian === null){
         return alert("请选择房型");
     }
     if(selKeHu !== undefined && selKeHu !== null){
         ruZhu.keHu = selKeHu.name;
         ruZhu.keHu_id = selKeHu.id;
     }
-    ruZhu.fangXing = selFangXing.name;
-    ruZhu.fangXing_id = selFangXing.id;
-    ruZhu.jiaGe = selFangXing.jiaGe;
+    ruZhu.fjHao = selFangJian.fjHao;
+    ruZhu.fangXing = selFangJian.fangXing;
+    ruZhu.jiaGe = selFangJian.jiaGe;
     ruZhu.rzSj = $("#inpRzSj").val();
     ruZhu.rzTs = $("#inpRzTs").val();
     ruZhu.rzFjs = $("#inpRzFjs").val();
@@ -186,10 +183,10 @@ function saveRuZhu() {
 
 function delRuZhu(index) {
     if (ruZhus[index] === undefined) {
-        return alert("请选择预定");
+        return alert("请选择入住");
     }
     var ruZhu = ruZhus[index];
-    if (confirm("确定删除预定：" + ruZhu.fjHao + "?")) {
+    if (confirm("确定删除入住：" + ruZhu.fjHao + "?")) {
         $.ajax({
             url: "/LbmHotel/ruZhu/delRuZhu",
             data: JSON.stringify(ruZhu),
