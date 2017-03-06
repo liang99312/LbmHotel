@@ -82,8 +82,8 @@
     </if>
   </select>
   <update id="updateState" parameterType="com.lanbo.hotel.pojo.YuDing" >
-    update yuding_t
-      state = #{state,jdbcType=VARCHAR}
+    update yuding_t set 
+    state = #{state,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
   <select id="selectRzJiBies" resultType="int" parameterType="com.lanbo.hotel.pojo.YuDing" >
