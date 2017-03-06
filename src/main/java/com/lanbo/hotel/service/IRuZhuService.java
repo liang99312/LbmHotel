@@ -10,6 +10,7 @@ public interface IRuZhuService {
         public boolean addRuZhu(RuZhu ruZhu);
         public boolean updateRuZhu(RuZhu ruZhu);
         public boolean checkRuZhu(RuZhu ruZhu);
+        public boolean jieZhang(RuZhu ruZhu);
         public int getSelectRows(HashMap map);
         public List<RuZhu> getSelectPage(HashMap map);
 }

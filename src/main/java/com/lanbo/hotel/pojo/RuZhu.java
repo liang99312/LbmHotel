@@ -35,7 +35,7 @@ public class RuZhu{
     
     private String dianHua;
     
-    private Integer fangXing_id;
+    private Integer fangJian_id;
     
     private String fangXing;
     
@@ -201,12 +201,12 @@ public class RuZhu{
         this.keHu_id = keHu_id;
     }
 
-    public Integer getFangXing_id() {
-        return fangXing_id;
+    public Integer getFangJian_id() {
+        return fangJian_id;
     }
 
-    public void setFangXing_id(Integer fangXing_id) {
-        this.fangXing_id = fangXing_id;
+    public void setFangJian_id(Integer fangJian_id) {
+        this.fangJian_id = fangJian_id;
     }
 
 }

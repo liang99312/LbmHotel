@@ -64,7 +64,7 @@ public class KeHuController {
         Map<String, Object> map = new HashMap();
         if(this.keHuService.selectHaos(model)){
             map.put("result", false);
-            map.put("msg", "该客户的预定已存在，请重新输入");
+            map.put("msg", "该客户的预订已存在，请重新输入");
             return map;
         }
         boolean result = this.keHuService.updateKeHu(model);
