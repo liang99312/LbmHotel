@@ -15,6 +15,8 @@ import com.lanbo.hotel.service.IYuDingService;
 import com.lanbo.hotel.util.DataUtil;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -38,16 +40,16 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 @RequestMapping("frontend")
 public class FrontendController {
-    
+
     @Resource
     private IFangXingService fangXingService;
-    
+
     @Resource
-    private IKeHuService keHuService;    
-    
+    private IKeHuService keHuService;
+
     @Resource
-    private IYuDingService yuDingService;   
-    
+    private IYuDingService yuDingService;
+
     @RequestMapping("/goIndex")
     public void goIndex(HttpServletRequest request, HttpServletResponse response) {
         PrintWriter out = null;
@@ -67,41 +69,41 @@ public class FrontendController {
             out.close();
         }
     }
-    
+
     @RequestMapping("/goYuLan")
     public String goYuLan(HttpServletRequest request, HttpServletResponse response) {
         return "frontend/yuLan";
     }
-    
+
     @RequestMapping("/goZhuCe")
     public String goZhuCe(HttpServletRequest request, HttpServletResponse response) {
         return "frontend/zhuCe";
     }
-    
+
     @RequestMapping("/goTop")
     public String goTop(HttpServletRequest request, HttpServletResponse response) {
         return "frontend/top";
     }
-    
+
     @RequestMapping("/goBottom")
     public String goBottom(HttpServletRequest request, HttpServletResponse response) {
         return "frontend/bottom";
     }
-    
+
     @RequestMapping("/goMine")
     public String goMine(HttpServletRequest request, HttpServletResponse response) {
-        if(request.getSession().getAttribute("KeHu")==null){
-            goIndex(request,response);
+        if (request.getSession().getAttribute("KeHu") == null) {
+            goIndex(request, response);
             return "";
         }
         return "frontend/mine";
     }
-    
+
     @RequestMapping("/goDetail")
     public String goDetail(HttpServletRequest request, HttpServletResponse response) {
         return "frontend/detail";
     }
-    
+
     @RequestMapping(value = "/getAllFangXing", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
     @ResponseBody
     public Map<String, Object> getAllFangXing() {
@@ -111,7 +113,7 @@ public class FrontendController {
         map.put("list", result);
         return map;
     }
-    
+
     @RequestMapping(value = "/getFangXing", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
     @ResponseBody
     public Map<String, Object> getFangXing(@RequestBody FangXing model) {
@@ -121,7 +123,7 @@ public class FrontendController {
         map.put("obj", obj);
         return map;
     }
-        
+
     @RequestMapping(value = "/load", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
     @ResponseBody
     public Map<String, Object> load(@RequestBody KeHu model, HttpServletRequest request,
@@ -138,7 +140,7 @@ public class FrontendController {
         }
         return map;
     }
-    
+
     @RequestMapping(value = "/loadOut", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
     @ResponseBody
     public Map<String, Object> loadOut(HttpServletRequest request,
@@ -148,7 +150,7 @@ public class FrontendController {
         map.put("result", 1);
         return map;
     }
-    
+
     @RequestMapping(value = "/changePassword", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
     @ResponseBody
     public Map<String, Object> changePassword(@RequestBody KeHu model, HttpServletRequest request,
@@ -158,19 +160,20 @@ public class FrontendController {
         Map<String, Object> map = new HashMap();
         if (!flag) {
             map.put("result", false);
-            map.put("msg","原密码输入有误");
+            map.put("msg", "原密码输入有误");
         } else {
             kh.setPassword(model.getPassword());
             boolean result = this.keHuService.updatePassword(kh);
-            if(!result){
+            if (!result) {
                 map.put("result", false);
                 map.put("msg", "修改数据库失败");
-            }else
+            } else {
                 map.put("result", true);
+            }
         }
         return map;
     }
-    
+
     @RequestMapping(value = "/getLordKeHu", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
     @ResponseBody
     public KeHu getLordKeHu(HttpServletRequest request,
@@ -178,7 +181,7 @@ public class FrontendController {
         KeHu kh = (KeHu) request.getSession().getAttribute("KeHu");
         return kh;
     }
-    
+
     @RequestMapping(value = "/zhuCe", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
     @ResponseBody
     public Map<String, Object> zhuCe(@RequestBody KeHu model) {
@@ -187,7 +190,7 @@ public class FrontendController {
         model.setId(-1);
         model.setDengJi("初级");
         Map<String, Object> map = new HashMap();
-        if(this.keHuService.selectHaos(model)){
+        if (this.keHuService.selectHaos(model)) {
             map.put("result", false);
             map.put("msg", "该用户名、身份证号、手机号已存在，请重新输入");
             return map;
@@ -201,10 +204,10 @@ public class FrontendController {
         }
         return map;
     }
-    
+
     @RequestMapping(value = "/addYuDing", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
     @ResponseBody
-    public Map<String, Object> addYuDing(@RequestBody YuDing model,HttpServletRequest request,
+    public Map<String, Object> addYuDing(@RequestBody YuDing model, HttpServletRequest request,
             HttpServletResponse response) {
         KeHu kh = (KeHu) request.getSession().getAttribute("KeHu");
         model.setId(-1);
@@ -213,6 +216,7 @@ public class FrontendController {
         model.setZjHao(DataUtil.getBianHao());
         model.setKeHu(kh.getName());
         model.setKeHu_id(kh.getId());
+        model.setRemark("");
         Map<String, Object> map = new HashMap();
         boolean result = this.yuDingService.addYuDing(model);
         if (result) {
@@ -223,33 +227,44 @@ public class FrontendController {
         }
         return map;
     }
-    
+
     @RequestMapping(value = "/tdYuDing", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
     @ResponseBody
-    public Map<String, Object> tdYuDing(@RequestBody YuDing model) {
-        model.setId(-1);
-        model.setState("已退订");
+    public Map<String, Object> tdYuDing(@RequestBody YuDing model, HttpServletRequest request,
+            HttpServletResponse response) {
+        Object obj = request.getSession().getAttribute("KeHu");
         Map<String, Object> map = new HashMap();
-        boolean result = this.yuDingService.checkYuDing(model);
-        if (result) {
-            map.put("result", true);
-        } else {
+        if(obj == null){
             map.put("result", false);
-            map.put("msg", "写入数据库失败");
+            map.put("msg", "用户没登录！");
+        }else{
+        boolean result = this.yuDingService.checkYuDing(model);
+            if (result) {
+                map.put("result", true);
+            } else {
+                map.put("result", false);
+                map.put("msg", "写入数据库失败");
+            }
         }
         return map;
     }
-    
+
     @RequestMapping(value = "/getYuDingPage", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
     @ResponseBody
-    public Page getYuDingPage(@RequestBody Page model,HttpServletRequest request,
+    public Page getYuDingPage(@RequestBody Page model, HttpServletRequest request,
             HttpServletResponse response) {
-        model.setPageSize(10);
+        model.setPageSize(5);
         HashMap map = model.getParamters();
-        if(map == null){
+        if (map == null) {
             map = new HashMap();
         }
-        if (model.getRows() == 0) {
+        Object obj = request.getSession().getAttribute("KeHu");
+        if (obj == null) {
+            model.setRows(0);
+            model.setList(new ArrayList());
+        } else {
+            KeHu kh = (KeHu) obj;
+            map.put("id", kh.getId());
             model.setRows(this.yuDingService.getSelectRows(map));
         }
         if (model.getRows() == 0) {
@@ -265,12 +280,7 @@ public class FrontendController {
         }
         map.put("beginRow", model.getBegin());
         map.put("pageSize", model.getPageSize());
-        Object obj = request.getSession().getAttribute("KeHu");
-        if(obj == null){
-            model.setList(new ArrayList());
-        }else{
-            KeHu kh = (KeHu) obj;
-            map.put("id", kh.getId());
+        if (obj != null) {
             model.setList(this.yuDingService.getSelectPage(map));
         }
         return model;
