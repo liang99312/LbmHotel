@@ -31,7 +31,8 @@ function jxYuDing(json) {
     yuDings = [];
     yuDings = json.list;
     $.each(json.list, function (index, item) { //遍历返回的json
-        var trStr = '<tr><td>' + item.fjHao + '</td><td>' + item.keHu + '</td><td>' + item.zjHao + '</td><td>' + item.ydSj + '</td><td>' + item.rzSj + '</td><td>' + item.fuzeRen + '</td><td>' + item.state + '</td><td>' + item.remark + '</td><td>'
+        var trStr = '<tr><td>' + item.zjHao + '</td><td>' + item.name + '</td><td>' + item.keHu + '</td><td>' + item.sfzHao + '</td><td>' + item.dianHua + '</td><td>' + item.ydSj + '</td><td>' + item.rzSj + '</td><td>'
+                + item.rzTs + '</td><td>' + item.rzFjs + '</td><td>' + item.state + '</td><td>' + item.remark + '</td><td>'
                 + '<button class="btn btn-info btn-xs icon-edit" onclick="editYuDing(' + index + ' );" style="padding-top: 4px;padding-bottom: 3px;"></button>&nbsp;'
                 + '<button class="btn btn-info btn-xs icon-check" onclick="checkYuDing(' + index + ' );" style="padding-top: 4px;padding-bottom: 3px;"></button>&nbsp;'
                 + '<button class="btn btn-danger btn-xs icon-remove" onclick="delYuDing(' + index + ' );" style="padding-top: 4px;padding-bottom: 3px;"></button></td></tr>';

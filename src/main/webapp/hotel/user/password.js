@@ -12,7 +12,7 @@ function changePassword() {
     user.password = $("#inpOldPassword").val();
     user.quanxian = $("#inpNewPassword").val();
     $.ajax({
-        url: "/LbmHotel/user/changePassword",
+        url: "/LbmHotel/prontend/changePassword",
         data: JSON.stringify(user),
         contentType: "application/json",
         type: "post",

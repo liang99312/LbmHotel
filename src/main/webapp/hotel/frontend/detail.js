@@ -108,7 +108,7 @@ function saveYuDing(){
         return alert("请选择入住时间");
     }
     yuDing.rzSj = $("#inpRzSj").val()+":00";
-    yuDing.rzTs = $("#inpRzTs").val();
+    yuDing.rzTs = parseInt($("#inpRzTs").val());
     yuDing.rzFjs = 1;
     yuDing.name = $("#inpName").val();
     yuDing.sex = $("#inpSex").val();

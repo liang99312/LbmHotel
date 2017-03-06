@@ -31,7 +31,7 @@ and open the template in the editor.
             .dvDd table{
                 width:100%;
                 border: 1px solid #eaf8ff;
-                line-height: 60px;
+                line-height: 80px;
                 border-collapse: collapse; 
                 border-spacing: 0;
                 table-layout: fixed;
@@ -116,11 +116,13 @@ and open the template in the editor.
                     </div>
                     <div id="dvMyDd" >
                         <div style="float:left;width:100%;line-height: 50px; vertical-align: middle; height: 50px; border-bottom: 1px solid #E5E5E5;">
-                            <span style="font-size:18px;font-weight: bold;">&nbsp;我的订单：</span><br/>
-                        </div>
-                        <div style="float:left;width:100%;text-align:right;margin-top: 10px;">
-                            <input type="button" value="上一页" />
-                            <input style="margin-right:100px;" type="button" value="上一页" />
+                            <div style="float:left;width:50%;line-height: 50px; vertical-align: middle; height: 50px; border-bottom: 1px solid #E5E5E5;">
+                                <span style="font-size:18px;font-weight: bold;">&nbsp;我的订单：</span><br/>
+                            </div>
+                            <div style="float:left;width:50%;text-align:right;margin-top: 10px;">
+                                <input onclick="prePage()" type="button" value="上一页" />
+                                <input onclick="nextPage()" style="margin-right:100px;" type="button" value="下一页" />
+                            </div>
                         </div>
                         <div id="dvDetail" style="float:left;width:100%;">
                             
