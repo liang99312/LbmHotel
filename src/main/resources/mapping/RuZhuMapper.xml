@@ -16,7 +16,7 @@
     <result column="sex" property="sex" jdbcType="VARCHAR" />
     <result column="sfzhao" property="sfzHao" jdbcType="VARCHAR" />
     <result column="dianhua" property="dianHua" jdbcType="VARCHAR" />
-    <result column="fangxing_id" property="fangXing_id" jdbcType="INTEGER" />
+    <result column="fangjian_id" property="fangJian_id" jdbcType="INTEGER" />
     <result column="fangxing" property="fangXing" jdbcType="VARCHAR" />
     <result column="jiage" property="jiaGe" jdbcType="FLOAT" />
     <result column="jine" property="jinE" jdbcType="FLOAT" />
@@ -25,7 +25,7 @@
     <result column="remark" property="remark" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, kehu_id, kehu, bianhao,fjhao,yuding, jzsj, rzsj, rzts, rzfjs,name,sex,sfzhao,dianhua,fangxing_id,fangxing,jiage,jine state, fuzeren, remark
+    id, kehu_id, kehu, bianhao,fjhao,yuding, jzsj, rzsj, rzts, rzfjs,name,sex,sfzhao,dianhua,fangjian_id,fangxing,jiage,jine state, fuzeren, remark
   </sql>
   <select id="selectById" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -38,9 +38,9 @@
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.lanbo.hotel.pojo.RuZhu" >
-    insert into ruzhu_t (kehu_id,kehu, bianhao,fjhao,yuding, jzsj, rzsj, rzts, rzfjs,name,sex,sfzhao,dianhua,fangxing_id,fangxing,jiage,jine state, fuzeren, remark)
+    insert into ruzhu_t (kehu_id,kehu, bianhao,fjhao,yuding, jzsj, rzsj, rzts, rzfjs,name,sex,sfzhao,dianhua,fangjian_id,fangxing,jiage,jine state, fuzeren, remark)
     values (#{keHu_id,jdbcType=INTEGER},#{keHu,jdbcType=VARCHAR}, #{bianHao,jdbcType=VARCHAR}, #{fjHao,jdbcType=VARCHAR}, #{yuDing,jdbcType=VARCHAR}, #{jzSj,jdbcType=TIMESTAMP}, #{rzSj,jdbcType=TIMESTAMP}, #{rzTs,jdbcType=INTEGER}, #{rzFjs,jdbcType=INTEGER},
-      #{name,jdbcType=VARCHAR},#{sex,jdbcType=VARCHAR},#{sfzHao,jdbcType=VARCHAR},#{dianHua,jdbcType=VARCHAR},#{fangXing_id,jdbcType=INTEGER},#{fangXing,jdbcType=VARCHAR},#{jiaGe,jdbcType=FLOAT},#{jinE,jdbcType=FLOAT},
+      #{name,jdbcType=VARCHAR},#{sex,jdbcType=VARCHAR},#{sfzHao,jdbcType=VARCHAR},#{dianHua,jdbcType=VARCHAR},#{fangJian_id,jdbcType=INTEGER},#{fangXing,jdbcType=VARCHAR},#{jiaGe,jdbcType=FLOAT},#{jinE,jdbcType=FLOAT},
       #{state,jdbcType=VARCHAR}, #{fuzeRen,jdbcType=VARCHAR},#{remark,jdbcType=VARCHAR})
   </insert>
   <update id="updateById" parameterType="com.lanbo.hotel.pojo.RuZhu" >
@@ -58,7 +58,7 @@
       sex = #{state,jdbcType=VARCHAR},
       sfzhao = #{state,jdbcType=VARCHAR},
       dianhua = #{state,jdbcType=VARCHAR},
-      fangxing_id = #{state,jdbcType=INTEGER},
+      fangjian_id = #{state,jdbcType=INTEGER},
       fangxing = #{state,jdbcType=VARCHAR},
       jiage = #{jiaGe,jdbcType=FLOAT},
       jine = #{jinE,jdbcType=FLOAT},
@@ -88,7 +88,7 @@
     </if>
   </select>
   <update id="updateState" parameterType="com.lanbo.hotel.pojo.RuZhu" >
-    update ruzhu_t
+    update ruzhu_t set 
       state = #{state,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -98,4 +98,15 @@
     from ruzhu_t where 1=1
    <!--and jibie = #{jiBie,jdbcType=VARCHAR} and rzSj <= #{rzSj,jdbcType=TIMESTAMP} and date_add(rzSj, interval rzts day)>= #{rzSj,jdbcType=TIMESTAMP} --> 
   </select>
+  <update id="jieZhang" parameterType="com.lanbo.hotel.pojo.RuZhu" >
+    update ruzhu_t
+    set 
+      jzsj = #{jzSj,jdbcType=TIMESTAMP},
+      rzts = #{rzTs,jdbcType=INTEGER},
+      jine = #{jinE,jdbcType=FLOAT},
+      state = #{state,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      fuzeren = #{fuzeRen,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
 </mapper>
