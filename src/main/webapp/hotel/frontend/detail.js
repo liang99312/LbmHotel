@@ -74,7 +74,7 @@ function jxFangXing(json){
         $("#iName").html(json.name);
         $("#iJiaGe").html("价格：￥"+json.jiaGe);
         var tps = json.tuPian.split(";");
-        var tpStr = "客房细节：<br/>";
+        var tpStr = "<span  style='font-size:24px;'>客房细节：</span><br/>";
         for(var i=0;i<tps.length;i++){
             var e = tps[i];
             if(e !== null && e !== ""){
