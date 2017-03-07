@@ -24,7 +24,7 @@
     <result column="remark" property="remark" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, kehu_id, kehu, bianhao,fjhao,yuding, jzsj, rzsj, rzts, name,sex,sfzhao,dianhua,fangjian_id,fangxing,jiage,jine state, fuzeren, remark
+    id, kehu_id, kehu, bianhao,fjhao,yuding, jzsj, rzsj, rzts, name,sex,sfzhao,dianhua,fangjian_id,fangxing,jiage,jine, state, fuzeren, remark
   </sql>
   <select id="selectById" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -52,12 +52,12 @@
       jzsj = #{jzSj,jdbcType=TIMESTAMP},
       rzsj = #{rzSj,jdbcType=TIMESTAMP},
       rzts = #{rzTs,jdbcType=INTEGER},
-      name = #{state,jdbcType=VARCHAR},
-      sex = #{state,jdbcType=VARCHAR},
-      sfzhao = #{state,jdbcType=VARCHAR},
-      dianhua = #{state,jdbcType=VARCHAR},
-      fangjian_id = #{state,jdbcType=INTEGER},
-      fangxing = #{state,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=VARCHAR},
+      sfzhao = #{sfzHao,jdbcType=VARCHAR},
+      dianhua = #{dianHua,jdbcType=VARCHAR},
+      fangjian_id = #{fangJian_id,jdbcType=INTEGER},
+      fangxing = #{fangXing,jdbcType=VARCHAR},
       jiage = #{jiaGe,jdbcType=FLOAT},
       jine = #{jinE,jdbcType=FLOAT},
       state = #{state,jdbcType=VARCHAR},
