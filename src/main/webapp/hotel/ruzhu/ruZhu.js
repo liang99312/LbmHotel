@@ -83,7 +83,7 @@ function setYuDing(){
         $("#inpSfzHao").val(selYuDing.sfzHao);
         $("#inpDianHua").val(selYuDing.dianHua);
         $("#inpKeHu").val(selYuDing.keHu);
-        $("#inpState").val("已生效").attr("readonly","readonly");
+        $("#inpState").val("已生效").attr("disabled","disabled");
         $("#inpRemark").val(selYuDing.remark);
     }
 }
@@ -97,7 +97,7 @@ function jxRuZhu(json) {
     ruZhus = [];
     ruZhus = json.list;
     $.each(json.list, function (index, item) { //遍历返回的json
-        var trStr = '<tr><td>' + item.fjHao + '</td><td>' + item.keHu + '</td><td>' + item.zjHao + '</td><td>' + item.ydSj + '</td><td>' + item.rzSj + '</td><td>' + item.fuzeRen + '</td><td>' + item.state + '</td><td>' + item.remark + '</td><td>'
+        var trStr = '<tr><td>' + item.keHu + '</td><td>' + item.fjHao + '</td><td>' + item.name + '</td><td>' + item.sfzHao + '</td><td>' + item.dianHua + '</td><td>' + item.rzSj + '</td><td>' + item.jzSj + '</td><td>' + item.state + '</td><td>' + item.remark + '</td><td>'
                 + '<button class="btn btn-info btn-xs icon-edit" onclick="editRuZhu(' + index + ' );" style="padding-top: 4px;padding-bottom: 3px;"></button>&nbsp;'
                 + '<button class="btn btn-info btn-xs icon-check" onclick="checkRuZhu(' + index + ' );" style="padding-top: 4px;padding-bottom: 3px;"></button>&nbsp;'
                 + '<button class="btn btn-danger btn-xs icon-remove" onclick="delRuZhu(' + index + ' );" style="padding-top: 4px;padding-bottom: 3px;"></button></td></tr>';
@@ -126,8 +126,8 @@ function selectRuZhu() {
 function addRuZhu() {
     optFlag = 1;
     $("#ruZhuModel_title").html("登记入住");
-    $("#dvContent input").val("").removeAttr("readonly");
-    $("#inpState").val("已生效").attr("readonly","readonly");
+    $("#dvContent input,#dvContent select").val("").removeAttr("disabled");
+    $("#inpState").val("已生效").attr("disabled","disabled");
     $("#inpRzSj").val(getNowFormatDate());
     $("#btnSave").html("保存");
     $("#ruZhuModal").modal("show");
@@ -148,22 +148,29 @@ function editRuZhu(index) {
     selKeHu = {};
     selKeHu.id = ruZhu.keHu_id;
     selKeHu.name = ruZhu.keHu;
-    $("#dvContent input").removeAttr("readonly");
+    selFangJian = {};
+    selFangJian.id = ruZhu.fangJian_id;
+    selFangJian.fjHao = ruZhu.fjHao;
+    selFangJian.fangXing = ruZhu.fangXing;
+    selFangJian.jiaGe = ruZhu.jiaGe;
+    $("#dvContent input,#dvContent select").removeAttr("disabled");
     $("#inpFangXing").val(ruZhu.fangXing);
+    $("#inpJiaGe").val(ruZhu.jiaGe);
+    $("#inpFjHao").val(ruZhu.fjHao);
     $("#inpRzSj").val(ruZhu.rzSj);
     $("#inpRzTs").val(ruZhu.rzTs);
     $("#inpRzFjs").val(ruZhu.rzFjs);
-    $("#inpName").val(ruZhu.nme);
+    $("#inpName").val(ruZhu.name);
     $("#inpSex").val(ruZhu.sex);
     $("#inpSfzHao").val(ruZhu.sfzHao);
     $("#inpDianHua").val(ruZhu.dianHua);
     $("#inpKeHu").val(ruZhu.keHu);
-    $("#inpState").val(ruZhu.state).attr("readonly","readonly");
+    $("#inpState").val(ruZhu.state).attr("disabled","disabled");
     $("#inpRemark").val(ruZhu.remark);
     $("#ruZhuModal").modal("show");
 }
 
-function checkRuZhu(){
+function checkRuZhu(index){
     optFlag = 3;
     if (ruZhus[index] === undefined) {
         optFlag = 1;
@@ -181,6 +188,7 @@ function checkRuZhu(){
     selKeHu = {};
     selKeHu.id = ruZhu.keHu_id;
     selKeHu.name = ruZhu.keHu;
+    $("#dvContent input,#dvContent select").attr("disabled","disabled");
     $("#inpFangXing").val(ruZhu.fangXing);
     $("#inpRzSj").val(ruZhu.rzSj);
     $("#inpRzTs").val(ruZhu.rzTs);
@@ -190,7 +198,7 @@ function checkRuZhu(){
     $("#inpSfzHao").val(ruZhu.sfzHao);
     $("#inpDianHua").val(ruZhu.dianHua);
     $("#inpKeHu").val(ruZhu.keHu);
-    $("#inpState").val(ruZhu.state).removeAttr("readonly");
+    $("#inpState").val(ruZhu.state).removeAttr("disabled");
     $("#inpRemark").val(ruZhu.remark);
     $("#ruZhuModal").modal("show");
 }
@@ -209,12 +217,12 @@ function saveRuZhu() {
             return;
         }
         ruZhu = ruZhus[editIndex];
-        url = "/LbmHotel/ruZhu/updateRuZhu";
+        url = "/LbmHotel/ruZhu/checkRuZhu";
     } else if (optFlag === 1) {
         url = "/LbmHotel/ruZhu/addRuZhu";
     }
     if(selFangJian === undefined || selFangJian === null){
-        return alert("请选择房型");
+        return alert("请选择房间");
     }
     if(selKeHu !== undefined && selKeHu !== null){
         ruZhu.keHu = selKeHu.name;
