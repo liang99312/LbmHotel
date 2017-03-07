@@ -221,7 +221,7 @@ public class UserController {
         try {
             request.getSession().removeAttribute("user");
             out = response.getWriter();
-            String loginPage = request.getContextPath() + "/index.jsp";
+            String loginPage = request.getContextPath() + "/admin.jsp";
             StringBuilder builder = new StringBuilder();
             builder.append("<script type=\"text/javascript\">");
             builder.append("window.top.location.href='");
