@@ -41,7 +41,7 @@ public class RuZhu{
     
     private Float jiaGe;
     
-    private Float jine;
+    private Float jinE;
     
     private String state;
     
@@ -121,12 +121,12 @@ public class RuZhu{
         this.jzSj = jzSj;
     }
 
-    public Float getJine() {
-        return jine;
+    public Float getJinE() {
+        return jinE;
     }
 
-    public void setJine(Float jine) {
-        this.jine = jine;
+    public void setJinE(Float jinE) {
+        this.jinE = jinE;
     }
 
     public String getFuzeRen() {

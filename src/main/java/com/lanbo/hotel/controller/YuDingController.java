@@ -11,7 +11,9 @@ import com.lanbo.hotel.pojo.YuDing;
 import com.lanbo.hotel.service.IYuDingService;
 import com.lanbo.hotel.util.DataUtil;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -40,9 +42,13 @@ public class YuDingController {
     
     @RequestMapping(value = "/addYuDing", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
     @ResponseBody
-    public Map<String, Object> addYuDing(@RequestBody YuDing model) {
+    public Map<String, Object> addYuDing(@RequestBody YuDing model,HttpServletRequest request,
+            HttpServletResponse response) {
+        User user = (User) request.getSession().getAttribute("user");        
         model.setId(-1);
         model.setZjHao(DataUtil.getBianHao());
+        model.setYdSj(new Date());
+        model.setFuzeRen(user.getUserName());
         Map<String, Object> map = new HashMap();
         boolean result = this.yuDingService.addYuDing(model);
         if (result) {
@@ -123,6 +129,20 @@ public class YuDingController {
         map.put("pageSize", model.getPageSize());
         model.setList(this.yuDingService.getSelectPage(map));
         return model;
+    }
+    
+    @RequestMapping(value = "/getYuDingFromHao", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+    @ResponseBody
+    public Map<String, Object> getYuDingFromHao(@RequestBody YuDing model) {
+        Map<String, Object> map = new HashMap();
+        HashMap pmap = new HashMap();
+        pmap.put("state", model.getState());
+        pmap.put("name", model.getName());
+        pmap.put("zjHao", model.getZjHao());
+        List<YuDing> result = this.yuDingService.getYuDingFromHao(pmap);
+        map.put("result", true);
+        map.put("list", result);
+        return map;
     }
     
 }

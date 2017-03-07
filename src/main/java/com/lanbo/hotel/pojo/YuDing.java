@@ -39,7 +39,7 @@ public class YuDing{
     
     private Float jiaGe;
     
-    private String state;
+    private String state;//未生效、已生效、已入住、已取消、已失效
     
     private String fuzeRen;
     

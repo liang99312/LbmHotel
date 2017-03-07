@@ -8,4 +8,5 @@ public interface IYuDingDao extends IBaseDao{
     int updateState(YuDing record);
     int selectRzJiBies(YuDing record);
     List selectMyYuDing(HashMap map);
+    List selectYuDingFromHao(HashMap map);
 }

@@ -11,7 +11,6 @@
     <result column="jzsj" property="jzSj" jdbcType="TIMESTAMP" javaType="java.util.Date"/>
     <result column="rzsj" property="rzSj" jdbcType="TIMESTAMP" javaType="java.util.Date"/>
     <result column="rzts" property="rzTs" jdbcType="INTEGER" />
-    <result column="rzfjs" property="rzFjs" jdbcType="INTEGER" />
     <result column="name" property="name" jdbcType="VARCHAR" />
     <result column="sex" property="sex" jdbcType="VARCHAR" />
     <result column="sfzhao" property="sfzHao" jdbcType="VARCHAR" />
@@ -25,7 +24,7 @@
     <result column="remark" property="remark" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, kehu_id, kehu, bianhao,fjhao,yuding, jzsj, rzsj, rzts, rzfjs,name,sex,sfzhao,dianhua,fangjian_id,fangxing,jiage,jine state, fuzeren, remark
+    id, kehu_id, kehu, bianhao,fjhao,yuding, jzsj, rzsj, rzts, name,sex,sfzhao,dianhua,fangjian_id,fangxing,jiage,jine state, fuzeren, remark
   </sql>
   <select id="selectById" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -38,8 +37,8 @@
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.lanbo.hotel.pojo.RuZhu" >
-    insert into ruzhu_t (kehu_id,kehu, bianhao,fjhao,yuding, jzsj, rzsj, rzts, rzfjs,name,sex,sfzhao,dianhua,fangjian_id,fangxing,jiage,jine state, fuzeren, remark)
-    values (#{keHu_id,jdbcType=INTEGER},#{keHu,jdbcType=VARCHAR}, #{bianHao,jdbcType=VARCHAR}, #{fjHao,jdbcType=VARCHAR}, #{yuDing,jdbcType=VARCHAR}, #{jzSj,jdbcType=TIMESTAMP}, #{rzSj,jdbcType=TIMESTAMP}, #{rzTs,jdbcType=INTEGER}, #{rzFjs,jdbcType=INTEGER},
+    insert into ruzhu_t (kehu_id,kehu, bianhao,fjhao,yuding, jzsj, rzsj, rzts, name,sex,sfzhao,dianhua,fangjian_id,fangxing,jiage,jine, state, fuzeren, remark)
+    values (#{keHu_id,jdbcType=INTEGER},#{keHu,jdbcType=VARCHAR}, #{bianHao,jdbcType=VARCHAR}, #{fjHao,jdbcType=VARCHAR}, #{yuDing,jdbcType=VARCHAR}, #{jzSj,jdbcType=TIMESTAMP}, #{rzSj,jdbcType=TIMESTAMP}, #{rzTs,jdbcType=INTEGER},
       #{name,jdbcType=VARCHAR},#{sex,jdbcType=VARCHAR},#{sfzHao,jdbcType=VARCHAR},#{dianHua,jdbcType=VARCHAR},#{fangJian_id,jdbcType=INTEGER},#{fangXing,jdbcType=VARCHAR},#{jiaGe,jdbcType=FLOAT},#{jinE,jdbcType=FLOAT},
       #{state,jdbcType=VARCHAR}, #{fuzeRen,jdbcType=VARCHAR},#{remark,jdbcType=VARCHAR})
   </insert>
@@ -53,7 +52,6 @@
       jzsj = #{jzSj,jdbcType=TIMESTAMP},
       rzsj = #{rzSj,jdbcType=TIMESTAMP},
       rzts = #{rzTs,jdbcType=INTEGER},
-      rzfjs = #{rzFjs,jdbcType=INTEGER},
       name = #{state,jdbcType=VARCHAR},
       sex = #{state,jdbcType=VARCHAR},
       sfzhao = #{state,jdbcType=VARCHAR},

@@ -2,16 +2,15 @@ var yuDings;
 var optFlag = 1;
 var editIndex = -1;
 var selFangXing;
-var seKeHu;
+var selKeHu;
 $(document).ready(function () {
-    //getUserNames(setTrager);
     getKeHus(setTrager_kh);
     getFangXings(setTrager_fx);
     $('#inpRzSj').datetimepicker({language:  'zh-CN',format: 'yyyy-mm-dd hh:ii',weekStart: 7,todayBtn:  1,autoclose: 1,todayHighlight: 1,startView: 2,forceParse: 0,showMeridian: 1});
 });
 
 function setTrager_kh(){
-    $('#inpKeHu').AutoComplete({'data': h_keHus.list}); 
+    $('#inpKeHu').AutoComplete({'data': h_keHus.list,'afterSelectedHandler':selectKeHu}); 
 }
 
 function setTrager_fx(){
@@ -20,10 +19,24 @@ function setTrager_fx(){
 
 function selectFangXing(json){
     selFangXing = json;
+    $("#inpFangXing").val(selFangXing.name);
+    $("#inpJiaGe").val(selFangXing.jiaGe);
 }
 
-function setTrager(){
-    //$('#inpFuzeRen').AutoComplete({'data': h_userNames.list}); 
+function selectKeHu(json){
+    selKeHu = json;
+    if($("#inpName").val() === ""){
+        $("#inpName").val(selKeHu.name);
+    }
+    if($("#inpSex").val() === ""){
+        $("#inpSex").val(selKeHu.sex);
+    }
+    if($("#inpSfzHao").val() === ""){
+        $("#inpSfzHao").val(selKeHu.sfzHao);
+    }
+    if($("#inpDianHua").val() === ""){
+        $("#inpDianHua").val(selKeHu.dianHua);
+    }
 }
 
 function jxYuDing(json) {
@@ -61,8 +74,11 @@ function selectYuDing() {
 function addYuDing() {
     optFlag = 1;
     $("#yuDingModel_title").html("新增预订");
-    $("#dvContent input").val("").removeAttr("readonly");
-    $("#inpState").val("已生效").attr("readonly","readonly");
+    $("#dvContent input,#dvContent select").val("").removeAttr("disabled");
+    $("#inpRzTs").val("1");
+    $("#inpRzFjs").val("1");
+    $("#inpState").val("未生效").attr("disabled","disabled");
+    $("#inpFuzeRen").attr("disabled","disabled");
     $("#btnSave").html("保存");
     $("#yuDingModal").modal("show");
 }
@@ -75,6 +91,9 @@ function editYuDing(index) {
         return alert("请选择预订");
     }
     var yuDing = yuDings[index];
+    if(yuDing.state !== "未生效"){
+        return alert(yuDing.state + "的预订不能修改");
+    }
     editIndex = index;
     $("#yuDingModel_title").html("修改预订");
     $("#btnSave").html("保存");
@@ -84,22 +103,23 @@ function editYuDing(index) {
     selKeHu = {};
     selKeHu.id = yuDing.keHu_id;
     selKeHu.name = yuDing.keHu;
-    $("#dvContent input").removeAttr("readonly");
     $("#inpFangXing").val(yuDing.fangXing);
+    $("#inpJiaGe").val(yuDing.jiaGe);
     $("#inpRzSj").val(yuDing.rzSj);
     $("#inpRzTs").val(yuDing.rzTs);
     $("#inpRzFjs").val(yuDing.rzFjs);
-    $("#inpName").val(yuDing.nme);
+    $("#inpName").val(yuDing.name);
     $("#inpSex").val(yuDing.sex);
     $("#inpSfzHao").val(yuDing.sfzHao);
     $("#inpDianHua").val(yuDing.dianHua);
     $("#inpKeHu").val(yuDing.keHu);
-    $("#inpState").val(yuDing.state).attr("readonly","readonly");
+    $("#inpState").val(yuDing.state).attr("disabled","disabled");
+    $("#inpFuzeRen").val(yuDing.fuzeRen).attr("disabled","disabled");
     $("#inpRemark").val(yuDing.remark);
     $("#yuDingModal").modal("show");
 }
 
-function checkYuDing(){
+function checkYuDing(index){
     optFlag = 3;
     if (yuDings[index] === undefined) {
         optFlag = 1;
@@ -116,17 +136,20 @@ function checkYuDing(){
     selKeHu = {};
     selKeHu.id = yuDing.keHu_id;
     selKeHu.name = yuDing.keHu;
+    $("#dvContent input,#dvContent select").attr("disabled","disabled");
     $("#inpFangXing").val(yuDing.fangXing);
+    $("#inpJiaGe").val(yuDing.jiaGe);
     $("#inpRzSj").val(yuDing.rzSj);
     $("#inpRzTs").val(yuDing.rzTs);
     $("#inpRzFjs").val(yuDing.rzFjs);
-    $("#inpName").val(yuDing.nme);
+    $("#inpName").val(yuDing.name);
     $("#inpSex").val(yuDing.sex);
     $("#inpSfzHao").val(yuDing.sfzHao);
     $("#inpDianHua").val(yuDing.dianHua);
     $("#inpKeHu").val(yuDing.keHu);
-    $("#inpState").val(yuDing.state).removeAttr("readonly");
-    $("#inpRemark").val(yuDing.remark);
+    $("#inpState").val(yuDing.state).removeAttr("disabled");
+    $("#inpFuzeRen").val(yuDing.fuzeRen).attr("disabled","disabled");
+    $("#inpRemark").val(yuDing.remark).removeAttr("disabled");;
     $("#yuDingModal").modal("show");
 }
 
@@ -144,9 +167,12 @@ function saveYuDing() {
             return;
         }
         yuDing = yuDings[editIndex];
-        url = "/LbmHotel/yuDing/updateYuDing";
+        url = "/LbmHotel/yuDing/checkYuDing";
     } else if (optFlag === 1) {
         url = "/LbmHotel/yuDing/addYuDing";
+    }
+    if($("#inpRzSj").val() === ""){
+        return alert("请选择入住时间");
     }
     if(selFangXing === undefined || selFangXing === null){
         return alert("请选择房型");
@@ -157,14 +183,15 @@ function saveYuDing() {
     }
     yuDing.fangXing = selFangXing.name;
     yuDing.fangXing_id = selFangXing.id;
-    yuDing.jiaGe = selFangXing.jiaGe;
-    yuDing.rzSj = $("#inpRzSj").val();
+    yuDing.jiaGe = parseFloat($("#inpJiaGe").val());
+    yuDing.rzSj = $("#inpRzSj").val() + ":00";
     yuDing.rzTs = $("#inpRzTs").val();
     yuDing.rzFjs = $("#inpRzFjs").val();
     yuDing.name = $("#inpName").val();
     yuDing.sex = $("#inpSex").val();
     yuDing.sfzHao = $("#inpSfzHao").val();
     yuDing.dianHua = $("#inpDianHua").val();
+    yuDing.state = $("#inpState").val();
     yuDing.remark = $("#inpRemark").val();
     $.ajax({
         url: url,
@@ -190,7 +217,7 @@ function delYuDing(index) {
         return alert("请选择预订");
     }
     var yuDing = yuDings[index];
-    if (confirm("确定删除预订：" + yuDing.fjHao + "?")) {
+    if (confirm("确定删除预订：" + yuDing.zjHao + "?")) {
         $.ajax({
             url: "/LbmHotel/yuDing/delYuDing",
             data: JSON.stringify(yuDing),

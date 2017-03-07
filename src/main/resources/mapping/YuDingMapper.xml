@@ -49,12 +49,12 @@
       rzsj = #{rzSj,jdbcType=TIMESTAMP},
       rzts = #{rzTs,jdbcType=INTEGER},
       rzfjs = #{rzFjs,jdbcType=INTEGER},
-      name = #{state,jdbcType=VARCHAR},
-      sex = #{state,jdbcType=VARCHAR},
-      sfzhao = #{state,jdbcType=VARCHAR},
-      dianhua = #{state,jdbcType=VARCHAR},
-      fangxing_id = #{state,jdbcType=INTEGER},
-      fangxing = #{state,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=VARCHAR},
+      sfzhao = #{sfzHao,jdbcType=VARCHAR},
+      dianhua = #{dianHua,jdbcType=VARCHAR},
+      fangxing_id = #{fangXing_id,jdbcType=INTEGER},
+      fangxing = #{fangXing,jdbcType=VARCHAR},
       jiage = #{jiaGe,jdbcType=FLOAT},
       state = #{state,jdbcType=VARCHAR},
       remark = #{remark,jdbcType=VARCHAR},
@@ -73,6 +73,21 @@
     </if>
     order by id limit #{beginRow},#{pageSize}
   </select>
+  <select id="selectYuDingFromHao" resultMap="BaseResultMap" parameterType="com.lanbo.hotel.pojo.YuDing" >
+    select
+    <include refid="Base_Column_List" />
+    from yuding_t where 1=1 and rzsj > now() 
+    <if test="state != null and state !=''">
+        and state = #{state}
+    </if>
+    <if test="zjHao != null and zjHao !=''">
+        and zjhao = #{zjHao}
+    </if>
+    <if test="name != null and name !=''">
+        and (name=#{name} or dianhua =#{name} or sfzhao=#{name} )
+    </if>
+    order by rzsj
+  </select>
   <select id="selectRows" resultType="int" parameterType="hashmap">
     select
     count(1)
@@ -83,7 +98,8 @@
   </select>
   <update id="updateState" parameterType="com.lanbo.hotel.pojo.YuDing" >
     update yuding_t set 
-    state = #{state,jdbcType=VARCHAR}
+    state = #{state,jdbcType=VARCHAR},
+    remark = #{remark,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
   <select id="selectRzJiBies" resultType="int" parameterType="com.lanbo.hotel.pojo.YuDing" >

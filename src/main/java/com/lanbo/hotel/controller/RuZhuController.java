@@ -43,6 +43,7 @@ public class RuZhuController {
     public Map<String, Object> addRuZhu(@RequestBody RuZhu model) {
         model.setId(-1);
         model.setBianHao(DataUtil.getBianHao());
+        model.setJinE(0F);
         Map<String, Object> map = new HashMap();
         boolean result = this.ruZhuService.addRuZhu(model);
         if (result) {

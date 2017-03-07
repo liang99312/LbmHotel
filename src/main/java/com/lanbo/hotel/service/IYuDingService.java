@@ -13,4 +13,5 @@ public interface IYuDingService {
         public int getSelectRows(HashMap map);
         public List<YuDing> getSelectPage(HashMap map);
         public int selectRzJiBies(YuDing yuDing);
+        public List<YuDing> getYuDingFromHao(HashMap map);
 }

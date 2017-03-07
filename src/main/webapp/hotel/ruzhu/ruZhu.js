@@ -2,24 +2,90 @@ var ruZhus;
 var optFlag = 1;
 var editIndex = -1;
 var selFangJian;
-var seKeHu;
+var selKeHu;
+var selYuDing;
+var zjHao = "-1";
 $(document).ready(function () {
     //getUserNames(setTrager);
     getKeHus(setTrager_kh);
+    getFangXings(setTrager_fx);
     getFangJians_jx({"state":"就绪"},setTrager_fj);
     $('#inpRzSj').datetimepicker({language:  'zh-CN',format: 'yyyy-mm-dd hh:ii',weekStart: 7,todayBtn:  1,autoclose: 1,todayHighlight: 1,startView: 2,forceParse: 0,showMeridian: 1});
 });
 
+function setTrager_fx(){
+    $('#inpFangXing').AutoComplete({'data': h_fangXings.list,'afterSelectedHandler':selectFangXing}); 
+}
+
+function selectFangXing(json){
+    selFangXing = json;
+    $("#inpFangXing").val(selFangXing.name);
+    $("#inpJiaGe").val(selFangXing.jiaGe);
+}
+
 function setTrager_kh(){
-    $('#inpKeHu').AutoComplete({'data': h_keHus.list}); 
+    $('#inpKeHu').AutoComplete({'data': h_keHus.list,'afterSelectedHandler':selectKeHu}); 
+}
+
+function selectKeHu(json){
+    selKeHu = json;
 }
 
 function setTrager_fj(){
+    for(var i = 0;i<h_fangJians_jx.list.length;i++){
+        var e = h_fangJians_jx.list[i];
+        e.name = e.fjHao;
+    }
     $('#inpFjHao').AutoComplete({'data': h_fangJians_jx.list,'afterSelectedHandler':selectFangJian}); 
 }
 
 function selectFangJian(json){
     selFangJian = json;
+}
+
+function cxYuDing(){
+    selYuDing = null;
+    var name = $("#inpRzr").val();
+    var hao = $("#inpYdHao").val();
+    var yuDing = {"name":name,"state":"已生效","zjHao":hao};
+    $.ajax({
+        url: "/LbmHotel/yuDing/getYuDingFromHao",
+        data: JSON.stringify(yuDing),
+        contentType: "application/json",
+        type: "post",
+        cache: false,
+        error: function (msg, textStatus) {
+            
+        },
+        success: function (json) {
+            if (json.result) {
+                if(json.list !== undefined && json.list !== null && json.list.length > 0){
+                    selYuDing = json.list[0];
+                    setYuDing();
+                }else{
+                    alert("没有相关预订记录");
+                }
+            } else
+                alert("查询数据失败:" + json.msg !== undefined ? json.msg : "");
+        }
+    });
+}
+
+function setYuDing(){
+    if(selYuDing !== undefined && selYuDing !== null){
+        if(selYuDing.keHu_id > 0){
+            selKeHu = {"id":selYuDing.keHu_id,"name":selYuDing.keHu};
+        }
+        $("#inpFangXing").val(selYuDing.fangXing);
+        $("#inpJiaGe").val(selYuDing.jiaGe);
+        $("#inpName").val(selYuDing.name);
+        $("#inpSex").val(selYuDing.sex);
+        $("#inpSfzHao").val(selYuDing.sfzHao);
+        $("#inpDianHua").val(selYuDing.dianHua);
+        $("#inpKeHu").val(selYuDing.keHu);
+        $("#inpState").val("已生效").attr("readonly","readonly");
+        $("#inpRemark").val(selYuDing.remark);
+    }
 }
 
 function setTrager(){
@@ -62,6 +128,7 @@ function addRuZhu() {
     $("#ruZhuModel_title").html("登记入住");
     $("#dvContent input").val("").removeAttr("readonly");
     $("#inpState").val("已生效").attr("readonly","readonly");
+    $("#inpRzSj").val(getNowFormatDate());
     $("#btnSave").html("保存");
     $("#ruZhuModal").modal("show");
 }
@@ -74,6 +141,7 @@ function editRuZhu(index) {
         return alert("请选择入住");
     }
     var ruZhu = ruZhus[index];
+    zjHao = ruZhu.yuDing;
     editIndex = index;
     $("#ruZhuModel_title").html("修改入住");
     $("#btnSave").html("保存");
@@ -102,6 +170,7 @@ function checkRuZhu(){
         return alert("请选择入住");
     }
     var ruZhu = ruZhus[index];
+    zjHao = ruZhu.yuDing;
     editIndex = index;
     $("#ruZhuModel_title").html("审核入住");
     $("#btnSave").html("审核");
@@ -151,16 +220,22 @@ function saveRuZhu() {
         ruZhu.keHu = selKeHu.name;
         ruZhu.keHu_id = selKeHu.id;
     }
+    if(selYuDing !== undefined && selYuDing !== null){
+        ruZhu.yuDing = selYuDing.zjHao;
+    }else{
+        ruZhu.yuDing = zjHao;
+    }
     ruZhu.fjHao = selFangJian.fjHao;
+    ruZhu.fangJian_id = selFangJian.id;
     ruZhu.fangXing = selFangJian.fangXing;
-    ruZhu.jiaGe = selFangJian.jiaGe;
-    ruZhu.rzSj = $("#inpRzSj").val();
+    ruZhu.jiaGe = $("#inpJiaGe").val();
+    ruZhu.rzSj = $("#inpRzSj").val()+"00";
     ruZhu.rzTs = $("#inpRzTs").val();
-    ruZhu.rzFjs = $("#inpRzFjs").val();
     ruZhu.name = $("#inpName").val();
     ruZhu.sex = $("#inpSex").val();
     ruZhu.sfzHao = $("#inpSfzHao").val();
     ruZhu.dianHua = $("#inpDianHua").val();
+    ruZhu.state = $("#inpState").val();
     ruZhu.remark = $("#inpRemark").val();
     $.ajax({
         url: url,
