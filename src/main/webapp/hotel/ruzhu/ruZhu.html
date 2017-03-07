@@ -25,7 +25,7 @@ and open the template in the editor.
     <body style='height:800px;'>
         <div style="float:left; width: 100%">
             <button type="button" class="btn btn-primary btn-sm" onclick="addRuZhu();">客户入住</button>
-            <span>&nbsp;预定号：</span><input id="selFjHao" type="text" />
+            <span>&nbsp;房间号：</span><input id="selFjHao" type="text" />
             <span>&nbsp;状态：</span><select id="selState" style="width: 170px;height:26px;"><option value="">全部</option><option value="入住中">入住中</option><option value="已结账">已结账</option><option value="已失效">已失效</option></select>
             <button type="button" class="btn btn-primary btn-sm" onclick="selectRuZhu();" style="margin-left: 2px;">查找</button>
             <div id="list1" class="table-responsive" style="height: 672px">
@@ -33,19 +33,19 @@ and open the template in the editor.
                     <thead>
                         <tr>
                             <th>客户</th>
+                            <th>房间号</th>
                             <th>入住人</th>
                             <th>证件号</th>
                             <th>电话</th>
                             <th>入住时间</th>
                             <th>退房时间</th>
-                            <th>入住天数</th>
                             <th>状态</th>
                             <th>备注</th>
                             <th>操作</th>
                         </tr>
                     </thead>
                     <tbody id='data_table_body'>
-                        <tr><td>请查询预定记录</td></tr>
+                        <tr><td>请查询入住记录</td></tr>
                     </tbody>
                 </table>
             </div>
@@ -57,13 +57,22 @@ and open the template in the editor.
                 <div class="modal-content">
                     <div class="modal-header" style="background: #ace1ff;height: 40px;border-top-left-radius: 6px;border-top-right-radius: 6px;padding:10px">
                         <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                        <h4 class="modal-title" id="ruZhuModel_title">添加预定</h4>
+                        <h4 class="modal-title" id="ruZhuModel_title">登记入住</h4>
+                    </div>
+                    <div class="modal-body" style=" border-bottom: 1px solid #E5E5E5;">
+                        <div class="form-group" style="margin-bottom: 0px;">
+                                <label for="inpFjHao">预订号：</label>
+                                <input type="text" id="inpFjHao" />
+                                <label for="inpRzSj">入住人：</label>
+                                <input type="text" id="inpRzSj" />
+                                <input type="button" onclick="cxRuZhu()" value="查询预订">
+                            </div>
                     </div>
                     <div class="modal-body">
                         <div class="content" id="dvContent">
                             <div class="form-group">
-                                <label for="inpFangXing">房&ensp;间&ensp;号：</label>
-                                <input type="text" id="inpFangXing" />
+                                <label for="inpFjHao">房&ensp;间&ensp;号：</label>
+                                <input type="text" id="inpFjHao" />
                                 <label for="inpRzSj">入住时间：</label>
                                 <input type="text" id="inpRzSj" />
                             </div>

@@ -53,8 +53,8 @@ public class FangJianServiceImpl implements IFangJianService {
     }
 
     @Override
-    public List getAllFangJianHao(HashMap map) {
-        return this.fangJianDao.selectAllFangJianHao(map);
+    public List getAllFangJian(HashMap map) {
+        return this.fangJianDao.selectAllFangJian(map);
     }
 
 }

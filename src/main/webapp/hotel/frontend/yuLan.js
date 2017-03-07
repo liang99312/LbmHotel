@@ -21,7 +21,7 @@ function jxFangXing(json){
     var html = "";
     for(var i=0;i<json.list.length;i++){
         var e = json.list[i];
-        var dvStr = formatString(["<div style='float:left;width:360px;margin-bottom:30px;text-align: center'><a href='/LbmHotel/frontend/goDetail?id={3}'><img src='/LbmHotel/files/{0}' style='width:300px;height:300px;' /><br/><span>{1}</span><br/><span style='color:red;'>￥{2}</span><br/>预定</a></div>", e.zhuTu, e.name, e.jiaGe,e.id]);
+        var dvStr = formatString(["<div style='float:left;width:360px;margin-bottom:30px;text-align: center'><a href='/LbmHotel/frontend/goDetail?id={3}'><img src='/LbmHotel/files/{0}' style='width:300px;height:300px;' /><br/><span>{1}</span><br/><span style='color:red;'>￥{2}</span><br/>预订</a></div>", e.zhuTu, e.name, e.jiaGe,e.id]);
         html = html + dvStr;
     }
     $("#content").html(html);

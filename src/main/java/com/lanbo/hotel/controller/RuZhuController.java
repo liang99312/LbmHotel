@@ -35,7 +35,7 @@ public class RuZhuController {
     
     @RequestMapping("/ruZhu")
     public String goRuZhu(HttpServletRequest request, HttpServletResponse response) {
-        return "yuding/ruZhu";
+        return "ruzhu/ruZhu";
     }
     
     @RequestMapping(value = "/addRuZhu", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
@@ -76,6 +76,24 @@ public class RuZhuController {
         User user = (User) request.getSession().getAttribute("user");
         model.setFuzeRen(user.getUserName());
         boolean result = this.ruZhuService.checkRuZhu(model);
+        if (result) {
+            map.put("result", true);
+        } else {
+            map.put("result", false);
+            map.put("msg", "修改数据库失败");
+        }
+        return map;
+    }
+    
+    @RequestMapping(value = "/jzRuZhu", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+    @ResponseBody
+    public Map<String, Object> jzRuZhu(@RequestBody RuZhu model,HttpServletRequest request,
+            HttpServletResponse response) {
+        Map<String, Object> map = new HashMap();
+        User user = (User) request.getSession().getAttribute("user");
+        model.setFuzeRen(user.getUserName());
+        model.setState("已结账");
+        boolean result = this.ruZhuService.jieZhang(model);
         if (result) {
             map.put("result", true);
         } else {

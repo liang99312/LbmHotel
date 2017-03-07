@@ -24,8 +24,8 @@ and open the template in the editor.
     </head>
     <body style='height:800px;'>
         <div style="float:left; width: 100%">
-            <button type="button" class="btn btn-primary btn-sm" onclick="addYuDing();">新增预定</button>
-            <span>&nbsp;预定号：</span><input id="selFjHao" type="text" />
+            <button type="button" class="btn btn-primary btn-sm" onclick="addYuDing();">新增预订</button>
+            <span>&nbsp;预订号：</span><input id="selFjHao" type="text" />
             <span>&nbsp;状态：</span><select id="selState" style="width: 170px;height:26px;"><option value="">全部</option><option value="就绪">就绪</option><option value="已使用">已使用</option><option value="未准备">未准备</option></select>
             <button type="button" class="btn btn-primary btn-sm" onclick="selectYuDing();" style="margin-left: 2px;">查找</button>
             <div id="list1" class="table-responsive" style="height: 672px">
@@ -37,7 +37,7 @@ and open the template in the editor.
                             <th>入住人</th>
                             <th>证件号</th>
                             <th>电话</th>
-                            <th>预定时间</th>
+                            <th>预订时间</th>
                             <th>预住时间</th>
                             <th>预住天数</th>
                             <th>预住房间数</th>
@@ -47,7 +47,7 @@ and open the template in the editor.
                         </tr>
                     </thead>
                     <tbody id='data_table_body'>
-                        <tr><td>请查询预定记录</td></tr>
+                        <tr><td>请查询预订记录</td></tr>
                     </tbody>
                 </table>
             </div>
@@ -59,7 +59,7 @@ and open the template in the editor.
                 <div class="modal-content">
                     <div class="modal-header" style="background: #ace1ff;height: 40px;border-top-left-radius: 6px;border-top-right-radius: 6px;padding:10px">
                         <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                        <h4 class="modal-title" id="yuDingModel_title">添加预定</h4>
+                        <h4 class="modal-title" id="yuDingModel_title">添加预订</h4>
                     </div>
                     <div class="modal-body">
                         <div class="content" id="dvContent">

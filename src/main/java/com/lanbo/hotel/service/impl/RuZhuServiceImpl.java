@@ -50,4 +50,8 @@ public class RuZhuServiceImpl implements IRuZhuService {
     public boolean checkRuZhu(RuZhu ruZhu) {
         return this.ruZhuDao.updateState(ruZhu) == 1;
     }
+
+    public boolean jieZhang(RuZhu ruZhu) {
+        return this.ruZhuDao.jieZhang(ruZhu) == 1;
+    }
 }

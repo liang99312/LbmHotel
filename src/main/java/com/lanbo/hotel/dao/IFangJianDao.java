@@ -7,5 +7,5 @@ import java.util.List;
 public interface IFangJianDao extends IBaseDao{
     int updateState(FangJian record);
     int selectHaos(FangJian record);
-    List selectAllFangJianHao(HashMap map);
+    List selectAllFangJian(HashMap map);
 }

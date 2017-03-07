@@ -60,7 +60,7 @@ function selectYuDing() {
 
 function addYuDing() {
     optFlag = 1;
-    $("#yuDingModel_title").html("新增预定");
+    $("#yuDingModel_title").html("新增预订");
     $("#dvContent input").val("").removeAttr("readonly");
     $("#inpState").val("已生效").attr("readonly","readonly");
     $("#btnSave").html("保存");
@@ -72,11 +72,11 @@ function editYuDing(index) {
     optFlag = 2;
     if (yuDings[index] === undefined) {
         optFlag = 1;
-        return alert("请选择预定");
+        return alert("请选择预订");
     }
     var yuDing = yuDings[index];
     editIndex = index;
-    $("#yuDingModel_title").html("修改预定");
+    $("#yuDingModel_title").html("修改预订");
     $("#btnSave").html("保存");
     selFangXing = {};
     selFangXing.id = yuDing.fangXing_id;
@@ -103,11 +103,11 @@ function checkYuDing(){
     optFlag = 3;
     if (yuDings[index] === undefined) {
         optFlag = 1;
-        return alert("请选择预定");
+        return alert("请选择预订");
     }
     var yuDing = yuDings[index];
     editIndex = index;
-    $("#yuDingModel_title").html("审核预定");
+    $("#yuDingModel_title").html("审核预订");
     $("#btnSave").html("审核");
     selFangXing = {};
     selFangXing.id = yuDing.fangXing_id;
@@ -187,10 +187,10 @@ function saveYuDing() {
 
 function delYuDing(index) {
     if (yuDings[index] === undefined) {
-        return alert("请选择预定");
+        return alert("请选择预订");
     }
     var yuDing = yuDings[index];
-    if (confirm("确定删除预定：" + yuDing.fjHao + "?")) {
+    if (confirm("确定删除预订：" + yuDing.fjHao + "?")) {
         $.ajax({
             url: "/LbmHotel/yuDing/delYuDing",
             data: JSON.stringify(yuDing),
