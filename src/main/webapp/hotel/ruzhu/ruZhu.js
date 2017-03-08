@@ -41,6 +41,12 @@ function setTrager_fj(){
 
 function selectFangJian(json){
     selFangJian = json;
+    if($("#inpFangXing").val()===""){
+        $("#inpFangXing").val(selFangJian.fangXing);
+    }
+    if($("#inpJiaGe").val()===""){
+        $("#inpJiaGe").val(selFangJian.jiaGe);
+    }
 }
 
 function cxYuDing(){
@@ -190,10 +196,11 @@ function checkRuZhu(index){
     selKeHu.name = ruZhu.keHu;
     $("#dvContent input,#dvContent select").attr("disabled","disabled");
     $("#inpFangXing").val(ruZhu.fangXing);
+    $("#inpJiaGe").val(ruZhu.jiaGe);
+    $("#inpFjHao").val(ruZhu.fjHao);
     $("#inpRzSj").val(ruZhu.rzSj);
-    $("#inpRzTs").val(ruZhu.rzTs);
     $("#inpRzFjs").val(ruZhu.rzFjs);
-    $("#inpName").val(ruZhu.nme);
+    $("#inpName").val(ruZhu.name);
     $("#inpSex").val(ruZhu.sex);
     $("#inpSfzHao").val(ruZhu.sfzHao);
     $("#inpDianHua").val(ruZhu.dianHua);
@@ -235,10 +242,9 @@ function saveRuZhu() {
     }
     ruZhu.fjHao = selFangJian.fjHao;
     ruZhu.fangJian_id = selFangJian.id;
-    ruZhu.fangXing = selFangJian.fangXing;
+    ruZhu.fangXing = $("#inpFangXing").val();
     ruZhu.jiaGe = $("#inpJiaGe").val();
     ruZhu.rzSj = $("#inpRzSj").val()+"00";
-    ruZhu.rzTs = $("#inpRzTs").val();
     ruZhu.name = $("#inpName").val();
     ruZhu.sex = $("#inpSex").val();
     ruZhu.sfzHao = $("#inpSfzHao").val();
@@ -269,6 +275,9 @@ function delRuZhu(index) {
         return alert("请选择入住");
     }
     var ruZhu = ruZhus[index];
+    if (ruZhu.state !== "已失效") {
+        return alert("只能删除已失效记录");
+    }
     if (confirm("确定删除入住：" + ruZhu.fjHao + "?")) {
         $.ajax({
             url: "/LbmHotel/ruZhu/delRuZhu",

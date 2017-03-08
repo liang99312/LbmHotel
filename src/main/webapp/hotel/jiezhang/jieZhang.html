@@ -9,8 +9,111 @@ and open the template in the editor.
         <title>TODO supply a title</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="/LbmHotel/content/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+        <link href="/LbmHotel/content/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+        <link href="/LbmHotel/content/bootstrap/css/bootstrap-datetimepicker.min.css" rel="stylesheet" />
+        <link href="/LbmHotel/content/autocomplete/autocomplete.css" rel="stylesheet" />
+        <script src="/LbmHotel/js/jquery2.js"></script>
+        <script src="/LbmHotel/content/bootstrap/js/bootstrap.min.js"></script>
+        <script src="/LbmHotel/content/bootstrap/js/bootstrap-paginator.js"></script>
+        <script src="/LbmHotel/content/bootstrap/js/bootstrap-datetimepicker.min.js"></script>
+        <script src="/LbmHotel/content/bootstrap/js/bootstrap-datetimepicker.zh-CN.js"></script>
+        <script src="/LbmHotel/content/autocomplete/autocomplete.js"></script>
+        <script src="/LbmHotel/hotel/common/hotel.js"></script>
+        <script src="/LbmHotel/hotel/jiezhang/jieZhang.js"></script>
     </head>
-    <body>
-        <div>结账***</div>
+    <body style='height:800px;'>
+        <div style="float:left; width: 100%">
+            <span>&nbsp;房间号：</span><input id="selFjHao" type="text" />
+            <span>&nbsp;状态：</span><select id="selState" style="width: 170px;height:26px;"><option value="">全部</option><option value="入住中">入住中</option><option value="已结账">已结账</option><option value="已失效">已失效</option></select>
+            <button type="button" class="btn btn-primary btn-sm" onclick="selectRuZhu();" style="margin-left: 2px;">查找</button>
+            <div id="list1" class="table-responsive" style="height: 672px">
+                <table id="data_table" class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>客户</th>
+                            <th>房间号</th>
+                            <th>入住人</th>
+                            <th>证件号</th>
+                            <th>电话</th>
+                            <th>入住时间</th>
+                            <th>退房时间</th>
+                            <th>状态</th>
+                            <th>备注</th>
+                            <th>操作</th>
+                        </tr>
+                    </thead>
+                    <tbody id='data_table_body'>
+                        <tr><td>请查询入住记录</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <ul id="example"></ul>
+        </div>
+        <div class="modal fade" id="ruZhuModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content" style="width: 620px;">
+                    <div class="modal-header" style="background: #ace1ff;height: 40px;border-top-left-radius: 6px;border-top-right-radius: 6px;padding:10px">
+                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                        <h4 class="modal-title" id="ruZhuModel_title">登记入住</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="content" id="dvContent" style=" border-bottom: 1px solid #E5E5E5;">
+                            <div class="form-group">
+                                <label for="inpFangXing">房&ensp;&ensp;&ensp;&ensp;型：</label>
+                                <input type="text" id="inpFangXing" />
+                                <label for="inpJiaGe">价&ensp;&ensp;&ensp;&ensp;格：</label>
+                                <input type="text" id="inpJiaGe" />
+                            </div>
+                            <div class="form-group">
+                                <label for="inpFjHao">房&ensp;间&ensp;号：</label>
+                                <input type="text" id="inpFjHao" />
+                                <label for="inpRzSj">入住时间：</label>
+                                <input type="text" id="inpRzSj" />
+                            </div>
+                            <div class="form-group">
+                                <label for="inpName">入&ensp;住&ensp;人：</label>
+                                <input type="text" id="inpName" />
+                                <label for="inpSex">性&ensp;&ensp;&ensp;&ensp;别：</label>
+                                <input type="text" id="inpSex" />
+                            </div>
+                            <div class="form-group">
+                                <label for="inpSfzHao">身&ensp;份&ensp;证：</label>
+                                <input type="text" id="inpSfzHao" />
+                                <label for="inpDianHua">电&ensp;&ensp;&ensp;&ensp;话：</label>
+                                <input type="text" id="inpDianHua" />
+                            </div>
+                            <div class="form-group">
+                                <label for="inpKeHu">客&ensp;&ensp;&ensp;&ensp;户：</label>
+                                <input type="text" id="inpKeHu" />
+                                <label for="inpState">状&ensp;&ensp;&ensp;&ensp;态：</label>
+                                <input type="text" id="inpState" />
+                            </div>
+                        </div>
+                        <div class="modal-body content" id="dvJzDetail" style="padding-left: 0px;">
+                            <div class="form-group" >
+                                <label for="inpJzSj">退房时间：</label>
+                                <input type="text" id="inpJzSj" />
+                                <label for="inpRzTs">入住天数：</label>
+                                <input type="text" id="inpRzTs" />
+                            </div>
+                            <div class="form-group">
+                                <label for="inpJinE">金&ensp;&ensp;&ensp;&ensp;额：</label>
+                                <input type="text" id="inpJinE" />
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="inpRemark">备&ensp;&ensp;&ensp;&ensp;注：</label>
+                                <input type="text" id="inpRemark" style="width: 427px;" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer" style="text-align: center;padding: 8px;">
+                        <button id="btnSave" type="submit" class="btn btn-primary" onclick="saveRuZhu()">保存</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </body>
 </html>
