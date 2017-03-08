@@ -56,7 +56,7 @@ public class FangJianController {
         }
         return map;
     }
-
+    
     @RequestMapping(value = "/updateFangJian", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
     @ResponseBody
     public Map<String, Object> updateFangJian(@RequestBody FangJian model) {
@@ -67,6 +67,25 @@ public class FangJianController {
             return map;
         }
         boolean result = this.fangJianService.updateFangJian(model);
+        if (result) {
+            map.put("result", true);
+        } else {
+            map.put("result", false);
+            map.put("msg", "修改数据库失败");
+        }
+        return map;
+    }
+
+    @RequestMapping(value = "/updateState", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+    @ResponseBody
+    public Map<String, Object> updateState(@RequestBody FangJian model) {
+        Map<String, Object> map = new HashMap();
+        if(this.fangJianService.selectHaos(model)){
+            map.put("result", false);
+            map.put("msg", "该客户的预订已存在，请重新输入");
+            return map;
+        }
+        boolean result = this.fangJianService.updateState(model);
         if (result) {
             map.put("result", true);
         } else {
@@ -122,7 +141,7 @@ public class FangJianController {
         System.out.println(model);
         List<String> stateList = new ArrayList<String>();
         stateList.add("就绪");
-        stateList.add("已使用");
+        stateList.add("已住客");
         stateList.add("未准备");
         if(model.get("state") == null || !stateList.contains(model.get("state").toString())){
             model.remove("state");

@@ -57,4 +57,8 @@ public class FangJianServiceImpl implements IFangJianService {
         return this.fangJianDao.selectAllFangJian(map);
     }
 
+    public boolean updateState(FangJian fangJian) {
+        return this.fangJianDao.updateState(fangJian)==1;
+    }
+
 }

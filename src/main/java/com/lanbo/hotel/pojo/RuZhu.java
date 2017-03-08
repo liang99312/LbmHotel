@@ -43,7 +43,7 @@ public class RuZhu{
     
     private Float jinE;
     
-    private String state;
+    private String state;//已生效、已结账、已失效
     
     private String fuzeRen;
     

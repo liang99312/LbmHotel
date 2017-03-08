@@ -59,6 +59,10 @@ public class YuDingServiceImpl implements IYuDingService {
     public List<YuDing> getYuDingFromHao(HashMap map) {
         return (List<YuDing>) this.yuDingDao.selectYuDingFromHao(map);
     }
+
+    public boolean updateState(YuDing yuDing) {
+        return this.yuDingDao.updateState(yuDing)==1;
+    }
     
     
 }

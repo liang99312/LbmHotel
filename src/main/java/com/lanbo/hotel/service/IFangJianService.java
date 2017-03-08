@@ -9,6 +9,7 @@ public interface IFangJianService {
         public boolean deleteFangJianById(int fangJianId);
         public boolean addFangJian(FangJian fangJian);
         public boolean updateFangJian(FangJian fangJian);
+        public boolean updateState(FangJian fangJian);
         public int getSelectRows(HashMap map);
         public List<FangJian> getSelectPage(HashMap map);
         public boolean selectHaos(FangJian fangJian);

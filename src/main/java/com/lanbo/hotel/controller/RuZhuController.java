@@ -5,12 +5,17 @@
  */
 package com.lanbo.hotel.controller;
 
+import com.lanbo.hotel.pojo.FangJian;
 import com.lanbo.hotel.pojo.Page;
 import com.lanbo.hotel.pojo.User;
 import com.lanbo.hotel.pojo.RuZhu;
+import com.lanbo.hotel.pojo.YuDing;
+import com.lanbo.hotel.service.IFangJianService;
 import com.lanbo.hotel.service.IRuZhuService;
+import com.lanbo.hotel.service.IYuDingService;
 import com.lanbo.hotel.util.DataUtil;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import javax.annotation.Resource;
@@ -29,15 +34,21 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 @RequestMapping("ruZhu")
 public class RuZhuController {
-    
+
     @Resource
     private IRuZhuService ruZhuService;
+
+    @Resource
+    private IFangJianService fangJianService;
     
+    @Resource
+    private IYuDingService yuDingService;
+
     @RequestMapping("/ruZhu")
     public String goRuZhu(HttpServletRequest request, HttpServletResponse response) {
         return "ruzhu/ruZhu";
     }
-    
+
     @RequestMapping(value = "/addRuZhu", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
     @ResponseBody
     public Map<String, Object> addRuZhu(@RequestBody RuZhu model) {
@@ -47,6 +58,18 @@ public class RuZhuController {
         Map<String, Object> map = new HashMap();
         boolean result = this.ruZhuService.addRuZhu(model);
         if (result) {
+            FangJian fj = new FangJian();
+            fj.setId(model.getFangJian_id());
+            fj.setState("已住客");
+            this.fangJianService.updateState(fj);
+            if(model.getYuDing() != null && !"".equals(model.getYuDing())){
+                YuDing yd = new YuDing();
+                yd.setId(-1);
+                yd.setZjHao(model.getYuDing());
+                yd.setState("已入住");
+                yd.setRemark("-1");
+                this.yuDingService.updateState(yd);
+            }
             map.put("result", true);
         } else {
             map.put("result", false);
@@ -68,16 +91,22 @@ public class RuZhuController {
         }
         return map;
     }
-    
+
     @RequestMapping(value = "/checkRuZhu", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
     @ResponseBody
-    public Map<String, Object> checkRuZhu(@RequestBody RuZhu model,HttpServletRequest request,
+    public Map<String, Object> checkRuZhu(@RequestBody RuZhu model, HttpServletRequest request,
             HttpServletResponse response) {
         Map<String, Object> map = new HashMap();
         User user = (User) request.getSession().getAttribute("user");
         model.setFuzeRen(user.getUserName());
         boolean result = this.ruZhuService.checkRuZhu(model);
         if (result) {
+            if ("已失效".equals(model.getState())) {
+                FangJian fj = new FangJian();
+                fj.setId(model.getFangJian_id());
+                fj.setState("就绪");
+                this.fangJianService.updateState(fj);
+            }
             map.put("result", true);
         } else {
             map.put("result", false);
@@ -85,10 +114,10 @@ public class RuZhuController {
         }
         return map;
     }
-    
+
     @RequestMapping(value = "/jzRuZhu", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
     @ResponseBody
-    public Map<String, Object> jzRuZhu(@RequestBody RuZhu model,HttpServletRequest request,
+    public Map<String, Object> jzRuZhu(@RequestBody RuZhu model, HttpServletRequest request,
             HttpServletResponse response) {
         Map<String, Object> map = new HashMap();
         User user = (User) request.getSession().getAttribute("user");
@@ -96,6 +125,10 @@ public class RuZhuController {
         model.setState("已结账");
         boolean result = this.ruZhuService.jieZhang(model);
         if (result) {
+            FangJian fj = new FangJian();
+            fj.setId(model.getFangJian_id());
+            fj.setState("就绪");
+            this.fangJianService.updateState(fj);
             map.put("result", true);
         } else {
             map.put("result", false);
@@ -110,6 +143,10 @@ public class RuZhuController {
         Map<String, Object> map = new HashMap();
         boolean result = this.ruZhuService.deleteRuZhuById(model.getId());
         if (result) {
+            FangJian fj = new FangJian();
+            fj.setId(model.getFangJian_id());
+            fj.setState("就绪");
+            this.fangJianService.updateState(fj);
             map.put("result", true);
         } else {
             map.put("result", false);
@@ -121,7 +158,7 @@ public class RuZhuController {
     @ResponseBody
     public Page getRuZhuPage(@RequestBody Page model) {
         HashMap map = model.getParamters();
-        if(map == null){
+        if (map == null) {
             map = new HashMap();
         }
         if (model.getRows() == 0) {
@@ -143,5 +180,5 @@ public class RuZhuController {
         model.setList(this.ruZhuService.getSelectPage(map));
         return model;
     }
-    
+
 }
