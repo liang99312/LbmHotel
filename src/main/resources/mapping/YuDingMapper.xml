@@ -98,9 +98,17 @@
   </select>
   <update id="updateState" parameterType="com.lanbo.hotel.pojo.YuDing" >
     update yuding_t set 
-    state = #{state,jdbcType=VARCHAR},
-    remark = #{remark,jdbcType=VARCHAR}
-    where id = #{id,jdbcType=INTEGER}
+    state = #{state,jdbcType=VARCHAR}
+    <if test="remark != null and remark !='-1'">
+          ,remark = #{remark,jdbcType=VARCHAR}
+    </if>
+    where 1=0 
+    <if test="id != null and id !=-1">
+        or id = #{id}
+    </if>
+    <if test="zjHao != null and zjHao !=''">
+        or zjhao = #{zjHao}
+    </if>
   </update>
   <select id="selectRzJiBies" resultType="int" parameterType="com.lanbo.hotel.pojo.YuDing" >
     select
