@@ -75,6 +75,9 @@
     <if test="fjHao != null and fjHao !=''">
         and fjHao = #{fjHao}
     </if>
+    <if test="id != null and id !=''">
+        and kehu_id = #{id}
+    </if>
     <if test="name != null and name !=''">
         and (name = #{name} or kehu = #{name} or sfzhao = #{name} or dianHua = #{name} )
     </if>

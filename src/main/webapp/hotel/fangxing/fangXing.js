@@ -16,6 +16,7 @@ function jxFangXing(json) {
     $.each(json.list, function (index, item) { //遍历返回的json
         var trStr = '<tr><td>' + item.fxHao + '</td><td>' + item.name + '</td><td>' + item.jiaGe + '</td><td>' + item.remark + '</td><td>'
                 + '<button class="btn btn-info btn-xs icon-edit" onclick="editFangXing(' + index + ' );" style="padding-top: 4px;padding-bottom: 3px;"></button>&nbsp;'
+                + '<button class="btn btn-info btn-xs icon-file-alt" onclick="yuLanFangXing(' + index + ' );" style="padding-top: 4px;padding-bottom: 3px;"></button>&nbsp;'
                 + '<button class="btn btn-danger btn-xs icon-remove" onclick="delFangXing(' + index + ' );" style="padding-top: 4px;padding-bottom: 3px;"></button></td></tr>';
         $("#data_table_body").append(trStr);
     });
@@ -49,6 +50,13 @@ function addFangXing() {
     $("#fangXingModal").modal("show");
 }
 
+function yuLanFangXing(index) {
+    if (fangXings[index] === undefined) {
+        return alert("请选择房型");
+    }
+    var fangXing = fangXings[index];
+    window.open("/LbmHotel/frontend/goDetail?id="+fangXing.id); 
+}
 
 function editFangXing(index) {
     optFlag = 2;

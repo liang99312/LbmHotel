@@ -21,7 +21,7 @@ function selectKeHu() {
     var keHu = {};
     var tj = {"pageSize": 20, "currentPage": 1};
     if ($("#selBianHao").val() !== "") {
-        keHu.bianHao = $("#selBianHao").val();
+        keHu.name = $("#selBianHao").val();
     }
     if ($("#selDengJi").val() !== "") {
         keHu.dengJi = $("#selDengJi").val();

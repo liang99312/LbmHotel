@@ -46,7 +46,7 @@
     <include refid="Base_Column_List" />
     from kehu_t where 1=1 
     <if test="name != null and name !=''">
-        and name LIKE concat('%',#{name},'%')
+        and (name LIKE concat('%',#{name},'%') or dianhua LIKE concat('%',#{name},'%') or sfzhao LIKE concat('%',#{name},'%') or bianhao LIKE concat('%',#{name},'%')) 
     </if>
     <if test="dengJi != null and dengJi !=''">
         and dengji = #{dengJi}

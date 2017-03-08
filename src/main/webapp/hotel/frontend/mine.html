@@ -65,6 +65,7 @@ and open the template in the editor.
                     <ul>
                         <li id="grXx">个人信息</li>
                         <li id="myDd">我的订单</li>
+                        <li id="myZd">我的账单</li>
                         <li id="xgPwd">修改密码</li>
                     </ul>
                 </div>
@@ -125,6 +126,20 @@ and open the template in the editor.
                             </div>
                         </div>
                         <div id="dvDetail" style="float:left;width:100%;">
+                            
+                        </div>
+                    </div>
+                    <div id="dvMyZd"  style="display: none;">
+                        <div style="float:left;width:100%;line-height: 50px; vertical-align: middle; height: 50px; border-bottom: 1px solid #E5E5E5;">
+                            <div style="float:left;width:50%;line-height: 50px; vertical-align: middle; height: 50px; border-bottom: 1px solid #E5E5E5;">
+                                <span style="font-size:18px;font-weight: bold;">&nbsp;我的账单：</span><br/>
+                            </div>
+                            <div style="float:left;width:50%;text-align:right;margin-top: 10px;">
+                                <input onclick="preRzPage()" type="button" value="上一页" />
+                                <input onclick="nextRzPage()" style="margin-right:100px;" type="button" value="下一页" />
+                            </div>
+                        </div>
+                        <div id="dvRzDetail" style="float:left;width:100%;">
                             
                         </div>
                     </div>

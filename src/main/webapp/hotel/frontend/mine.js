@@ -1,20 +1,33 @@
 var keHu;
 var page;
+var rzPage;
 $(document).ready(function () {
     $("#myDd").click(function () {
         if (page === undefined || page === null) {
             selectYuDing({});
         }
+        $("#dvMyZd").hide();
         $("#dvMyDd").show();
         $("#dvPwd").hide();
         $("#dvGrXx").hide();
     });
+    $("#myZd").click(function () {
+        if (rzPage === undefined || rzPage === null) {
+            selectRuZhu({});
+        }
+        $("#dvMyZd").show();
+        $("#dvMyDd").hide();
+        $("#dvPwd").hide();
+        $("#dvGrXx").hide();
+    });
     $("#xgPwd").click(function () {
+        $("#dvMyZd").hide();
         $("#dvMyDd").hide();
         $("#dvGrXx").hide();
         $("#dvPwd").show();
     });
     $("#grXx").click(function () {
+        $("#dvMyZd").hide();
         $("#dvMyDd").hide();
         $("#dvGrXx").show();
         $("#dvPwd").hide();
@@ -102,6 +115,61 @@ function selectYuDing(tj) {
     });
 }
 
+function selectRuZhu(tj) {
+    $.ajax({
+        url: "/LbmHotel/frontend/getRuZhuPage",
+        data: JSON.stringify(tj),
+        contentType: "application/json",
+        type: "post",
+        cache: false,
+        error: function (msg, textStatus) {
+        },
+        success: function (json) {
+            if (json === null || json === "") {
+
+            } else {
+                rzPage = json;
+                jxRzPage();
+            }
+        }
+    });
+}
+
+function jxRzPage() {
+    if(rzPage === undefined || rzPage.list === undefined || rzPage.list.length === 0){
+        $("#dvDetail").html("<span>没有账单信息</span>");
+        return;
+    }
+    $("#dvRzDetail").html("");
+    for (var i = 0; i < rzPage.list.length; i++) {
+        addRuZhu(rzPage.list[i]);
+    }
+}
+
+function addRuZhu(json) {
+    var btnStr = "<input type='button' disabled='disabled' id='btn" + json.id + "' value='" + json.state + "' />";
+    var html = "<div class='dvDd'><div class='dvDdBt'><span>" + json.rzSj + " <span style='color:blue;'>账单号：</span>" + json.bianHao + "</span></div>\n\
+                <div class='dvDdTable'><table><tr><td style='line-height:25px;'>入住人：" + json.name + "</td><td>" + json.fangXing + "("+json.fjHao+")" + "</td><td>退房时间：" + json.jzSj + "</td>\n\
+                <td>消费金额：￥" + json.jinE + "</td><td>" + btnStr + "</td></tr></table></div></div>";
+    $("#dvRzDetail").append(html);
+}
+
+function preRzPage() {
+    if (rzPage.currentPage === 1) {
+        return;
+    }
+    rzPage.currentPage = rzPage.currentPage - 1;
+    selectYuDing(rzPage);
+}
+
+function nextRzPage() {
+    if (rzPage.currentPage === rzPage.totalPage-1) {
+        return;
+    }
+    rzPage.currentPage = rzPage.currentPage + 1;
+    selectRuZhu(rzPage);
+}
+
 function jxPage() {
     if(page === undefined || page.list === undefined || page.list.length === 0){
         $("#dvDetail").html("<span>没有订单信息</span>");
@@ -119,8 +187,8 @@ function addYuDing(json) {
         btnStr = "<input type='button' disabled='disabled' id='btn" + json.id + "' value='" + json.state + "' />";
     }
     var html = "<div class='dvDd'><div class='dvDdBt'><span>" + json.ydSj + " <span style='color:blue;'>订单号：</span>" + json.zjHao + "</span></div>\n\
-                <div class='dvDdTable'><table><tr><td>" + json.fangXing + "</td><td>￥" + json.jiaGe + "</td><td>预住时间：" + json.rzSj + "</td>\n\
-                <td style='line-height:25px;'>证件号：" + json.sfzHao + "</td><td>" + btnStr + "</td></tr></table></div></div>";
+                <div class='dvDdTable'><table><tr><td>" + json.fangXing + "</td><td>单价：￥" + json.jiaGe + "</td><td>预住时间：" + json.rzSj + "</td>\n\
+                <td style='line-height:25px;'>入住人：" +json.name + "(" +json.sfzHao + ")</td><td>" + btnStr + "</td></tr></table></div></div>";
     $("#dvDetail").append(html);
 
 }
@@ -134,7 +202,7 @@ function prePage() {
 }
 
 function nextPage() {
-    if (page.currentPage === page.totalPage) {
+    if (page.currentPage === page.totalPage-1) {
         return;
     }
     page.currentPage = page.currentPage + 1;

@@ -11,6 +11,7 @@ import com.lanbo.hotel.pojo.Page;
 import com.lanbo.hotel.pojo.YuDing;
 import com.lanbo.hotel.service.IFangXingService;
 import com.lanbo.hotel.service.IKeHuService;
+import com.lanbo.hotel.service.IRuZhuService;
 import com.lanbo.hotel.service.IYuDingService;
 import com.lanbo.hotel.util.DataUtil;
 import java.io.IOException;
@@ -49,6 +50,9 @@ public class FrontendController {
 
     @Resource
     private IYuDingService yuDingService;
+    
+    @Resource
+    private IRuZhuService ruZhuService;
 
     @RequestMapping("/goIndex")
     public void goIndex(HttpServletRequest request, HttpServletResponse response) {
@@ -282,6 +286,43 @@ public class FrontendController {
         map.put("pageSize", model.getPageSize());
         if (obj != null) {
             model.setList(this.yuDingService.getSelectPage(map));
+        }
+        return model;
+    }
+    
+    @RequestMapping(value = "/getRuZhuPage", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+    @ResponseBody
+    public Page getRuZhuPage(@RequestBody Page model, HttpServletRequest request,
+            HttpServletResponse response) {
+        model.setPageSize(5);
+        HashMap map = model.getParamters();
+        if (map == null) {
+            map = new HashMap();
+        }
+        Object obj = request.getSession().getAttribute("KeHu");
+        if (obj == null) {
+            model.setRows(0);
+            model.setList(new ArrayList());
+        } else {
+            KeHu kh = (KeHu) obj;
+            map.put("id", kh.getId());
+            model.setRows(this.ruZhuService.getSelectRows(map));
+        }
+        if (model.getRows() == 0) {
+            model.setCurrentPage(1);
+            model.setList(new ArrayList());
+            model.setParamters(new HashMap());
+            model.setRows(0);
+            model.setTotalPage(0);
+            return model;
+        }
+        if (model.getTotalPage() == 0) {
+            model.setTotalPage(model.getTotalPage());
+        }
+        map.put("beginRow", model.getBegin());
+        map.put("pageSize", model.getPageSize());
+        if (obj != null) {
+            model.setList(this.ruZhuService.getSelectPage(map));
         }
         return model;
     }
