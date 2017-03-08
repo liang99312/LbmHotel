@@ -147,7 +147,7 @@ function jxRzPage() {
 }
 
 function addRuZhu(json) {
-    var btnStr = "<input type='button' disabled='disabled' id='btn" + json.id + "' value='" + json.state + "' />";
+    var btnStr = "<span>" + json.state + "</span>";;
     var html = "<div class='dvDd'><div class='dvDdBt'><span>" + json.rzSj + " <span style='color:blue;'>账单号：</span>" + json.bianHao + "</span></div>\n\
                 <div class='dvDdTable'><table><tr><td style='line-height:25px;'>入住人：" + json.name + "</td><td>" + json.fangXing + "("+json.fjHao+")" + "</td><td>退房时间：" + json.jzSj + "</td>\n\
                 <td>消费金额：￥" + json.jinE + "</td><td>" + btnStr + "</td></tr></table></div></div>";
@@ -182,9 +182,9 @@ function jxPage() {
 }
 
 function addYuDing(json) {
-    var btnStr = "<input type='button' id='btn" + json.id + "' value='退订' onclick='tdYuDing(" + json.id + ")' />";
-    if (json.state !== "未生效") {
-        btnStr = "<input type='button' disabled='disabled' id='btn" + json.id + "' value='" + json.state + "' />";
+    var btnStr = "<span style='color:red;'>" + json.state + "</span>";
+    if (json.state === "未生效" || json.state ==="已生效") {
+         btnStr = json.state + "&nbsp;&nbsp;<input type='button' id='btn" + json.id + "' value='退订' onclick='tdYuDing(" + json.id + ")' />";
     }
     var html = "<div class='dvDd'><div class='dvDdBt'><span>" + json.ydSj + " <span style='color:blue;'>订单号：</span>" + json.zjHao + "</span></div>\n\
                 <div class='dvDdTable'><table><tr><td>" + json.fangXing + "</td><td>单价：￥" + json.jiaGe + "</td><td>预住时间：" + json.rzSj + "</td>\n\
