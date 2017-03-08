@@ -7880,3 +7880,21 @@ Caused by: org.springframework.beans.factory.NoSuchBeanDefinitionException: No q
 [INFO] [2017-03-07 19:56:51][org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor]JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
 [INFO] [2017-03-07 19:56:53][com.lanbo.testmybatis.TestMyBatis]{"age":0,"id":1,"loadName":"a","password":"a","quanxian":"","sex":"","userName":"admin","zhiwei":""}
 [INFO] [2017-03-07 19:56:54][org.springframework.context.support.GenericApplicationContext]Closing org.springframework.context.support.GenericApplicationContext@42d80b78: startup date [Tue Mar 07 19:56:51 CST 2017]; root of context hierarchy
+[INFO] [2017-03-08 08:38:57][org.springframework.beans.factory.xml.XmlBeanDefinitionReader]Loading XML bean definitions from class path resource [spring-mybatis.xml]
+[INFO] [2017-03-08 08:38:58][org.springframework.context.support.GenericApplicationContext]Refreshing org.springframework.context.support.GenericApplicationContext@42d80b78: startup date [Wed Mar 08 08:38:58 CST 2017]; root of context hierarchy
+[INFO] [2017-03-08 08:38:58][org.springframework.beans.factory.config.PropertyPlaceholderConfigurer]Loading properties file from class path resource [jdbc.properties]
+[INFO] [2017-03-08 08:38:58][org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor]JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+[INFO] [2017-03-08 08:39:01][com.lanbo.testmybatis.TestMyBatis]{"age":0,"id":1,"loadName":"a","password":"a","quanxian":"","sex":"","userName":"admin","zhiwei":""}
+[INFO] [2017-03-08 08:39:01][org.springframework.context.support.GenericApplicationContext]Closing org.springframework.context.support.GenericApplicationContext@42d80b78: startup date [Wed Mar 08 08:38:58 CST 2017]; root of context hierarchy
+[INFO] [2017-03-08 08:50:05][org.springframework.beans.factory.xml.XmlBeanDefinitionReader]Loading XML bean definitions from class path resource [spring-mybatis.xml]
+[INFO] [2017-03-08 08:50:06][org.springframework.context.support.GenericApplicationContext]Refreshing org.springframework.context.support.GenericApplicationContext@42d80b78: startup date [Wed Mar 08 08:50:06 CST 2017]; root of context hierarchy
+[INFO] [2017-03-08 08:50:06][org.springframework.beans.factory.config.PropertyPlaceholderConfigurer]Loading properties file from class path resource [jdbc.properties]
+[INFO] [2017-03-08 08:50:06][org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor]JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+[INFO] [2017-03-08 08:50:08][com.lanbo.testmybatis.TestMyBatis]{"age":0,"id":1,"loadName":"a","password":"a","quanxian":"","sex":"","userName":"admin","zhiwei":""}
+[INFO] [2017-03-08 08:50:08][org.springframework.context.support.GenericApplicationContext]Closing org.springframework.context.support.GenericApplicationContext@42d80b78: startup date [Wed Mar 08 08:50:06 CST 2017]; root of context hierarchy
+[INFO] [2017-03-08 08:50:17][org.springframework.beans.factory.xml.XmlBeanDefinitionReader]Loading XML bean definitions from class path resource [spring-mybatis.xml]
+[INFO] [2017-03-08 08:50:18][org.springframework.context.support.GenericApplicationContext]Refreshing org.springframework.context.support.GenericApplicationContext@42d80b78: startup date [Wed Mar 08 08:50:18 CST 2017]; root of context hierarchy
+[INFO] [2017-03-08 08:50:18][org.springframework.beans.factory.config.PropertyPlaceholderConfigurer]Loading properties file from class path resource [jdbc.properties]
+[INFO] [2017-03-08 08:50:18][org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor]JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+[INFO] [2017-03-08 08:50:20][com.lanbo.testmybatis.TestMyBatis]{"age":0,"id":1,"loadName":"a","password":"a","quanxian":"","sex":"","userName":"admin","zhiwei":""}
+[INFO] [2017-03-08 08:50:20][org.springframework.context.support.GenericApplicationContext]Closing org.springframework.context.support.GenericApplicationContext@42d80b78: startup date [Wed Mar 08 08:50:18 CST 2017]; root of context hierarchy

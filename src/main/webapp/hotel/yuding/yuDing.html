@@ -25,7 +25,8 @@ and open the template in the editor.
     <body style='height:800px;'>
         <div style="float:left; width: 100%">
             <button type="button" class="btn btn-primary btn-sm" onclick="addYuDing();">新增预订</button>
-            <span>&nbsp;预订号：</span><input id="selFjHao" type="text" />
+            <span>&nbsp;预订号：</span><input id="selZjHao" type="text" />
+            <span>&nbsp;客户：</span><input id="selName" type="text" />
             <span>&nbsp;状态：</span><select id="selState" style="width: 170px;height:26px;"><option value="">全部</option><option value="就绪">就绪</option><option value="已使用">已使用</option><option value="未准备">未准备</option></select>
             <button type="button" class="btn btn-primary btn-sm" onclick="selectYuDing();" style="margin-left: 2px;">查找</button>
             <div id="list1" class="table-responsive" style="height: 672px">

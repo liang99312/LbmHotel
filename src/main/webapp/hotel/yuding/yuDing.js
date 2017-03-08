@@ -56,11 +56,14 @@ function jxYuDing(json) {
 function selectYuDing() {
     var yuDing = {};
     var tj = {"pageSize": 20, "currentPage": 1};
-    if ($("#selFjHao").val() !== "") {
-        yuDing.fjHao = $("#selFjHao").val();
+    if ($("#selZjHao").val() !== "") {
+        yuDing.zjHao = $("#selZjHao").val();
     }
     if ($("#selState").val() !== "") {
         yuDing.state = $("#selState").val();
+    }
+    if ($("#selName").val() !== "") {
+        yuDing.name = $("#selName").val();
     }
     tj.paramters = yuDing;
     var options = {};

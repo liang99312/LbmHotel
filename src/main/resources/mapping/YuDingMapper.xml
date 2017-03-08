@@ -68,15 +68,18 @@
     <if test="state != null and state !=''">
         and state = #{state}
     </if>
-    <if test="id != null and id !=''">
-        and kehu_id = #{id}
+    <if test="zjHao != null and zjHao !=''">
+        and zjhao = #{zjHao}
+    </if>
+    <if test="name != null and name !=''">
+        and (name = #{name} or kehu = #{name} or sfzhao = #{name} or dianHua = #{name} )
     </if>
     order by id limit #{beginRow},#{pageSize}
   </select>
   <select id="selectYuDingFromHao" resultMap="BaseResultMap" parameterType="com.lanbo.hotel.pojo.YuDing" >
     select
     <include refid="Base_Column_List" />
-    from yuding_t where 1=1 and rzsj > now() 
+    from yuding_t where 1=1 and date_add(rzsj, interval 1 day) > now() 
     <if test="state != null and state !=''">
         and state = #{state}
     </if>

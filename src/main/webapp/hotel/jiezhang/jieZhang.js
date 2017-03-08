@@ -30,6 +30,9 @@ function selectRuZhu() {
     if ($("#selState").val() !== "") {
         ruZhu.state = $("#selState").val();
     }
+    if ($("#selName").val() !== "") {
+        ruZhu.name = $("#selName").val();
+    }
     tj.paramters = ruZhu;
     var options = {};
     options.url = "/LbmHotel/ruZhu/getRuZhuPage";

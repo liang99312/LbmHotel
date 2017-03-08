@@ -26,7 +26,8 @@ and open the template in the editor.
         <div style="float:left; width: 100%">
             <button type="button" class="btn btn-primary btn-sm" onclick="addRuZhu();">客户入住</button>
             <span>&nbsp;房间号：</span><input id="selFjHao" type="text" />
-            <span>&nbsp;状态：</span><select id="selState" style="width: 170px;height:26px;"><option value="">全部</option><option value="入住中">入住中</option><option value="已结账">已结账</option><option value="已失效">已失效</option></select>
+            <span>&nbsp;客户：</span><input id="selName" type="text" />
+            <span>&nbsp;状态：</span><select id="selState" style="width: 170px;height:26px;"><option value="">全部</option><option value="已生效">已生效</option><option value="已结账">已结账</option><option value="已失效">已失效</option></select>
             <button type="button" class="btn btn-primary btn-sm" onclick="selectRuZhu();" style="margin-left: 2px;">查找</button>
             <div id="list1" class="table-responsive" style="height: 672px">
                 <table id="data_table" class="table table-hover">

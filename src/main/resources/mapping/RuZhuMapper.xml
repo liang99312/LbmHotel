@@ -72,8 +72,11 @@
     <if test="state != null and state !=''">
         and state = #{state}
     </if>
-    <if test="id != null and id !=''">
-        and kehu_id = #{id}
+    <if test="fjHao != null and fjHao !=''">
+        and fjHao = #{fjHao}
+    </if>
+    <if test="name != null and name !=''">
+        and (name = #{name} or kehu = #{name} or sfzhao = #{name} or dianHua = #{name} )
     </if>
     order by id limit #{beginRow},#{pageSize}
   </select>
