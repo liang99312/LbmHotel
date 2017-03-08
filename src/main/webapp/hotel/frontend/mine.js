@@ -163,7 +163,7 @@ function preRzPage() {
 }
 
 function nextRzPage() {
-    if (rzPage.currentPage === rzPage.totalPage-1) {
+    if (rzPage.currentPage === rzPage.totalPage) {
         return;
     }
     rzPage.currentPage = rzPage.currentPage + 1;
@@ -202,7 +202,7 @@ function prePage() {
 }
 
 function nextPage() {
-    if (page.currentPage === page.totalPage-1) {
+    if (page.currentPage === page.totalPage) {
         return;
     }
     page.currentPage = page.currentPage + 1;
