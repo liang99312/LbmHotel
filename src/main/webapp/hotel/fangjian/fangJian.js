@@ -13,6 +13,7 @@ function setTrager_fzr(){
 
 function setTrager_fx(){
     $('#inpFangXing').AutoComplete({'data': h_fangXings.list,'afterSelectedHandler':selectFangXing}); 
+    $('#selFxName').AutoComplete({'data': h_fangXings.list}); 
 }
 
 function selectFangXing(json){
@@ -41,6 +42,9 @@ function selectFangJian() {
     }
     if ($("#selState").val() !== "") {
         fangJian.state = $("#selState").val();
+    }
+    if ($("#selFxName").val() !== "") {
+        fangJian.fangXing = $("#selFxName").val();
     }
     tj.paramters = fangJian;
     var options = {};
