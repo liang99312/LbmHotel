@@ -49,6 +49,9 @@
     <if test="state != null and state !=''">
         and a.state = #{state}
     </if>
+    <if test="fangXing != null and fangXing !=''">
+        and b.name = #{fangXing}
+    </if>
     order by a.id limit #{beginRow},#{pageSize}
   </select>
   <select id="selectAllFangJian" resultMap="BaseResultMap" parameterType="hashmap">
